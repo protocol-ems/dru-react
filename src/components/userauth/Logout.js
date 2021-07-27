@@ -1,18 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { axiosInstance } from "../../axios";
 import { useHistory } from "react-router-dom";
 
 export default function Logout() {
   const history = useHistory();
 
-  useEffect(() => {
-    const response = axiosInstance.post("user/logout/blacklist/", {
-      refresh_token: localStorage.getItem("refresh_token"),
-    });
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    axiosInstance.defaults.headers["Authorization"] = null;
-    history.push("/login");
-  });
-  return <div>Logout</div>;
+  const logOutHandler = () => {
+    let token = localStorage.getItem("Authorization");
+
+    axiosInstance
+      .post("api/logout/", {
+        headers: {
+          Authorization: `Token ${token}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        localStorage.setItem("Authorization", null);
+        history.push("/");
+        console.log(res);
+        console.log(res.data);
+      });
+  };
+
+  return <div onClick={logOutHandler}>Logout</div>;
 }

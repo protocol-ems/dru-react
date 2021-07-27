@@ -1,53 +1,58 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
-import Axios from "axios";
+import { Switch, Route, useHistory } from "react-router-dom";
+import { axiosInstance } from "./axios";
 
 import UserContext from "./components/context/UserContext";
 
 import Navbar from "./components/navbar/Navbar";
-
 import Register from "./components/userauth/Register";
 import Login from "./components/userauth/Login";
+import Dashboard from "./components/dashboard/pages/Dashboard";
 
 function App() {
-  // const [userData, setUserData] = useState({
-  //   token: undefined,
-  //   user: undefined,
-  // });
+  const [userData, setUserData] = useState({
+    user: null,
+  });
 
-  // useEffect(() => {
-  //   const checkLoggedIn = async () => {
-  //     let token = localStorage.getItem("Authorization");
-  //     if (token === null) {
-  //       localStorage.setItem("Authorization", "");
-  //       token = "";
-  //     }
-  //     const tokenRes = await Axios.post(
-  //       "http://localhost:8080/users/tokenIsValid",
-  //       null,
-  //       { headers: { "Authorization": token } }
-  //     );
-  //     if (tokenRes.data) {
-  //       const userRes = await Axios.get("http://localhost:8080/users/", {
-  //         headers: { "Authorization": token },
-  //       });
-  //       setUserData({
-  //         token,
-  //         user: userRes.data,
-  //       });
-  //     }
-  //   };
+  const history = useHistory();
 
-  //   checkLoggedIn();
-  // }, []);
+  useEffect(() => {
+    const getUserInfo = async () => {
+      let token = localStorage.getItem("Authorization");
+      if (token === null) {
+        localStorage.setItem("Authorization", "");
+        token = "";
+      }
+
+      const userInfo = await axiosInstance.get("/users/info/", {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+
+      if (userInfo.data) {
+        setUserData({
+          user: userInfo.data[0],
+        });
+        history.push("/dashboard");
+      }
+    };
+
+    getUserInfo();
+  }, []);
 
   return (
     <div className="App">
-      <Navbar />
-      <Switch>
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-      </Switch>
+      <UserContext.Provider value={{ userData, setUserData }}>
+        <Navbar />
+        <Switch>
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/dashboard">
+            <Dashboard></Dashboard>
+          </Route>
+        </Switch>
+      </UserContext.Provider>
     </div>
   );
 }

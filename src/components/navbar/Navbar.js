@@ -13,7 +13,7 @@ export default function Navbar() {
               <li>
                 <a
                   href="/"
-                  className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400 "
                 >
                   Pricing
                 </a>
@@ -34,11 +34,19 @@ export default function Navbar() {
               <li>
                 <Link
                   to="/login"
-                  className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400 "
                 >
                   Login
                 </Link>
-                <Link to="/register">Register</Link>
+                <Link
+                  className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400 "
+                  to="/register"
+                >
+                  Register
+                </Link>
+              </li>
+              <li className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400">
+                <Logout />
               </li>
             </ul>
           </nav>

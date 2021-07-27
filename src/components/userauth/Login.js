@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { axiosInstance } from "../../axios";
 import { useHistory } from "react-router-dom";
+import UserContext from "../context/UserContext";
 
 export default function Register() {
   const history = useHistory();
@@ -9,6 +10,8 @@ export default function Register() {
     username: "",
     password: "",
   });
+
+  const { setUserData } = useContext(UserContext);
 
   const [formData, setFormData] = useState(initialFormData);
 
@@ -31,9 +34,27 @@ export default function Register() {
         localStorage.setItem("Authorization", res.data.token);
         axiosInstance.defaults.headers["Authorization"] =
           "Token " + localStorage.getItem("Authorization");
-        history.push("/");
-        console.log(res);
-        console.log(res.data);
+        // history.push("/");
+        // console.log(res);
+        // console.log(res.data.user);
+      })
+      .then(() => {
+        let token = localStorage.getItem("Authorization");
+
+        axiosInstance
+          .get("/users/info/", {
+            headers: {
+              Authorization: `Token ${token}`,
+            },
+          })
+          .then((res) => {
+            setUserData({
+              user: res.data[0],
+            });
+          })
+          .then(() => {
+            history.push("/dashboard");
+          });
       });
   };
 
