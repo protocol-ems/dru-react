@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../context/UserContext";
 
 import Logout from "../userauth/Logout";
 
 export default function Navbar() {
+  const { userData } = useContext(UserContext);
+
   return (
     <div className="container items-center mx-auto">
       <div className="text-blueGray-700 transition duration-500 ease-in-out transform bg-white border rounded-lg ">
@@ -31,23 +34,26 @@ export default function Navbar() {
           </a>
           <nav className="flex flex-wrap items-center justify-start text-base ">
             <ul className="items-center inline-block list-none lg:inline-flex">
-              <li>
-                <Link
-                  to="/login"
-                  className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400 "
-                >
-                  Login
-                </Link>
-                <Link
-                  className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400 "
-                  to="/register"
-                >
-                  Register
-                </Link>
-              </li>
-              <li className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400">
-                <Logout />
-              </li>
+              {userData.user !== null ? (
+                <li className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400">
+                  <Logout />
+                </li>
+              ) : (
+                <div>
+                  <Link
+                    to="/login"
+                    className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400 "
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400 "
+                    to="/register"
+                  >
+                    Register
+                  </Link>
+                </div>
+              )}
             </ul>
           </nav>
         </div>

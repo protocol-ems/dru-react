@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { axiosInstance } from "../../axios";
 import { useHistory } from "react-router-dom";
+import UserContext from "../context/UserContext";
 
 export default function Logout() {
   const history = useHistory();
-
+  const { setUserData } = useContext(UserContext);
   const logOutHandler = () => {
     let token = localStorage.getItem("Authorization");
 
@@ -19,10 +20,15 @@ export default function Logout() {
       .then((res) => {
         localStorage.setItem("Authorization", null);
         history.push("/");
-        console.log(res);
-        console.log(res.data);
+        setUserData({
+          user: null,
+        });
       });
   };
 
-  return <div onClick={logOutHandler}>Logout</div>;
+  return (
+    <div className="cursor-pointer" onClick={logOutHandler}>
+      Logout
+    </div>
+  );
 }

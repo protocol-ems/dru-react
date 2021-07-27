@@ -19,27 +19,31 @@ function App() {
   useEffect(() => {
     const getUserInfo = async () => {
       let token = localStorage.getItem("Authorization");
-      if (token === null) {
+
+      if (token === "null") {
         localStorage.setItem("Authorization", "");
         token = "";
+        console.log("true");
       }
 
-      const userInfo = await axiosInstance.get("/users/info/", {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      });
-
-      if (userInfo.data) {
-        setUserData({
-          user: userInfo.data[0],
+      if (token !== "") {
+        const userInfo = await axiosInstance.get("/users/info/", {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
         });
-        history.push("/dashboard");
+
+        if (userInfo.data) {
+          setUserData({
+            user: userInfo.data[0],
+          });
+          history.push("/dashboard");
+        }
       }
     };
 
     getUserInfo();
-  }, []);
+  }, [history]);
 
   return (
     <div className="App">
