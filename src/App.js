@@ -23,7 +23,6 @@ function App() {
       if (token === "null") {
         localStorage.setItem("Authorization", "");
         token = "";
-        console.log("true");
       }
 
       if (token !== "") {

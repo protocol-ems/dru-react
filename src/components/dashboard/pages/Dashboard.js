@@ -1,8 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../../context/UserContext";
+import { axiosInstance } from "../../../axios";
 
 export default function Dashboard() {
   const { userData } = useContext(UserContext);
+
+  const [companyUsers, setCompanyUsers] = useState(null);
+
+  useEffect(() => {
+    const getCompanyInfo = async () => {
+      let token = localStorage.getItem("Authorization");
+
+      if (token !== "" && userData.user.company) {
+        let companyId = userData.user.company;
+        await axiosInstance
+          .get(`/company-users/${companyId}`, {
+            headers: {
+              Authorization: `Token ${token}`,
+            },
+          })
+          .then((res) => {
+            setCompanyUsers(res.data);
+          });
+      }
+    };
+
+    getCompanyInfo();
+  }, []);
 
   return (
     <div>
@@ -14,7 +38,7 @@ export default function Dashboard() {
         "Please log in"
       )}
 
-      <button onClick={() => console.log(userData)}>click</button>
+      <button onClick={() => console.log(userData.user)}>click</button>
     </div>
   );
 }
