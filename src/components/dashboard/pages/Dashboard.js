@@ -30,7 +30,6 @@ export default function Dashboard() {
     if (userData.user !== null) {
       getCompanyInfo();
     }
-    //      getCompanyInfo();
   }, [userData.user]);
 
   return (
@@ -42,10 +41,10 @@ export default function Dashboard() {
         "Please log in"
       )}
 
-      <button className="btn" onClick={() => console.log(userData.user)}>
+      {/* <button className="btn" onClick={() => console.log(userData.user)}>
         click
-      </button>
-      {userData.user.company === 1 ? (
+      </button> */}
+      {userData.user !== null && userData.user.company === 1 ? (
         <CreateOrJoinHeader />
       ) : (
         <DashboardContent companyUsers={companyUsers} />
