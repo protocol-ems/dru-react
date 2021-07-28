@@ -92,7 +92,7 @@ export default function Register() {
               onClick={handleSubmit}
             >
               {" "}
-              Register
+              Login
             </button>
           </form>
         </div>

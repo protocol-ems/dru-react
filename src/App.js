@@ -8,6 +8,7 @@ import Navbar from "./components/navbar/Navbar";
 import Register from "./components/userauth/Register";
 import Login from "./components/userauth/Login";
 import Dashboard from "./components/dashboard/pages/Dashboard";
+import CreateCompany from "./components/dashboard/components/CreateCompany";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -54,6 +55,7 @@ function App() {
           <Route exact path="/dashboard">
             <Dashboard></Dashboard>
           </Route>
+          <Route exact path="/create-company" component={CreateCompany} />
         </Switch>
       </UserContext.Provider>
     </div>
