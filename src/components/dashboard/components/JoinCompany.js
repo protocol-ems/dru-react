@@ -8,7 +8,7 @@ export default function JoinCompany() {
   const { userData, setUserData } = useContext(UserContext);
 
   const initialFormData = Object.freeze({
-    requestedCompany: undefined,
+    requested_company: undefined,
   });
 
   const [companyList, setCompanyList] = useState(null);
@@ -34,7 +34,7 @@ export default function JoinCompany() {
     e.preventDefault();
     axiosInstance
       .patch(`/users/${userData.user.id}/`, {
-        requestedCompany: formData.requestedCompany,
+        requested_company: formData.requested_company,
       })
       .then((res) => {
         setUserData({
@@ -48,7 +48,7 @@ export default function JoinCompany() {
 
   const handleChange = (e) => {
     setFormData({
-      requestedCompany: e.target.value,
+      requested_company: e.target.value,
     });
   };
 
