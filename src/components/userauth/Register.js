@@ -100,7 +100,6 @@ export default function Register() {
                 onChange={handleChange}
               ></input>
             </div>
-
             <button
               type="submit"
               className="w-full px-16 py-2 my-2 mr-2 text-base text-white transition duration-500 ease-in-out transform bg-green-300 border-green-600 rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-green-400"

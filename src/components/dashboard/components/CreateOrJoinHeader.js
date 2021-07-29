@@ -21,7 +21,7 @@ export default function CreateOrJoinHeader() {
                 Join an agency or Create your agency today
               </p>
             </div>
-            <div className="flex justify-between w-1/6">
+            <div className="flex justify-between mx-auto">
               <Link to="join-company/" className="btn btn-accent">
                 Join
               </Link>

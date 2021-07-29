@@ -14,6 +14,8 @@ const employeeTitle = (title) => {
       return "Admin";
     case 5:
       return "Super User";
+    case 6:
+      return "Accounting";
     default:
       return "NA";
   }

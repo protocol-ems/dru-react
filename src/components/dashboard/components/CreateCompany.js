@@ -8,8 +8,6 @@ export default function CreateCompany() {
 
   const initialFormData = Object.freeze({
     name: "",
-    main_email: "",
-    ap_email: "",
     phone: "",
     street_address: "",
     zipcode: "",
@@ -33,8 +31,6 @@ export default function CreateCompany() {
     axiosInstance
       .post("/company/", {
         name: formData.name,
-        main_email: formData.main_email,
-        ap_email: formData.ap_email,
         phone: formData.phone,
         street_address: formData.street_address,
         zipcode: formData.zipcode,
@@ -42,6 +38,7 @@ export default function CreateCompany() {
         city: formData.city,
         documents: [],
         users: [userData.user.id],
+        requested_users: [],
       })
       .then(() => {
         history.push("/dashboard");
@@ -62,32 +59,6 @@ export default function CreateCompany() {
               className="input input-bordered"
               name="name"
               id="name"
-              onChange={handleChange}
-            ></input>
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Best Contact Email</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Contact Email"
-              className="input input-bordered"
-              name="main_email"
-              id="main_email"
-              onChange={handleChange}
-            ></input>
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Accounts Payable Email</span>
-            </label>
-            <input
-              type="text"
-              placeholder="AP Email"
-              className="input input-bordered"
-              name="ap_email"
-              id="ap_email"
               onChange={handleChange}
             ></input>
           </div>
