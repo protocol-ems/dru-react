@@ -30,28 +30,19 @@ export default function CreateCompany() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let token = localStorage.getItem("Authorization");
     axiosInstance
-      .post(
-        "/company/",
-        {
-          name: formData.name,
-          main_email: formData.main_email,
-          ap_email: formData.ap_email,
-          phone: formData.phone,
-          street_address: formData.street_address,
-          zipcode: formData.zipcode,
-          state: formData.state,
-          city: formData.city,
-          documents: [],
-          users: [userData.user.id],
-        },
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
-        }
-      )
+      .post("/company/", {
+        name: formData.name,
+        main_email: formData.main_email,
+        ap_email: formData.ap_email,
+        phone: formData.phone,
+        street_address: formData.street_address,
+        zipcode: formData.zipcode,
+        state: formData.state,
+        city: formData.city,
+        documents: [],
+        users: [userData.user.id],
+      })
       .then(() => {
         history.push("/dashboard");
       });

@@ -16,15 +16,9 @@ export default function Dashboard() {
 
       if (token !== "" && userData.user.company) {
         let companyId = userData.user.company;
-        await axiosInstance
-          .get(`/company-users/${companyId}`, {
-            headers: {
-              Authorization: `Token ${token}`,
-            },
-          })
-          .then((res) => {
-            setCompanyUsers(res.data);
-          });
+        await axiosInstance.get(`/company-users/${companyId}`).then((res) => {
+          setCompanyUsers(res.data);
+        });
       }
     };
     if (userData.user !== null) {

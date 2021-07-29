@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import employeeTitle from "./employeeTitle";
 
 export default function UserList({ companyUsers }) {
@@ -30,6 +31,7 @@ export default function UserList({ companyUsers }) {
           </tbody>
         </table>
       </div>
+      <Link>Add Users</Link>
     </div>
   );
 }
