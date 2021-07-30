@@ -126,7 +126,7 @@ export default function UserList({
 
   return (
     <div>
-      <div className="overflow-x-auto">
+      <div>
         <table className="table w-full">
           <thead>
             <tr>
@@ -185,7 +185,7 @@ export default function UserList({
               })
             ) : (
               <tr>
-                <td>error</td>
+                <td>Loading</td>
               </tr>
             )}
           </tbody>

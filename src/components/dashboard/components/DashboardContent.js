@@ -9,10 +9,10 @@ export default function DashboardContent({
 }) {
   return (
     <div className="flex flex-col w-full pt-24">
-      <div className="border rounded-3xl mb-4 p-4 shadow-xl">
+      <div className="border rounded-3xl mb-4 p-4 shadow-xl ">
         <h2 className="text-center text-4xl py-4">Current Employees</h2>
         {companyUsers !== null ? (
-          <div className="overflow-auto">
+          <div className="h-64 overflow-auto">
             <UserList
               users={companyUsers}
               setCompanyUsers={setCompanyUsers}
@@ -29,7 +29,7 @@ export default function DashboardContent({
           Users who have requested acess
         </h2>
         {companyUsers !== null ? (
-          <div className=" overflow-auto">
+          <div className=" h-64 overflow-auto">
             <UserList
               users={userWaitList}
               setUserWaitList={setUserWaitList}
