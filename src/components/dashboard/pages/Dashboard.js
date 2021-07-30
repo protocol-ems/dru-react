@@ -9,6 +9,7 @@ export default function Dashboard() {
   const { userData } = useContext(UserContext);
 
   const [companyUsers, setCompanyUsers] = useState(null);
+  const [userWaitList, setUserWaitList] = useState(null);
 
   useEffect(() => {
     const getCompanyInfo = async () => {
@@ -16,9 +17,16 @@ export default function Dashboard() {
 
       if (token !== "" && userData.user.company) {
         let companyId = userData.user.company;
-        await axiosInstance.get(`/company-users/${companyId}`).then((res) => {
-          setCompanyUsers(res.data);
-        });
+        await axiosInstance
+          .get(`/company-users/${companyId}/`)
+          .then((res) => {
+            setCompanyUsers(res.data);
+          })
+          .then(() => {
+            axiosInstance.get(`/company-waitlist/${companyId}/`).then((res) => {
+              setUserWaitList(res.data);
+            });
+          });
       }
     };
     if (userData.user !== null) {
@@ -41,7 +49,12 @@ export default function Dashboard() {
       {userData.user !== null && userData.user.company === 1 ? (
         <CreateOrJoinHeader />
       ) : (
-        <DashboardContent companyUsers={companyUsers} />
+        <DashboardContent
+          companyUsers={companyUsers}
+          setCompanyUsers={setCompanyUsers}
+          userWaitList={userWaitList}
+          setUserWaitList={setUserWaitList}
+        />
       )}
     </div>
   );
