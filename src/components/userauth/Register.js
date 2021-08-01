@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { axiosInstance } from "../../axios";
 import { useHistory } from "react-router-dom";
 
+import Error from "../misc/Error";
+
 export default function Register() {
   const history = useHistory();
 
@@ -13,6 +15,7 @@ export default function Register() {
   });
 
   const [formData, setFormData] = useState(initialFormData);
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   const handleChange = (e) => {
     setFormData({
@@ -29,17 +32,29 @@ export default function Register() {
 
     let email = formData.username;
     localStorage.removeItem("Authorization");
-    axiosInstance
-      .post("api/register/", {
-        username: formData.username,
-        password: formData.password,
-        email: email,
-        first_name: formData.first_name,
-        last_name: formData.last_name,
-      })
-      .then(() => {
-        history.push("/login");
-      });
+    if (
+      formData.username.length > 0 &&
+      formData.password.length > 0 &&
+      formData.first_name.length > 0 &&
+      formData.last_name.length > 0
+    ) {
+      axiosInstance
+        .post("api/register/", {
+          username: formData.username,
+          password: formData.password,
+          email: email,
+          first_name: formData.first_name,
+          last_name: formData.last_name,
+        })
+        .then(() => {
+          history.push("/login");
+        })
+        .catch((error) => {
+          setErrorMessage(error.response.data.username);
+        });
+    } else {
+      setErrorMessage("All fields must be filled out");
+    }
   };
 
   return (
@@ -47,6 +62,12 @@ export default function Register() {
       <div className="min-h-screen  container items-center py-12 mx-auto">
         <div className=" flex flex-col w-full p-10 mx-auto my-6 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-2/6 md:w-1/2 md:mt-0">
           <h1>Register</h1>
+          {errorMessage && (
+            <Error
+              errorMessage={errorMessage}
+              clearError={() => setErrorMessage(undefined)}
+            />
+          )}
           <form action="post" autoComplete="off">
             <div className="form-control">
               <label className="label">

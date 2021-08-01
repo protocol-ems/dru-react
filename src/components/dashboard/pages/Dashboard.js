@@ -22,6 +22,7 @@ export default function Dashboard() {
           .then((res) => {
             setCompanyUsers(res.data);
           })
+
           .then(() => {
             axiosInstance.get(`/company-waitlist/${companyId}/`).then((res) => {
               setUserWaitList(res.data);
