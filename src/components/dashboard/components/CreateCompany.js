@@ -39,6 +39,7 @@ export default function CreateCompany() {
         documents: [],
         users: [userData.user.id],
         requested_users: [],
+        document_headers: [],
       })
       .then(() => {
         history.push("/dashboard");

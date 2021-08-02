@@ -1,5 +1,6 @@
 import React from "react";
 import UserList from "../components/UserList";
+import { Link } from "react-router-dom";
 
 export default function DashboardContent({
   companyUsers,
@@ -9,6 +10,21 @@ export default function DashboardContent({
 }) {
   return (
     <div className="flex flex-col w-full pt-24">
+      <div className="flex flex-row flex-wrap justify-between  card border shadow-xl px-4 py-4 mb-12">
+        <Link to="/create-document-header" className="btn btn-accent my-4">
+          Create, Edit, or Delete a Document Label
+        </Link>
+        <Link to="/create-document-header" className="btn btn-accent my-4">
+          Create New Protocol
+        </Link>
+        <Link to="/create-document-header" className="btn btn-accent my-4">
+          Create New Medicine
+        </Link>
+        <Link to="/create-document-header" className="btn btn-accent my-4">
+          Create New Procedure
+        </Link>
+      </div>
+
       <div className="border rounded-3xl mb-4 p-4 shadow-xl ">
         <h2 className="text-center text-4xl py-4">Current Employees</h2>
         {companyUsers !== null ? (

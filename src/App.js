@@ -11,6 +11,7 @@ import Dashboard from "./components/dashboard/pages/Dashboard";
 import CreateCompany from "./components/dashboard/components/CreateCompany";
 import JoinCompany from "./components/dashboard/components/JoinCompany";
 import Error from "./components//misc/Error";
+import CreateDocumentHeader from "./components/dashboard/components/documents/CreateDocumentHeader";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -46,7 +47,7 @@ function App() {
           })
 
           .catch((err) => {
-            console.log(err);
+            err ? setErrorMessage("Please log in") : setErrorMessage(undefined);
           });
       }
     };
@@ -72,6 +73,11 @@ function App() {
           </Route>
           <Route exact path="/create-company" component={CreateCompany} />
           <Route exact path="/join-company" component={JoinCompany} />
+          <Route
+            exact
+            path="/create-document-header"
+            component={CreateDocumentHeader}
+          />
         </Switch>
       </UserContext.Provider>
     </div>
