@@ -1,6 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { axiosInstance } from "../../../../axios";
 import UserContext from "../../../context/UserContext";
+
+import LabelList from "./LabelList";
 
 export default function CreateDocumentHeader() {
   const { userData } = useContext(UserContext);
@@ -11,7 +13,29 @@ export default function CreateDocumentHeader() {
     company: undefined,
   });
 
+  const [documentLabels, setDocumentLabels] = useState(null);
+
   const [documentLabel, setDocumentLabel] = useState(initialData);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const getCompanyDocumentLabels = async () => {
+      if (userData.user) {
+        await axiosInstance
+          .get(`/company-document-headers/${userData.user.company}`)
+          .then((res) => {
+            if (mounted) {
+              setDocumentLabels(res.data);
+            }
+          });
+      }
+    };
+
+    getCompanyDocumentLabels();
+
+    return () => (mounted = false);
+  }, [userData.user]);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -23,11 +47,19 @@ export default function CreateDocumentHeader() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axiosInstance.post("/document-headers/", {
-      document_type: documentLabel.document_type,
-      document_detail_name: documentLabel.document_detail_name,
-      company: userData.user.company,
-    });
+    axiosInstance
+      .post("/document-headers/", {
+        document_type: documentLabel.document_type,
+        document_detail_name: documentLabel.document_detail_name,
+        company: userData.user.company,
+      })
+      .then(() => {
+        axiosInstance
+          .get(`/company-document-headers/${userData.user.company}`)
+          .then((res) => {
+            setDocumentLabels(res.data);
+          });
+      });
   };
 
   return (
@@ -68,6 +100,46 @@ export default function CreateDocumentHeader() {
           Create
         </button>
       </form>
+
+      {documentLabels !== null ? (
+        <div className="flex flex-row w-full py-12 flex-wrap lg:flex-nowrap">
+          <div className="w-full lg:w-1/3 py-8">
+            <div className="text-center text-4xl py-4">Medicine Labels</div>
+            <div className="grid flex-grow h-64 card   overflow-auto">
+              <LabelList
+                labels={documentLabels.filter(
+                  (label) => label.document_type === 1
+                )}
+              />
+            </div>
+          </div>
+
+          <div className="divider divider-vertical"></div>
+          <div className="w-full lg:w-1/3 py-8">
+            <div className="text-center text-4xl py-4">Procedure Labels</div>
+            <div className="grid flex-grow h-64 card  overflow-auto">
+              <LabelList
+                labels={documentLabels.filter(
+                  (label) => label.document_type === 2
+                )}
+              />
+            </div>
+          </div>
+          <div className="divider divider-vertical"></div>
+          <div className="w-full lg:w-1/3 py-8">
+            <div className="text-center text-4xl py-4">Protocol Labels</div>
+            <div className="grid flex-grow h-64 card overflow-auto">
+              <LabelList
+                labels={documentLabels.filter(
+                  (label) => label.document_type === 3
+                )}
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
