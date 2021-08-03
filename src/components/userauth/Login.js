@@ -36,9 +36,6 @@ export default function Register() {
         localStorage.setItem("Authorization", res.data.token);
         axiosInstance.defaults.headers["Authorization"] =
           "Token " + localStorage.getItem("Authorization");
-        // history.push("/");
-        // console.log(res);
-        // console.log(res.data.user);
       })
       .catch((error) => {
         error

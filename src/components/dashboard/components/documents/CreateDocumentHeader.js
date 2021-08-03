@@ -102,7 +102,7 @@ export default function CreateDocumentHeader() {
         </label>
         <input
           type="text"
-          placeholder="label"
+          placeholder="Label"
           className="input input-bordered input-accent"
           onChange={handleChange}
           name="document_detail_name"
@@ -118,10 +118,10 @@ export default function CreateDocumentHeader() {
       </form>
 
       {documentLabels !== null ? (
-        <div className="flex flex-row w-full py-12 flex-wrap lg:flex-nowrap">
-          <div className="w-full lg:w-1/3 py-8">
-            <div className="text-center text-4xl py-4">Medicine Labels</div>
-            <div className="grid flex-grow h-64 card   overflow-auto">
+        <div className="flex flex-col w-full pt-24">
+          <div className="text-center text-4xl py-4">Medicine Labels</div>
+          <div className="grid card  rounded-box">
+            <div className="h-64 overflow-auto">
               <LabelList
                 labels={documentLabels.filter(
                   (label) => label.document_type === 1
@@ -131,10 +131,11 @@ export default function CreateDocumentHeader() {
             </div>
           </div>
 
-          <div className="divider divider-vertical"></div>
-          <div className="w-full lg:w-1/3 py-8">
-            <div className="text-center text-4xl py-4">Procedure Labels</div>
-            <div className="grid flex-grow h-64 card  overflow-auto">
+          <div className="divider"></div>
+
+          <div className="text-center text-4xl py-4">Procedure Labels</div>
+          <div className="grid card  rounded-box">
+            <div className="h-64 overflow-auto">
               <LabelList
                 labels={documentLabels.filter(
                   (label) => label.document_type === 2
@@ -143,10 +144,11 @@ export default function CreateDocumentHeader() {
               />
             </div>
           </div>
-          <div className="divider divider-vertical"></div>
-          <div className="w-full lg:w-1/3 py-8">
-            <div className="text-center text-4xl py-4">Protocol Labels</div>
-            <div className="grid flex-grow h-64 card overflow-auto">
+          <div className="divider"></div>
+
+          <div className="text-center text-4xl py-4">Protocol Labels</div>
+          <div className="grid card  rounded-box">
+            <div className="h-64 overflow-auto">
               <LabelList
                 labels={documentLabels.filter(
                   (label) => label.document_type === 3

@@ -85,6 +85,19 @@ export default function LabelList({ labels, setLabels }) {
     }
   };
 
+  const confirmDelete = (e) => {
+    let result = window.confirm("Are you sure you want to delete?");
+    if (result) {
+      axiosInstance.delete(`/document-headers/${e.target.id}/`).then(() => {
+        axiosInstance
+          .get(`/company-document-headers/${userData.user.company}/`)
+          .then((res) => {
+            setLabels(res.data);
+          });
+      });
+    }
+  };
+
   return (
     <div>
       {errorMessage && (
@@ -99,6 +112,7 @@ export default function LabelList({ labels, setLabels }) {
             <tr>
               <th>Order</th>
               <th>Label</th>
+              <th>delete</th>
             </tr>
           </thead>
           <tbody>
@@ -132,13 +146,14 @@ export default function LabelList({ labels, setLabels }) {
                       </div>
                     </td>
                     <td className="break-all">
-                      <div className="flex justify-start">
+                      <div className="flex justify-between">
                         <input
                           type="text"
                           placeholder={label.document_detail_name}
                           name="document_detail_name"
                           onChange={handleLabelChange}
                           id={label.id}
+                          className="w-1/2"
                         />
                         {label.id === parseInt(newLabel.labelId) ? (
                           <button
@@ -153,6 +168,15 @@ export default function LabelList({ labels, setLabels }) {
                           </button>
                         )}
                       </div>
+                    </td>
+                    <td>
+                      <button
+                        id={label.id}
+                        onClick={(e) => confirmDelete(e)}
+                        className="btn btn-xs btn-warning"
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 );
