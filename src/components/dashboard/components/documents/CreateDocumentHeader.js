@@ -3,6 +3,7 @@ import { axiosInstance } from "../../../../axios";
 import UserContext from "../../../context/UserContext";
 
 import LabelList from "./LabelList";
+import Error from "../../../misc/Error";
 
 export default function CreateDocumentHeader() {
   const { userData } = useContext(UserContext);
@@ -12,6 +13,8 @@ export default function CreateDocumentHeader() {
     document_detail_name: "",
     company: undefined,
   });
+
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   const [documentLabels, setDocumentLabels] = useState(null);
 
@@ -53,6 +56,13 @@ export default function CreateDocumentHeader() {
         document_detail_name: documentLabel.document_detail_name,
         company: userData.user.company,
       })
+      .catch((err) => {
+        err
+          ? setErrorMessage(
+              "Please select a label category and the label cannot be blank."
+            )
+          : setErrorMessage(undefined);
+      })
       .then(() => {
         axiosInstance
           .get(`/company-document-headers/${userData.user.company}`)
@@ -67,7 +77,13 @@ export default function CreateDocumentHeader() {
       <div className="text-3xl pb-12">
         Create a label for your Medicine, Procedure, or Protocol
       </div>
-      <form className="form-control">
+      {errorMessage && (
+        <Error
+          errorMessage={errorMessage}
+          clearError={() => setErrorMessage(undefined)}
+        />
+      )}
+      <form className="form-control bg-gray-50 p-8 rounded-xl shadow-xl relative h-64">
         <select
           className="select select-bordered select-accent w-full max-w-xs"
           defaultValue={"DEFAULT"}
@@ -94,7 +110,7 @@ export default function CreateDocumentHeader() {
 
         <button
           type="submit"
-          className="w-full px-16 py-2 my-2 mr-2 text-base text-white transition duration-500 ease-in-out transform bg-green-300 border-green-600 rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-green-400"
+          className="absolute bottom-0 right-0 w-1/2 h-16 py-2 my-2 text-base text-white transition duration-500 ease-in-out transform bg-green-300 border-green-600 rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-green-400"
           onClick={handleSubmit}
         >
           Create
@@ -110,6 +126,7 @@ export default function CreateDocumentHeader() {
                 labels={documentLabels.filter(
                   (label) => label.document_type === 1
                 )}
+                setLabels={setDocumentLabels}
               />
             </div>
           </div>
@@ -122,6 +139,7 @@ export default function CreateDocumentHeader() {
                 labels={documentLabels.filter(
                   (label) => label.document_type === 2
                 )}
+                setLabels={setDocumentLabels}
               />
             </div>
           </div>
@@ -133,6 +151,7 @@ export default function CreateDocumentHeader() {
                 labels={documentLabels.filter(
                   (label) => label.document_type === 3
                 )}
+                setLabels={setDocumentLabels}
               />
             </div>
           </div>
