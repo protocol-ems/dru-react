@@ -31,7 +31,6 @@ export default function LabelList({ labels, setLabels }) {
       [e.target.name]: e.target.value,
       labelId: e.target.id,
     });
-    console.log(position);
   };
 
   const handleLabelChange = (e) => {
@@ -41,7 +40,6 @@ export default function LabelList({ labels, setLabels }) {
       labelId: e.target.id,
       [e.target.name]: e.target.value,
     });
-    console.log(newLabel);
   };
 
   const handleSubmit = (e, type) => {

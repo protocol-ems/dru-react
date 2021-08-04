@@ -14,14 +14,14 @@ export default function DashboardContent({
         <Link to="/create-document-header" className="btn btn-accent my-4">
           Create, Edit, or Delete a Document Label
         </Link>
-        <Link to="/create-document-header" className="btn btn-accent my-4">
-          Create New Protocol
-        </Link>
-        <Link to="/create-document-header" className="btn btn-accent my-4">
+        <Link to="/create-medicine" className="btn btn-accent my-4">
           Create New Medicine
         </Link>
         <Link to="/create-document-header" className="btn btn-accent my-4">
           Create New Procedure
+        </Link>
+        <Link to="/create-document-header" className="btn btn-accent my-4">
+          Create New Protocol
         </Link>
       </div>
 

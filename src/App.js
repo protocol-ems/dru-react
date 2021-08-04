@@ -12,7 +12,7 @@ import CreateCompany from "./components/dashboard/components/CreateCompany";
 import JoinCompany from "./components/dashboard/components/JoinCompany";
 import Error from "./components//misc/Error";
 import CreateDocumentHeader from "./components/dashboard/components/documents/CreateDocumentHeader";
-
+import CreateMedicine from "./components/dashboard/components/documents/pages/CreateMedicine";
 function App() {
   const [userData, setUserData] = useState({
     user: null,
@@ -78,6 +78,7 @@ function App() {
             path="/create-document-header"
             component={CreateDocumentHeader}
           />
+          <Route exact path="/create-medicine" component={CreateMedicine} />
         </Switch>
       </UserContext.Provider>
     </div>
