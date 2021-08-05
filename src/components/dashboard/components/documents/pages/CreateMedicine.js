@@ -29,16 +29,8 @@ export default function CreateMedicine() {
 
   return (
     <div>
-      <button
-        className="btn"
-        onClick={() => {
-          console.log(labels);
-        }}
-      >
-        Click
-      </button>
       {labels.length > 0 ? (
-        <CreateDocument labels={labels} />
+        <CreateDocument labels={labels} documentType="1" />
       ) : (
         "Please create labels to move forward"
       )}
