@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import DocumentDisplay from "./DocumentDisplay";
+import DocumentPreview from "./DocumentPreview";
 import UserContext from "../../../context/UserContext";
 import { axiosInstance } from "../../../../axios";
 import { v4 as uuidv4 } from "uuid";
@@ -54,7 +54,7 @@ export default function CreateDocument({ labels, documentType }) {
 
     setDetail({});
     // this can  be done better.
-    e.target.parentElement.children[1].value = "";
+    e.target.parentElement.children[0].value = "";
   };
 
   const submitDocument = () => {
@@ -67,15 +67,8 @@ export default function CreateDocument({ labels, documentType }) {
   };
 
   const logData = () => {
-    let filteredArr = newDocumentDetails.documentDetails.filter(
-      (document) => document.label === "Actions"
-    );
-    let arr = [];
-    filteredArr.map((value) => {
-      arr.push(value.value);
-    });
-    console.log(arr);
-    console.log(newDocumentDetails.documentDetails.length);
+    console.log(newDocumentDetails);
+    console.log(labels);
   };
 
   return (
@@ -88,9 +81,13 @@ export default function CreateDocument({ labels, documentType }) {
       </button>
       <div className="text-4xl  text-center">Preview of the document</div>
       <div className="border my-12">
-        <DocumentDisplay documentDetails={newDocumentDetails} labels={labels} />
+        <DocumentPreview
+          documentDetails={newDocumentDetails}
+          setDocumentDetails={setNewDocumentDetails}
+          labels={labels}
+        />
       </div>
-      <div className="form-control md:w-1/2 md:ml-12 flex flex-col">
+      <div className="form-control md:w-1/2 mx-auto flex flex-col">
         <div className="flex flex-col">
           <label className="lable py-4">
             <span>Medicine Name</span>
@@ -112,9 +109,33 @@ export default function CreateDocument({ labels, documentType }) {
               return (
                 <div
                   key={label.id}
-                  className=" mx-auto border rounded shadow flex flex-col p-4 w-full my-4 md:ml-12 md:w-5/12"
+                  className=" mx-auto  flex flex-col p-4 w-full my-4 md:ml-12 md:w-5/12"
                 >
-                  <div className="text-3xl text-center py-4">
+                  <div className="collapse w-full border rounded-box border-base-300 collapse-arrow">
+                    <input type="checkbox" />
+                    <div className="collapse-title text-2xl font-bold">
+                      {label.document_detail_name}
+                    </div>
+                    <div className="collapse-content">
+                      <textarea
+                        className=" border outline-none rounded-xl p-4 w-full"
+                        name={label.document_detail_name}
+                        id={uuidv4()}
+                        cols="20"
+                        rows="10"
+                        onChange={handleDetailChange}
+                      ></textarea>
+                      <button
+                        name={label.document_detail_name}
+                        // id={label.id}
+                        onClick={addDetail}
+                        className="btn btn-accent my-4  justify-center w-full"
+                      >
+                        Add
+                      </button>
+                    </div>
+                  </div>
+                  {/* <div className="text-3xl text-center py-4">
                     {label.document_detail_name}
                   </div>
                   <textarea
@@ -132,7 +153,7 @@ export default function CreateDocument({ labels, documentType }) {
                     className="btn btn-accent my-4  justify-center"
                   >
                     Add
-                  </button>
+                  </button> */}
                 </div>
               );
             })
