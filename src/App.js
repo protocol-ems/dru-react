@@ -13,6 +13,8 @@ import JoinCompany from "./components/dashboard/components/JoinCompany";
 import Error from "./components//misc/Error";
 import CreateDocumentHeader from "./components/dashboard/components/documents/CreateDocumentHeader";
 import CreateMedicine from "./components/dashboard/components/documents/pages/CreateMedicine";
+import CreateProcedure from "./components/dashboard/components/documents/pages/CreateProcedure";
+import CreateProtocol from "./components/dashboard/components/documents/pages/CreateProtocol";
 function App() {
   const [userData, setUserData] = useState({
     user: null,
@@ -59,6 +61,7 @@ function App() {
     <div className="App">
       <UserContext.Provider value={{ userData, setUserData }}>
         <Navbar />
+
         {errorMessage && (
           <Error
             errorMessage={errorMessage}
@@ -79,6 +82,8 @@ function App() {
             component={CreateDocumentHeader}
           />
           <Route exact path="/create-medicine" component={CreateMedicine} />
+          <Route exact path="/create-procedure" component={CreateProcedure} />
+          <Route exact path="/create-protocol" component={CreateProtocol} />
         </Switch>
       </UserContext.Provider>
     </div>

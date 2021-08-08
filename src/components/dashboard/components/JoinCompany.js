@@ -47,7 +47,6 @@ export default function JoinCompany() {
   };
 
   const handleChange = (e) => {
-    console.log(e.target);
     setFormData({
       requested_company: e.target.value,
     });

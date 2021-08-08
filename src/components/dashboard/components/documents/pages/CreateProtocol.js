@@ -2,8 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import CreateDocument from "../CreateDocument";
 import UserContext from "../../../../context/UserContext";
 import { axiosInstance } from "../../../../../axios";
-
-export default function CreateMedicine() {
+export default function CreateProtocol() {
   const { userData } = useContext(UserContext);
 
   const initalLabels = Object.freeze({
@@ -12,25 +11,25 @@ export default function CreateMedicine() {
   const [labels, setLabels] = useState(initalLabels);
 
   useEffect(() => {
-    const getMedicineLabels = async () => {
+    const getProtocolLabels = async () => {
       await axiosInstance
         .get(`company-document-headers/${userData.user.company}/`)
         .then((res) => {
-          const medicineLabels = res.data.filter((label) => {
-            return label.document_type === 1;
+          const protocolLabels = res.data.filter((label) => {
+            return label.document_type === 3;
           });
-          setLabels(medicineLabels);
+          setLabels(protocolLabels);
         });
     };
     if (userData.user !== null) {
-      getMedicineLabels();
+      getProtocolLabels();
     }
   }, [userData.user]);
 
   return (
     <div>
       {labels.length > 0 ? (
-        <CreateDocument labels={labels} documentType="1" />
+        <CreateDocument labels={labels} documentType="3" />
       ) : (
         <div className=" mx-auto text-center pt-24">
           <div className="loader"></div>

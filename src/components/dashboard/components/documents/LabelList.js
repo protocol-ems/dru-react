@@ -108,7 +108,7 @@ export default function LabelList({ labels, setLabels }) {
         <table className="table w-full ">
           <thead>
             <tr>
-              <th>Order</th>
+              <th>Position</th>
               <th>Label</th>
               <th>delete</th>
             </tr>
@@ -181,7 +181,9 @@ export default function LabelList({ labels, setLabels }) {
               })
             ) : (
               <tr>
-                <td>Loading</td>
+                <td>
+                  <div className="loader">Loading</div>
+                </td>
               </tr>
             )}
           </tbody>

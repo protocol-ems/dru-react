@@ -185,7 +185,9 @@ export default function UserList({
               })
             ) : (
               <tr>
-                <td>Loading</td>
+                <td>
+                  <div className="loader">loading</div>
+                </td>
               </tr>
             )}
           </tbody>

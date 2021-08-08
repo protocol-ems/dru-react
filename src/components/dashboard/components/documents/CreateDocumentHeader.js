@@ -118,9 +118,9 @@ export default function CreateDocumentHeader() {
       </form>
 
       {documentLabels !== null ? (
-        <div className="flex flex-col w-full pt-24">
+        <div className="flex flex-col w-full pt-24 ">
           <div className="text-center text-4xl py-4">Medicine Labels</div>
-          <div className="grid card  rounded-box">
+          <div className="grid card rounded-box">
             <div className="h-64 overflow-auto">
               <LabelList
                 labels={documentLabels.filter(

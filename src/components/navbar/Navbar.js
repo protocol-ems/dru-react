@@ -9,7 +9,7 @@ export default function Navbar() {
 
   return (
     <div className="container items-center mx-auto">
-      <div className="text-blueGray-700 transition duration-500 ease-in-out transform bg-white border rounded-lg ">
+      <div className="text-gray-700 transition duration-500 ease-in-out bg-white border rounded-lg  ">
         <div className="flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row">
           <nav className="flex flex-wrap items-center justify-start text-base ">
             <ul className="items-center inline-block list-none lg:inline-flex">

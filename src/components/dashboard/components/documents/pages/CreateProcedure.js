@@ -3,7 +3,7 @@ import CreateDocument from "../CreateDocument";
 import UserContext from "../../../../context/UserContext";
 import { axiosInstance } from "../../../../../axios";
 
-export default function CreateMedicine() {
+export default function CreateProcedure() {
   const { userData } = useContext(UserContext);
 
   const initalLabels = Object.freeze({
@@ -12,25 +12,25 @@ export default function CreateMedicine() {
   const [labels, setLabels] = useState(initalLabels);
 
   useEffect(() => {
-    const getMedicineLabels = async () => {
+    const getProcedureLabels = async () => {
       await axiosInstance
         .get(`company-document-headers/${userData.user.company}/`)
         .then((res) => {
-          const medicineLabels = res.data.filter((label) => {
-            return label.document_type === 1;
+          const procedureLabels = res.data.filter((label) => {
+            return label.document_type === 2;
           });
-          setLabels(medicineLabels);
+          setLabels(procedureLabels);
         });
     };
     if (userData.user !== null) {
-      getMedicineLabels();
+      getProcedureLabels();
     }
   }, [userData.user]);
 
   return (
     <div>
       {labels.length > 0 ? (
-        <CreateDocument labels={labels} documentType="1" />
+        <CreateDocument labels={labels} documentType="2" />
       ) : (
         <div className=" mx-auto text-center pt-24">
           <div className="loader"></div>

@@ -57,6 +57,19 @@ export default function CreateDocument({ labels, documentType }) {
     e.target.parentElement.children[0].value = "";
   };
 
+  const documentTypeSetter = (documentType) => {
+    switch (documentType) {
+      case "1":
+        return "Medicine";
+      case "2":
+        return "Procedure";
+      case "3":
+        return "Protocol";
+      default:
+        return "N/A";
+    }
+  };
+
   const submitDocument = () => {
     axiosInstance.post("/documents/", {
       company: userData.user.company,
@@ -79,7 +92,7 @@ export default function CreateDocument({ labels, documentType }) {
       <button className="btn" onClick={logData}>
         Log Data
       </button>
-      <div className="text-4xl  text-center">Preview of the document</div>
+      <div className="text-4xl  text-center">Preview</div>
       <div className="border my-12">
         <DocumentPreview
           documentDetails={newDocumentDetails}
@@ -90,7 +103,7 @@ export default function CreateDocument({ labels, documentType }) {
       <div className="form-control md:w-1/2 mx-auto flex flex-col">
         <div className="flex flex-col">
           <label className="lable py-4">
-            <span>Medicine Name</span>
+            <span>{documentTypeSetter(documentType) + " Name"}</span>
           </label>
           <input
             className="input input-bordered input-accent "
