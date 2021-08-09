@@ -3,6 +3,7 @@ import DocumentPreview from "./DocumentPreview";
 import UserContext from "../../../context/UserContext";
 import { axiosInstance } from "../../../../axios";
 import { v4 as uuidv4 } from "uuid";
+import CreateTableSection from "./CreateTableSection";
 // import MyEditor from "./MyEditor";
 
 export default function CreateDocument({ labels, documentType }) {
@@ -171,6 +172,7 @@ export default function CreateDocument({ labels, documentType }) {
               );
             })
           : ""}
+        <CreateTableSection />
       </div>
     </div>
   );
