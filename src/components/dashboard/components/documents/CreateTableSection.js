@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+import TablePreview from "./TablePreview";
 
 export default function CreateTableSection() {
   const initialTableData = Object.freeze({
@@ -6,43 +9,16 @@ export default function CreateTableSection() {
     rows: [],
   });
 
-  //   rows: [
-  //       rowNumber: Number,
-  //       rowValues: [{
-  //           columnPosition: value,
-  //           Header: value,
-  //       }, {
-  //         columnPosition: value,
-  //         Header: value,
-  //       }]
-  //   ]
   const [rows, setRows] = useState(0);
   const [columns, setCoulmns] = useState(0);
   const [tableData, setTableData] = useState(initialTableData);
 
   const handleRow = (e) => {
     setRows(e.target.value);
-    // if (adjust === 1) {
-    //   setRows(rows + 1);
-    //   addTableRow();
-    // }
-    // if (adjust === -1 && rows > 0) {
-    //   setRows(rows - 1);
-    // }
-    // console.log(tableData);
   };
 
   const handleColumn = (e) => {
     setCoulmns(e.target.value);
-    // if (adjust === 1) {
-    //   setCoulmns(columns + 1);
-    //   addTableColumn();
-    // }
-    // if (adjust === -1 && columns > 0) {
-    //   setCoulmns(columns - 1);
-    //   removeTableColumn();
-    // }
-    // console.log(tableData);
   };
 
   const createTableColumns = () => {
@@ -52,14 +28,13 @@ export default function CreateTableSection() {
       columnsData.push({ id: i, value: "" });
     }
     return columnsData;
-    // setTableData({ ...tableData, columns: columnsData });
   };
 
   const createTableRow = () => {
     let rowData = [];
 
     for (let i = 0; i < columns; i++) {
-      rowData.push({ id: i, value: "" });
+      rowData.push({ id: uuidv4(), value: "", position: i });
     }
     return rowData;
   };
@@ -71,7 +46,6 @@ export default function CreateTableSection() {
       rowsData.push(createTableRow());
     }
     return rowsData;
-    // setTableData({ ...tableData, rows: rowsData });
   };
 
   const createTable = () => {
@@ -82,78 +56,63 @@ export default function CreateTableSection() {
     });
   };
 
-  const addTableColumn = () => {
-    let tableDataColumns = tableData.columns;
+  // const addTableColumn = () => {
+  //   let tableDataColumns = tableData.columns;
 
-    let newColumn = {
-      id: tableDataColumns.length,
-      header: "",
-    };
+  //   let newColumn = {
+  //     id: tableDataColumns.length,
+  //     header: "",
+  //   };
 
-    tableDataColumns.push(newColumn);
-    setTableData({
-      ...tableData,
-      columns: tableDataColumns,
-    });
-  };
+  //   tableDataColumns.push(newColumn);
+  //   setTableData({
+  //     ...tableData,
+  //     columns: tableDataColumns,
+  //   });
+  // };
 
-  const addTableRow = () => {
-    let tableDataRows = tableData.rows;
-    console.log(tableData.columns.length);
-    console.log(rows);
+  // const addTableRow = () => {
+  //   let tableDataRows = tableData.rows;
+  //   console.log(tableData.columns.length);
+  //   console.log(rows);
 
-    for (let i = 0; i < rows; i++) {
-      tableDataRows[i] = { ...tableData.rows, header: "12" };
-    }
+  //   for (let i = 0; i < rows; i++) {
+  //     tableDataRows[i] = { ...tableData.rows, header: "12" };
+  //   }
+  // };
 
-    // let mappedColumns = () => {
-    //   console.log(tableData);
-    //   return tableData.columns.map((column) => {
-    //     return {
-    //       rowValues: [
-    //         {
-    //           columnPosition: 1,
-    //           data: "1",
-    //         },
-    //       ],
-    //     };
-    //   });
-    // };
-    // let newRow = {
-    //   rowValues: [
-    //     {
-    //       columnPosition: 1,
-    //       data: "test",
-    //     },
-    //   ],
-    // };
-    // tableDataRows.push(mappedColumns());
-    // setTableData({ ...tableData, rows: tableDataRows });
-  };
-
-  const removeTableColumn = () => {
-    let tableDataColumns = tableData.columns;
-    tableDataColumns.pop();
-    setTableData({ ...tableData, columns: tableDataColumns });
-  };
+  // const removeTableColumn = () => {
+  //   let tableDataColumns = tableData.columns;
+  //   tableDataColumns.pop();
+  //   setTableData({ ...tableData, columns: tableDataColumns });
+  // };
 
   const handleColumnChange = (e) => {
     let tableDataColumns = tableData.columns;
     tableDataColumns[e.target.id].value = e.target.value;
+    setTableData({
+      ...tableData,
+    });
   };
 
   const handleRowChange = (e) => {
-    console.log(e.target);
+    let columnPosition = e.target.attributes.position.value;
+    let rowPosition = e.target.parentElement.parentElement.id;
+    tableData.rows[rowPosition][columnPosition].value = e.target.value;
+    setTableData({
+      ...tableData,
+    });
   };
 
   return (
     <div className="container mx-auto text-center">
       <div>Create Table Section</div>
-      <div>Preview Goes up top with other preview</div>
-      <div>
+      <TablePreview tableData={tableData} />
+
+      {/* <div>
         Table Description textarea would be good here. For general info about
         the table. Maybe put one at the footer as well. Not sure.
-      </div>
+      </div> */}
       <div>
         <div className="form-control">
           <label className="label "> How many Columns</label>
@@ -199,12 +158,14 @@ export default function CreateTableSection() {
             {tableData.rows.length > 0 ? (
               tableData.rows.map((row, i) => {
                 return (
-                  <tr key={i}>
+                  <tr key={i} id={i}>
                     {row.map((el) => {
                       return (
                         <td key={el.id}>
                           <input
                             type="text"
+                            position={el.position}
+                            id={el.id}
                             className="input input-accent input-sm w-5/6 "
                             onChange={handleRowChange}
                           ></input>
@@ -239,40 +200,6 @@ export default function CreateTableSection() {
             }}
           >
             Log Data
-          </button>
-          <button
-            className="btn"
-            onClick={() => {
-              handleColumn(1);
-            }}
-          >
-            add column
-          </button>
-          <button
-            className="btn btn-warning"
-            onClick={() => {
-              handleColumn(-1);
-            }}
-          >
-            remove column
-          </button>
-        </div>
-        <div>
-          <button
-            className="btn"
-            onClick={() => {
-              handleRow(1);
-            }}
-          >
-            add row
-          </button>
-          <button
-            className="btn btn-warning"
-            onClick={() => {
-              handleRow(-1);
-            }}
-          >
-            remove row
           </button>
         </div>
       </div>
