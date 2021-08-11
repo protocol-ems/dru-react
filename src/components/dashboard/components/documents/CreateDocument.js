@@ -14,9 +14,16 @@ export default function CreateDocument({ labels, documentType }) {
     documentDetails: [],
   });
 
+  const initialTableData = Object.freeze({
+    columns: [],
+    rows: [],
+    table_description: "",
+  });
+
   const [newDocumentDetails, setNewDocumentDetails] = useState(initialDetails);
   const [detail, setDetail] = useState({});
   const [documentName, setDocumentName] = useState("");
+  const [tableData, setTableData] = useState(initialTableData);
 
   const handleDetailChange = (e) => {
     //need a different way to handle the id. will come back.
@@ -94,7 +101,7 @@ export default function CreateDocument({ labels, documentType }) {
         Log Data
       </button>
       <div className="text-4xl  text-center">Preview</div>
-      <div className="border my-12">
+      <div className="border my-12 ">
         <DocumentPreview
           documentDetails={newDocumentDetails}
           setDocumentDetails={setNewDocumentDetails}
@@ -104,7 +111,9 @@ export default function CreateDocument({ labels, documentType }) {
       <div className="form-control md:w-1/2 mx-auto flex flex-col">
         <div className="flex flex-col">
           <label className="lable py-4">
-            <span>{documentTypeSetter(documentType) + " Name"}</span>
+            <span className="font-bold text-3xl">
+              {documentTypeSetter(documentType) + " Name"}
+            </span>
           </label>
           <input
             className="input input-bordered input-accent "
@@ -117,6 +126,7 @@ export default function CreateDocument({ labels, documentType }) {
           </button>
         </div>
       </div>
+
       <div className=" flex flex-wrap py-12">
         {labels
           ? labels.map((label) => {
@@ -141,7 +151,6 @@ export default function CreateDocument({ labels, documentType }) {
                       ></textarea>
                       <button
                         name={label.document_detail_name}
-                        // id={label.id}
                         onClick={addDetail}
                         className="btn btn-accent my-4  justify-center w-full"
                       >
@@ -149,30 +158,16 @@ export default function CreateDocument({ labels, documentType }) {
                       </button>
                     </div>
                   </div>
-                  {/* <div className="text-3xl text-center py-4">
-                    {label.document_detail_name}
-                  </div>
-                  <textarea
-                    className="border outline-none rounded-xl p-4"
-                    name={label.document_detail_name}
-                    id={uuidv4()}
-                    cols="20"
-                    rows="10"
-                    onChange={handleDetailChange}
-                  ></textarea>
-                  <button
-                    name={label.document_detail_name}
-                    // id={label.id}
-                    onClick={addDetail}
-                    className="btn btn-accent my-4  justify-center"
-                  >
-                    Add
-                  </button> */}
                 </div>
               );
             })
           : ""}
-        <CreateTableSection />
+
+        <CreateTableSection
+          tableData={tableData}
+          setTableData={setTableData}
+          initialTableData={initialTableData}
+        />
       </div>
     </div>
   );
