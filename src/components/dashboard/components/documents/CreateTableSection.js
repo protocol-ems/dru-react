@@ -194,7 +194,7 @@ export default function CreateTableSection({
               <button
                 className="btn"
                 onClick={() => {
-                  console.log(tableData);
+                  console.log(JSON.stringify(tableData));
                 }}
               >
                 Log Data

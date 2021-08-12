@@ -12,6 +12,7 @@ export default function CreateDocument({ labels, documentType }) {
   const initialDetails = Object.freeze({
     document_name: undefined,
     documentDetails: [],
+    table_data: {},
   });
 
   const initialTableData = Object.freeze({
@@ -84,12 +85,12 @@ export default function CreateDocument({ labels, documentType }) {
       document_type: documentType,
       document_name: newDocumentDetails.document_name,
       documentDetails: newDocumentDetails.documentDetails,
+      table_data: tableData,
     });
   };
 
   const logData = () => {
-    console.log(newDocumentDetails);
-    console.log(labels);
+    console.log(tableData);
   };
 
   return (
