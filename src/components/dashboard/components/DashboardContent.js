@@ -29,6 +29,8 @@ export default function DashboardContent({
         <h2 className="text-center text-4xl py-4">Current Employees</h2>
         {companyUsers !== null ? (
           <div className="h-64 overflow-auto">
+            {/* make it So that the employee's title is the drop down. Not a seperate column. */}
+
             <UserList
               users={companyUsers}
               setCompanyUsers={setCompanyUsers}
