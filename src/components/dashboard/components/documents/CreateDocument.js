@@ -4,6 +4,7 @@ import UserContext from "../../../context/UserContext";
 import { axiosInstance } from "../../../../axios";
 import { v4 as uuidv4 } from "uuid";
 import CreateTableSection from "./CreateTableSection";
+import CreateFlowSection from "./CreateFlowSection";
 // import MyEditor from "./MyEditor";
 
 export default function CreateDocument({ labels, documentType }) {
@@ -21,10 +22,15 @@ export default function CreateDocument({ labels, documentType }) {
     table_description: "",
   });
 
+  const initialFlowData = Object.freeze({
+    flow_data: {},
+  });
+
   const [newDocumentDetails, setNewDocumentDetails] = useState(initialDetails);
   const [detail, setDetail] = useState({});
   const [documentName, setDocumentName] = useState("");
   const [tableData, setTableData] = useState(initialTableData);
+  const [flowData, setFlowData] = useState(initialFlowData);
 
   const handleDetailChange = (e) => {
     //need a different way to handle the id. will come back.
@@ -170,6 +176,11 @@ export default function CreateDocument({ labels, documentType }) {
           initialTableData={initialTableData}
         />
       </div>
+      <CreateFlowSection
+        flowData={flowData}
+        setFlowData={setFlowData}
+        initialFlowData={initialFlowData}
+      />
     </div>
   );
 }
