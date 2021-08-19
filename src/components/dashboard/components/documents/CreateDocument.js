@@ -23,7 +23,168 @@ export default function CreateDocument({ labels, documentType }) {
   });
 
   const initialFlowData = Object.freeze({
-    flow_data: {},
+    flow_data: [
+      {
+        id: "randomnode_1629218456334",
+        type: "default",
+        data: { label: "Assess Appropriateness for clinical condition" },
+        position: { x: 529, y: 185 },
+        style: {
+          background: "#f4f0ec",
+          color: "black",
+          border: "1px solid black",
+          width: 250,
+        },
+      },
+      {
+        id: "randomnode_1629218467681",
+        type: "default",
+        data: { label: "Heart rate typically <50/min if bradyarrhythmia" },
+        position: { x: 528, y: 256 },
+        style: {
+          background: "white",
+          color: "black",
+          border: "1px solid black",
+          width: 150,
+        },
+      },
+      {
+        id: "randomnode_1629219637494",
+        type: "default",
+        data: { label: "Identify and treat underlying cause" },
+        position: { x: 721.1307046705919, y: 264.0069171921567 },
+        style: {
+          background: "white",
+          color: "black",
+          border: "1px solid black",
+          width: 150,
+        },
+      },
+      {
+        id: "randomnode_1629219740583",
+        type: "default",
+        data: {
+          label:
+            "• Maintain patent airway; assist breathing as necessary\n• Oxygen Therapy, high flow\n• Cardiac monitor to identify rhythm; monitor blood pressure and oximetry\n• IV or IO access\n• 12-lead ECG if available; don’t delay therapy",
+        },
+        position: { x: 532.0460741590982, y: 326.63117844487016 },
+        style: {
+          background: "#f4f0ec",
+          color: "black",
+          border: "1px solid black",
+          width: 250,
+          whiteSpace: "pre-wrap",
+        },
+      },
+      {
+        id: "randomnode_1629219802290",
+        type: "default",
+        data: {
+          label:
+            "Persistent bradyarrhythmia\ncausing:\n• Hypotension?\n• Acutely altered mental status?\n• Signs of shock?\n• Ischemic chest discomfort?",
+        },
+        style: {
+          background: "#f4f0ec",
+          color: "black",
+          border: "1px solid black",
+          width: 250,
+          whiteSpace: "pre",
+        },
+        position: { x: 530.0530454379535, y: 476.77267543777583 },
+      },
+      {
+        id: "reactflow__edge-randomnode_1629218456334null-randomnode_1629218467681null",
+        type: "custom",
+        animated: false,
+        data: { label: "" },
+        source: "randomnode_1629218456334",
+        target: "randomnode_1629218467681",
+      },
+      {
+        id: "reactflow__edge-randomnode_1629218467681null-randomnode_1629219637494null",
+        type: "custom",
+        animated: false,
+        data: { label: "" },
+        source: "randomnode_1629218467681",
+        target: "randomnode_1629219637494",
+      },
+      {
+        id: "reactflow__edge-randomnode_1629219637494null-randomnode_1629219740583null",
+        type: "custom",
+        animated: false,
+        data: { label: "" },
+        source: "randomnode_1629219637494",
+        target: "randomnode_1629219740583",
+      },
+      {
+        id: "reactflow__edge-randomnode_1629219740583null-randomnode_1629219802290null",
+        type: "custom",
+        animated: false,
+        data: { label: "" },
+        source: "randomnode_1629219740583",
+        target: "randomnode_1629219802290",
+      },
+      {
+        id: "randomnode_1629220391621",
+        type: "default",
+        data: { label: "Monitor and observe" },
+        position: { x: 746.5145564414969, y: 577.2620121292716 },
+        style: {
+          background: "white",
+          color: "black",
+          border: "1px solid black",
+          width: 150,
+        },
+      },
+      {
+        id: "reactflow__edge-randomnode_1629219802290null-randomnode_1629220391621null",
+        type: "custom",
+        animated: false,
+        data: { label: "no" },
+        source: "randomnode_1629219802290",
+        target: "randomnode_1629220391621",
+      },
+      {
+        id: "randomnode_1629220458661",
+        type: "default",
+        data: { label: "Atropine" },
+        position: { x: 554.9081575314698, y: 614.1981854131323 },
+        style: {
+          background: "white",
+          color: "black",
+          border: "1px solid black",
+          width: 150,
+        },
+      },
+      {
+        id: "reactflow__edge-randomnode_1629219802290null-randomnode_1629220458661null",
+        type: "custom",
+        animated: false,
+        data: { label: "Yes" },
+        source: "randomnode_1629219802290",
+        target: "randomnode_1629220458661",
+      },
+      {
+        id: "randomnode_1629220736716",
+        type: "default",
+        data: { label: "Transcutaneous pacing" },
+        position: { x: 702.6528506669124, y: 722.698194434473 },
+        style: {
+          background: "white",
+          color: "black",
+          border: "1px solid black",
+          width: 150,
+        },
+      },
+      {
+        id: "reactflow__edge-randomnode_1629220458661null-randomnode_1629220736716null",
+        type: "custom",
+        animated: false,
+        data: { label: "If atropine ineffective:" },
+        source: "randomnode_1629220458661",
+        target: "randomnode_1629220736716",
+      },
+    ],
   });
 
   const [newDocumentDetails, setNewDocumentDetails] = useState(initialDetails);
