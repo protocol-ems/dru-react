@@ -14,6 +14,18 @@ export const axiosInstance = axios.create({
   },
 });
 
+export const axiosInstanceWithImage = axios.create({
+  baseURL: baseURL,
+  timeout: 5000,
+  headers: {
+    Authorization: localStorage.getItem("Authorization")
+      ? "Token " + localStorage.getItem("Authorization")
+      : null,
+    "Content-Type": "multipart/form-data",
+    accept: "application/json",
+  },
+});
+
 // axiosInstance.interceptors.response.use(
 //   (response) => {
 //     return response;
