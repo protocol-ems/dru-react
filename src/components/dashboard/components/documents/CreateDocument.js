@@ -253,6 +253,7 @@ export default function CreateDocument({ labels, documentType }) {
       document_name: newDocumentDetails.document_name,
       documentDetails: newDocumentDetails.documentDetails,
       table_data: tableData,
+      flow_data: flowData,
     });
   };
 

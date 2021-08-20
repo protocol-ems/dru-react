@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 
-export default function ({ editNode, setEditNode, elements, setElements }) {
+export default function NodeEditor({
+  editNode,
+  setEditNode,
+  elements,
+  setElements,
+}) {
   const backgroundSelector = (e) => {
     let bgColor = e.target.value;
 
