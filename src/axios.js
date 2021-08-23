@@ -23,6 +23,7 @@ export const axiosInstanceWithImage = axios.create({
       : null,
     "Content-Type": "multipart/form-data",
     accept: "application/json",
+    // accept: "multipart/form-data",
   },
 });
 

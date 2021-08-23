@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
 import DocumentPreview from "./DocumentPreview";
 import UserContext from "../../../context/UserContext";
-import { axiosInstanceWithImage } from "../../../../axios";
+import { axiosInstanceWithImage, axiosInstance } from "../../../../axios";
 import { v4 as uuidv4 } from "uuid";
 import CreateTableSection from "./CreateTableSection";
 import CreateFlowSection from "./CreateFlowSection";
+import axios from "axios";
 // import MyEditor from "./MyEditor";
 
 export default function CreateDocument({ labels, documentType }) {
@@ -145,25 +146,39 @@ export default function CreateDocument({ labels, documentType }) {
   };
 
   const submitDocument = () => {
-    // const uploadData = new FormData();
-    // uploadData.append("company", userData.user.company);
-    // uploadData.append("document_type", documentType);
-    // uploadData.append("document_name", newDocumentDetails.document_name);
-    // uploadData.append("documentDetails", newDocumentDetails.documentDetails);
-    // uploadData.append("table_data", tableData);
-    // uploadData.append("image_one", imageOne);
+    const uploadData = new FormData();
 
-    // console.log(uploadData);
+    uploadData.append("image_one", imageOne, imageOne.name);
 
-    axiosInstanceWithImage.post("/documents/", {
-      company: userData.user.company,
-      document_type: documentType,
-      document_name: newDocumentDetails.document_name,
-      documentDetails: newDocumentDetails.documentDetails,
-      table_data: tableData,
-      flow_data: flowData,
-      image_one: imageOne,
-    });
+    axios.post(
+      "http://127.0.0.1:8000/documents/",
+      {
+        company: userData.user.company,
+        document_type: documentType,
+        document_name: newDocumentDetails.document_name,
+        documentDetails: newDocumentDetails.documentDetails,
+        table_data: tableData,
+        flow_data: flowData,
+        uploadData,
+      },
+      {
+        headers: {
+          Authorization: localStorage.getItem("Authorization")
+            ? "Token " + localStorage.getItem("Authorization")
+            : null,
+        },
+      }
+    );
+
+    // axiosInstanceWithImage.post("/documents/", {
+    //   company: userData.user.company,
+    //   document_type: documentType,
+    //   document_name: newDocumentDetails.document_name,
+    //   documentDetails: newDocumentDetails.documentDetails,
+    //   table_data: tableData,
+    //   flow_data: flowData,
+    //   image_one: imageOne,
+    // });
   };
 
   const logData = () => {
@@ -254,9 +269,11 @@ export default function CreateDocument({ labels, documentType }) {
       />
       <div>
         <div>Add image here</div>
-        <label className="label">Upload Image</label>
+
+        <label className="label" id="image_one" name="image_one">
+          Upload Image
+        </label>
         <input
-          className="input"
           type="file"
           onChange={(e) => setImageOne(e.target.files[0])}
         ></input>
