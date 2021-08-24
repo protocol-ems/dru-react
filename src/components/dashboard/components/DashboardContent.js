@@ -1,15 +1,22 @@
 import React from "react";
 import UserList from "../components/UserList";
 import { Link } from "react-router-dom";
+import ViewDocuments from "./documents/ViewDocuments";
 
 export default function DashboardContent({
   companyUsers,
   userWaitList,
   setCompanyUsers,
   setUserWaitList,
+  companyDocuments,
+  setCompanyDocuments,
 }) {
   return (
     <div className="flex flex-col w-full pt-24">
+      <ViewDocuments
+        companyDocuments={companyDocuments}
+        setCompanyDocuments={setCompanyDocuments}
+      />
       <div className=" bg-white flex flex-row flex-wrap justify-between  card border shadow-xl px-4 py-4 mb-12">
         <Link to="/create-document-header" className="btn btn-accent my-4">
           Create, Edit, or Delete a Document Label

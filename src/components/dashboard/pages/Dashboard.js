@@ -10,11 +10,11 @@ export default function Dashboard() {
 
   const [companyUsers, setCompanyUsers] = useState(null);
   const [userWaitList, setUserWaitList] = useState(null);
+  const [companyDocuments, setCompanyDocuments] = useState([]);
 
   useEffect(() => {
+    let token = localStorage.getItem("Authorization");
     const getCompanyInfo = async () => {
-      let token = localStorage.getItem("Authorization");
-
       if (token !== "" && userData.user.company) {
         let companyId = userData.user.company;
         await axiosInstance
@@ -30,8 +30,18 @@ export default function Dashboard() {
           });
       }
     };
+    const getCompanyDocuments = async () => {
+      if (token !== "") {
+        let companyId = userData.user.company || 1;
+        await axiosInstance
+          .get(`company-documents/${companyId}/`)
+          .then((res) => {
+            setCompanyDocuments(res.data);
+          });
+      }
+    };
     if (userData.user !== null) {
-      getCompanyInfo();
+      getCompanyInfo().then(() => getCompanyDocuments());
     }
   }, [userData.user]);
 
@@ -55,6 +65,8 @@ export default function Dashboard() {
           setCompanyUsers={setCompanyUsers}
           userWaitList={userWaitList}
           setUserWaitList={setUserWaitList}
+          companyDocuments={companyDocuments}
+          setCompanyDocuments={setCompanyDocuments}
         />
       )}
     </div>

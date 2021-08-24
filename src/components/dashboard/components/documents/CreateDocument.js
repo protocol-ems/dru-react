@@ -1,12 +1,10 @@
 import React, { useState, useContext } from "react";
 import DocumentPreview from "./DocumentPreview";
 import UserContext from "../../../context/UserContext";
-import { axiosInstanceWithImage, axiosInstance } from "../../../../axios";
+import { axiosInstance } from "../../../../axios";
 import { v4 as uuidv4 } from "uuid";
 import CreateTableSection from "./CreateTableSection";
 import CreateFlowSection from "./CreateFlowSection";
-import axios from "axios";
-// import MyEditor from "./MyEditor";
 
 export default function CreateDocument({ labels, documentType }) {
   const { userData } = useContext(UserContext);
@@ -90,7 +88,6 @@ export default function CreateDocument({ labels, documentType }) {
   const [documentName, setDocumentName] = useState("");
   const [tableData, setTableData] = useState(initialTableData);
   const [flowData, setFlowData] = useState(initialFlowData);
-  const [imageOne, setImageOne] = useState();
 
   const handleDetailChange = (e) => {
     //need a different way to handle the id. will come back.
@@ -146,43 +143,66 @@ export default function CreateDocument({ labels, documentType }) {
   };
 
   const submitDocument = () => {
-    const uploadData = new FormData();
+    // const uploadData = new FormData();
 
-    uploadData.append("image_one", imageOne, imageOne.name);
+    // uploadData.append("image_one", imageOne, imageOne.name);
 
-    axios.post(
-      "http://127.0.0.1:8000/documents/",
-      {
-        company: userData.user.company,
-        document_type: documentType,
-        document_name: newDocumentDetails.document_name,
-        documentDetails: newDocumentDetails.documentDetails,
-        table_data: tableData,
-        flow_data: flowData,
-        uploadData,
-      },
-      {
-        headers: {
-          Authorization: localStorage.getItem("Authorization")
-            ? "Token " + localStorage.getItem("Authorization")
-            : null,
-        },
-      }
-    );
+    // axios.post(
+    //   "http://127.0.0.1:8000/documents/",
+    //   {
+    //     company: userData.user.company,
+    //     document_type: documentType,
+    //     document_name: newDocumentDetails.document_name,
+    //     documentDetails: newDocumentDetails.documentDetails,
+    //     table_data: tableData,
+    //     flow_data: flowData,
+    //     uploadData,
+    //   },
+    //   {
+    //     headers: {
+    //       Authorization: localStorage.getItem("Authorization")
+    //         ? "Token " + localStorage.getItem("Authorization")
+    //         : null,
+    //     },
+    //   }
+    // );
 
-    // axiosInstanceWithImage.post("/documents/", {
-    //   company: userData.user.company,
-    //   document_type: documentType,
-    //   document_name: newDocumentDetails.document_name,
-    //   documentDetails: newDocumentDetails.documentDetails,
-    //   table_data: tableData,
-    //   flow_data: flowData,
-    //   image_one: imageOne,
+    axiosInstance.post("/documents/", {
+      company: userData.user.company,
+      document_type: documentType,
+      document_name: newDocumentDetails.document_name,
+      documentDetails: newDocumentDetails.documentDetails,
+      table_data: tableData,
+      flow_data: flowData,
+    });
+    // .then((res) => {
+    //   let uploadData = new FormData();
+
+    //   uploadData.append("image", imageOne);
+    //   uploadData.append("name", imageOne.name);
+    //   uploadData.append("document", res.data.id);
+
+    //   axios.post(
+    //     `http://127.0.0.1:8000/photos/`,
+    //     {
+    //       uploadData,
+    //     },
+    //     {
+    //       headers: {
+    //         Authorization: localStorage.getItem("Authorization")
+    //           ? "Token " + localStorage.getItem("Authorization")
+    //           : null,
+    //         // Accept: "application/json",
+    //         // "Content-Type":
+    //         //   "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+    //       },
+    //     }
+    //   );
     // });
   };
 
   const logData = () => {
-    console.log(imageOne);
+    console.log("yes");
   };
 
   return (
@@ -267,17 +287,6 @@ export default function CreateDocument({ labels, documentType }) {
         setFlowData={setFlowData}
         initialFlowData={initialFlowData}
       />
-      <div>
-        <div>Add image here</div>
-
-        <label className="label" id="image_one" name="image_one">
-          Upload Image
-        </label>
-        <input
-          type="file"
-          onChange={(e) => setImageOne(e.target.files[0])}
-        ></input>
-      </div>
     </div>
   );
 }

@@ -21,7 +21,8 @@ export const axiosInstanceWithImage = axios.create({
     Authorization: localStorage.getItem("Authorization")
       ? "Token " + localStorage.getItem("Authorization")
       : null,
-    "Content-Type": "multipart/form-data",
+    "Content-Type":
+      "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
     accept: "application/json",
     // accept: "multipart/form-data",
   },
