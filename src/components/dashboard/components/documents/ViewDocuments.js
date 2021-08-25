@@ -32,7 +32,7 @@ export default function ViewDocuments({
   }, [companyDocuments]);
 
   return (
-    <div className=" min-h-screen">
+    <div>
       {/* <button className="btn" onClick={logData}>
         logData
       </button> */}
@@ -68,6 +68,7 @@ export default function ViewDocuments({
           Protocol
         </div>
       </div>
+
       <div>
         {documentFocus === 1 && <ViewDocumentsPage documents={medicines} />}
       </div>

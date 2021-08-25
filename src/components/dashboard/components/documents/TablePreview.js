@@ -2,12 +2,11 @@ import React from "react";
 
 export default function TablePreview({ tableData }) {
   return (
-    <div>
+    <div className="pb-12">
       <div>
         {tableData.table_description.length && tableData.columns.length > 0 ? (
           <div>
-            <div className="text-3xl pt-8 font-bold">Preview</div>
-            <p className="whitespace-pre-line text-left p-6 mt-4">
+            <p className="whitespace-pre-line text-left  mt-4 text-2xl">
               {tableData.table_description}
             </p>
           </div>

@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 
 import SearchBar from "../SearchBar";
 import DocumentView from "../DocumentView";
+import TablePreview from "../TablePreview";
+import FlowView from "../flow/FlowView";
 
 export default function ViewDocumentsSection({ documents }) {
   const [filteredDocuments, setFilteredDocuments] = useState();
   const [currentDocument, setCurrentDocument] = useState({});
   const [searchText, setSearchText] = useState("");
   const [details, setDetails] = useState([]);
+  const [tableData, setTableData] = useState();
+  const [flowData, setFlowData] = useState();
 
   useEffect(() => {
     const groupBy = (objectArray, property) => {
@@ -27,9 +31,32 @@ export default function ViewDocumentsSection({ documents }) {
     }
   }, [currentDocument]);
 
+  useEffect(() => {
+    if (
+      currentDocument.table_data &&
+      currentDocument.table_data.columns.length > 0
+    ) {
+      setTableData(currentDocument.table_data);
+    } else {
+      setTableData();
+    }
+    if (
+      currentDocument.flow_data &&
+      currentDocument.flow_data.flow_data &&
+      currentDocument.flow_data.flow_data.length > 0
+    ) {
+      setFlowData(currentDocument.flow_data.flow_data);
+    } else {
+      setFlowData();
+    }
+  }, [currentDocument]);
+
   return (
-    <div>
-      <button className="btn" onClick={() => console.log(currentDocument)}>
+    <div className="border p-4 rounded-xl min-h-screen my-4 shadow-xl">
+      <button
+        className="btn"
+        onClick={() => console.log(currentDocument.flow_data.flow_data)}
+      >
         log docs
       </button>
       <SearchBar
@@ -42,6 +69,8 @@ export default function ViewDocumentsSection({ documents }) {
         setFilteredDocuments={setFilteredDocuments}
       />
       <DocumentView currentDocument={currentDocument} details={details} />
+      {tableData ? <TablePreview tableData={tableData} /> : ""}
+      {flowData ? <FlowView elements={flowData} /> : ""}
     </div>
   );
 }

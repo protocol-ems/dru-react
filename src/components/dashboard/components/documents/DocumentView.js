@@ -14,11 +14,11 @@ export default function DocumentView({
               {currentDocument.document_name}
             </h2>
 
-            <ul className="flex items-start gap-8 flex-wrap">
+            <ul className="flex items-start gap-8 flex-wrap ">
               {details
                 ? details.map((detail) => {
                     return (
-                      <li className="w-2/5" key={detail[0]}>
+                      <li className="sm:w-2/5 ml-4 sm:ml-24" key={detail[0]}>
                         <div className="text-lg font-medium leading-6 text-green-400">
                           {detail[0]}
                         </div>
@@ -28,7 +28,7 @@ export default function DocumentView({
                               <li
                                 key={point.id}
                                 id={point.id}
-                                className="whitespace-pre-line text-base leading-6 text-gray-600 m-4"
+                                className="whitespace-pre-line  leading-6 text-gray-600 m-4"
                               >
                                 {point.value}
                               </li>
