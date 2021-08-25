@@ -56,6 +56,23 @@ export default function SearchBar({
           autoComplete="off"
         ></input>
       </div>
+      <div className="flex">
+        {filteredDocuments
+          ? filteredDocuments.map((document, index) => {
+              return (
+                <button
+                  key={document.id}
+                  className="btn"
+                  onClick={() => {
+                    setCurrentDocument(filteredDocuments[index]);
+                  }}
+                >
+                  {document.document_name}
+                </button>
+              );
+            })
+          : ""}
+      </div>
     </div>
   );
 }

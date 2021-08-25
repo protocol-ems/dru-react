@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import ViewDocumentsPage from "./pages/ViewDocumentsPage.js";
+import ViewDocumentsPage from "./pages/ViewDocumentsSection.js";
 
 export default function ViewDocuments({
   companyDocuments,
