@@ -17,7 +17,6 @@ export default function SearchBar({
 
   useEffect(() => {
     if (documents) {
-      // console.log(documents);
       const documentList = documents.filter(
         (document) =>
           document.document_name.toLowerCase().indexOf(searchText) !== -1 &&
@@ -25,18 +24,6 @@ export default function SearchBar({
       );
 
       setFilteredDocuments(documentList);
-      // for (let i = 0; i < documents.length; i++) {
-      //   if (
-      //     documents[i].document_name.toLowerCase().includes(searchText) &&
-      //     searchText.length > 1
-      //   ) {
-      //     console.log(documents[i]);
-      //     setCurrentDocument(documents[i]);
-      //     break;
-      //   } else {
-      //     setCurrentDocument({});
-      //   }
-      // }
     }
   }, [searchText, setCurrentDocument, documents, setFilteredDocuments]);
 

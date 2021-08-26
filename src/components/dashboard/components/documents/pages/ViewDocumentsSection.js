@@ -59,18 +59,25 @@ export default function ViewDocumentsSection({ documents }) {
       >
         log docs
       </button>
-      <SearchBar
-        searchText={searchText}
-        setSearchText={setSearchText}
-        currentDocument={currentDocument}
-        setCurrentDocument={setCurrentDocument}
-        documents={documents}
-        filteredDocuments={filteredDocuments}
-        setFilteredDocuments={setFilteredDocuments}
-      />
-      <DocumentView currentDocument={currentDocument} details={details} />
-      {tableData ? <TablePreview tableData={tableData} /> : ""}
-      {flowData ? <FlowView elements={flowData} /> : ""}
+      {documents ? (
+        <div>
+          {" "}
+          <SearchBar
+            searchText={searchText}
+            setSearchText={setSearchText}
+            currentDocument={currentDocument}
+            setCurrentDocument={setCurrentDocument}
+            documents={documents}
+            filteredDocuments={filteredDocuments}
+            setFilteredDocuments={setFilteredDocuments}
+          />
+          <DocumentView currentDocument={currentDocument} details={details} />
+          {tableData ? <TablePreview tableData={tableData} /> : ""}
+          {flowData ? <FlowView elements={flowData} /> : ""}
+        </div>
+      ) : (
+        <div className="loader"></div>
+      )}
     </div>
   );
 }
