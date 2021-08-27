@@ -13,7 +13,6 @@ export default function DocumentPreview({
       (document) => document.label === label.document_detail_name
     );
     let arr = [];
-
     filteredArr.map((value) => {
       if (value.id) {
         return arr.push({

@@ -6,7 +6,16 @@ import { v4 as uuidv4 } from "uuid";
 import CreateTableSection from "./CreateTableSection";
 import CreateFlowSection from "./CreateFlowSection";
 
-export default function CreateDocument({ labels, documentType }) {
+export default function CreateDocument({
+  labels,
+  documentType,
+  details,
+  tableDetails,
+  flowDetails,
+  editMode,
+  editId,
+  setEdit,
+}) {
   const { userData } = useContext(UserContext);
 
   const initialDetails = Object.freeze({
@@ -83,11 +92,13 @@ export default function CreateDocument({ labels, documentType }) {
     ],
   });
 
-  const [newDocumentDetails, setNewDocumentDetails] = useState(initialDetails);
+  const [newDocumentDetails, setNewDocumentDetails] = useState(
+    details || initialDetails
+  );
   const [detail, setDetail] = useState({});
   const [documentName, setDocumentName] = useState("");
-  const [tableData, setTableData] = useState(initialTableData);
-  const [flowData, setFlowData] = useState(initialFlowData);
+  const [tableData, setTableData] = useState(tableDetails || initialTableData);
+  const [flowData, setFlowData] = useState(flowDetails || initialFlowData);
 
   const handleDetailChange = (e) => {
     //need a different way to handle the id. will come back.
@@ -143,30 +154,6 @@ export default function CreateDocument({ labels, documentType }) {
   };
 
   const submitDocument = () => {
-    // const uploadData = new FormData();
-
-    // uploadData.append("image_one", imageOne, imageOne.name);
-
-    // axios.post(
-    //   "http://127.0.0.1:8000/documents/",
-    //   {
-    //     company: userData.user.company,
-    //     document_type: documentType,
-    //     document_name: newDocumentDetails.document_name,
-    //     documentDetails: newDocumentDetails.documentDetails,
-    //     table_data: tableData,
-    //     flow_data: flowData,
-    //     uploadData,
-    //   },
-    //   {
-    //     headers: {
-    //       Authorization: localStorage.getItem("Authorization")
-    //         ? "Token " + localStorage.getItem("Authorization")
-    //         : null,
-    //     },
-    //   }
-    // );
-
     axiosInstance.post("/documents/", {
       company: userData.user.company,
       document_type: documentType,
@@ -175,44 +162,47 @@ export default function CreateDocument({ labels, documentType }) {
       table_data: tableData,
       flow_data: flowData,
     });
-    // .then((res) => {
-    //   let uploadData = new FormData();
-
-    //   uploadData.append("image", imageOne);
-    //   uploadData.append("name", imageOne.name);
-    //   uploadData.append("document", res.data.id);
-
-    //   axios.post(
-    //     `http://127.0.0.1:8000/photos/`,
-    //     {
-    //       uploadData,
-    //     },
-    //     {
-    //       headers: {
-    //         Authorization: localStorage.getItem("Authorization")
-    //           ? "Token " + localStorage.getItem("Authorization")
-    //           : null,
-    //         // Accept: "application/json",
-    //         // "Content-Type":
-    //         //   "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
-    //       },
-    //     }
-    //   );
-    // });
   };
 
-  const logData = () => {
-    console.log("yes");
+  const submitEdits = () => {
+    axiosInstance
+      .patch(`/documents/${editId}/`, {
+        company: userData.user.company,
+        document_type: documentType,
+        document_name: newDocumentDetails.document_name,
+        documentDetails: newDocumentDetails.documentDetails,
+        table_data: tableData,
+        flow_data: flowData,
+      })
+      .then(() => {
+        setEdit(false);
+      });
   };
+
+  // const logData = () => {
+  //   console.log(editId);
+  // };
 
   return (
     <div className="container mx-auto">
-      <button className="btn" onClick={submitDocument}>
-        submit data
-      </button>
-      <button className="btn" onClick={logData}>
+      {editMode ? (
+        <div>
+          <button className="btn btn-info" onClick={submitEdits}>
+            Confirm Edits
+          </button>
+          <button className="btn btn-warning" onClick={() => setEdit(false)}>
+            Cancel Edits
+          </button>
+        </div>
+      ) : (
+        <button className="btn" onClick={submitDocument}>
+          submit data
+        </button>
+      )}
+
+      {/* <button className="btn" onClick={logData}>
         Log Data
-      </button>
+      </button> */}
       <div className="text-4xl  text-center">Preview</div>
       <div className="border my-12 ">
         <DocumentPreview

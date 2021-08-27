@@ -1,7 +1,6 @@
 import React from "react";
 import ReactFlow, {
   Background,
-  MiniMap,
   Controls,
   ReactFlowProvider,
 } from "react-flow-renderer";

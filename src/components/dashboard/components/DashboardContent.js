@@ -12,7 +12,7 @@ export default function DashboardContent({
   setCompanyDocuments,
 }) {
   return (
-    <div className="flex flex-col w-full pt-24">
+    <div className="flex flex-col w-full ">
       <ViewDocuments
         companyDocuments={companyDocuments}
         setCompanyDocuments={setCompanyDocuments}

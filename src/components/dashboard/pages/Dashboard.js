@@ -46,13 +46,13 @@ export default function Dashboard() {
   }, [userData.user]);
 
   return (
-    <div className="container mx-auto mt-12 ">
-      <h1 className="text-5xl mx-auto">Dashboard</h1>
+    <div className="container mx-auto ">
+      {/* <h1 className="text-5xl mx-auto">Dashboard</h1>
       {userData.user !== null ? (
         <h1>Currently logged in as: {userData.user.username}</h1>
       ) : (
         "Please log in"
-      )}
+      )} */}
 
       {/* <button className="btn" onClick={() => console.log(userData.user)}>
         click

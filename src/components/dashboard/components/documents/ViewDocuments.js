@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import ViewDocumentsPage from "./pages/ViewDocumentsSection.js";
+import ViewDocumentsSection from "./pages/ViewDocumentsSection.js";
 
-export default function ViewDocuments({
-  companyDocuments,
-  setCompanyDocuments,
-}) {
+export default function ViewDocuments({ companyDocuments }) {
   const [documentFocus, setDocumentFocus] = useState(1);
   const [medicines, setMedicines] = useState();
   const [procedures, setProcedures] = useState();
@@ -13,10 +10,6 @@ export default function ViewDocuments({
 
   const focusHandler = (docId) => {
     setDocumentFocus(docId);
-  };
-
-  const logData = () => {
-    console.log(companyDocuments);
   };
 
   useEffect(() => {
@@ -33,10 +26,7 @@ export default function ViewDocuments({
 
   return (
     <div>
-      {/* <button className="btn" onClick={logData}>
-        logData
-      </button> */}
-      <div className="tabs tabs-boxed p-4">
+      <div className="tabs tabs-boxed p-4 ">
         <div
           onClick={() => {
             focusHandler(1);
@@ -70,13 +60,13 @@ export default function ViewDocuments({
       </div>
 
       <div>
-        {documentFocus === 1 && <ViewDocumentsPage documents={medicines} />}
+        {documentFocus === 1 && <ViewDocumentsSection documents={medicines} />}
       </div>
       <div>
-        {documentFocus === 2 && <ViewDocumentsPage documents={procedures} />}
+        {documentFocus === 2 && <ViewDocumentsSection documents={procedures} />}
       </div>
       <div>
-        {documentFocus === 3 && <ViewDocumentsPage documents={protocols} />}
+        {documentFocus === 3 && <ViewDocumentsSection documents={protocols} />}
       </div>
     </div>
   );

@@ -83,6 +83,7 @@ function App() {
             component={CreateDocumentHeader}
           />
           <Route exact path="/create-medicine" component={CreateMedicine} />
+
           <Route exact path="/create-procedure" component={CreateProcedure} />
           <Route exact path="/create-protocol" component={CreateProtocol} />
         </Switch>

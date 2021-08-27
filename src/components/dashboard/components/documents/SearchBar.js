@@ -8,6 +8,7 @@ export default function SearchBar({
   documents,
   filteredDocuments,
   setFilteredDocuments,
+  setFlowData,
 }) {
   const searchHandler = (e) => {
     const newSearch = e.target.value;
@@ -20,19 +21,31 @@ export default function SearchBar({
       const documentList = documents.filter(
         (document) =>
           document.document_name.toLowerCase().indexOf(searchText) !== -1 &&
-          searchText.length > 1
+          searchText.length > 0
       );
 
       setFilteredDocuments(documentList);
     }
+    if (documents && searchText.length === 0) {
+      setFilteredDocuments(documents);
+    }
   }, [searchText, setCurrentDocument, documents, setFilteredDocuments]);
 
+  const setDocumentHandler = (index) => {
+    //setFlowData is being used here to force a rerender.
+    // If a person clicks on one document that has a flow chart and the previous document had a flow chart
+    // the rerender will force the flow chart to be centered
+    setFlowData();
+    setCurrentDocument(filteredDocuments[index]);
+  };
+
   return (
-    <div>
-      <div className="flex flex-col mb-4 rounded md:items-center">
+    <div className="mb-12">
+      <div className="flex flex-col mb-4 rounded md:items-center ">
         <label className="mb-2 uppercase font-bold text-lg text-green-400">
           Search
         </label>
+
         <input
           value={searchText}
           onChange={searchHandler}
@@ -43,15 +56,15 @@ export default function SearchBar({
           autoComplete="off"
         ></input>
       </div>
-      <div className="flex">
+      <div className="flex overflow-auto p-2 m-2 ">
         {filteredDocuments
           ? filteredDocuments.map((document, index) => {
               return (
                 <button
                   key={document.id}
-                  className="btn"
+                  className="btn btn-outline btn-accent mx-2"
                   onClick={() => {
-                    setCurrentDocument(filteredDocuments[index]);
+                    setDocumentHandler(index);
                   }}
                 >
                   {document.document_name}

@@ -3,7 +3,14 @@ import CreateDocument from "../CreateDocument";
 import UserContext from "../../../../context/UserContext";
 import { axiosInstance } from "../../../../../axios";
 
-export default function CreateProcedure() {
+export default function CreateProcedure({
+  details,
+  tableDetails,
+  flowDetails,
+  editMode,
+  editId,
+  setEdit,
+}) {
   const { userData } = useContext(UserContext);
 
   const initalLabels = Object.freeze({
@@ -30,7 +37,16 @@ export default function CreateProcedure() {
   return (
     <div>
       {labels.length > 0 ? (
-        <CreateDocument labels={labels} documentType="2" />
+        <CreateDocument
+          labels={labels}
+          documentType="2"
+          details={details}
+          tableDetails={tableDetails}
+          flowDetails={flowDetails}
+          editMode={editMode}
+          editId={editId}
+          setEdit={setEdit}
+        />
       ) : (
         <div className=" mx-auto text-center pt-24">
           <div className="loader"></div>

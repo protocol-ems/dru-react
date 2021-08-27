@@ -4,6 +4,9 @@ import SearchBar from "../SearchBar";
 import DocumentView from "../DocumentView";
 import TablePreview from "../TablePreview";
 import FlowView from "../flow/FlowView";
+import CreateMedicine from "./CreateMedicine";
+import CreateProcedure from "./CreateProcedure";
+import CreateProtocol from "./CreateProtocol";
 
 export default function ViewDocumentsSection({ documents }) {
   const [filteredDocuments, setFilteredDocuments] = useState();
@@ -12,6 +15,7 @@ export default function ViewDocumentsSection({ documents }) {
   const [details, setDetails] = useState([]);
   const [tableData, setTableData] = useState();
   const [flowData, setFlowData] = useState();
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     const groupBy = (objectArray, property) => {
@@ -51,29 +55,83 @@ export default function ViewDocumentsSection({ documents }) {
     }
   }, [currentDocument]);
 
+  const handleEdit = () => {
+    window.scrollTo(0, 0);
+    setEdit(true);
+  };
+
   return (
-    <div className="border p-4 rounded-xl min-h-screen my-4 shadow-xl">
-      <button
+    <div className="border p-4 rounded-xl min-h-screen my-4 shadow-xl z-10">
+      {/* <button
         className="btn"
-        onClick={() => console.log(currentDocument.flow_data.flow_data)}
+        onClick={() => console.log(currentDocument.document_type)}
       >
         log docs
-      </button>
+      </button> */}
       {documents ? (
         <div>
-          {" "}
-          <SearchBar
-            searchText={searchText}
-            setSearchText={setSearchText}
-            currentDocument={currentDocument}
-            setCurrentDocument={setCurrentDocument}
-            documents={documents}
-            filteredDocuments={filteredDocuments}
-            setFilteredDocuments={setFilteredDocuments}
-          />
-          <DocumentView currentDocument={currentDocument} details={details} />
-          {tableData ? <TablePreview tableData={tableData} /> : ""}
-          {flowData ? <FlowView elements={flowData} /> : ""}
+          {edit && currentDocument.document_type === "1" && (
+            <CreateMedicine
+              details={currentDocument}
+              tableDetails={currentDocument.table_data}
+              flowDetails={currentDocument.flow_data}
+              editMode={edit}
+              editId={currentDocument.id}
+              setEdit={setEdit}
+            />
+          )}
+          {edit && currentDocument.document_type === "2" && (
+            <CreateProcedure
+              details={currentDocument}
+              tableDetails={currentDocument.table_data}
+              flowDetails={currentDocument.flow_data}
+              editMode={edit}
+              editId={currentDocument.id}
+              setEdit={setEdit}
+            />
+          )}
+          {edit && currentDocument.document_type === "3" && (
+            <CreateProtocol
+              details={currentDocument}
+              tableDetails={currentDocument.table_data}
+              flowDetails={currentDocument.flow_data}
+              editMode={edit}
+              editId={currentDocument.id}
+              setEdit={setEdit}
+            />
+          )}
+          {!edit && (
+            <div>
+              <SearchBar
+                searchText={searchText}
+                setSearchText={setSearchText}
+                currentDocument={currentDocument}
+                setCurrentDocument={setCurrentDocument}
+                documents={documents}
+                filteredDocuments={filteredDocuments}
+                setFilteredDocuments={setFilteredDocuments}
+                setFlowData={setFlowData}
+              />
+              <DocumentView
+                currentDocument={currentDocument}
+                details={details}
+              />
+              {tableData ? <TablePreview tableData={tableData} /> : ""}
+              {flowData ? <FlowView elements={flowData} /> : ""}
+              {currentDocument.id && (
+                <div className="flex justify-center p-4">
+                  <button
+                    className="btn-warning btn w-1/2"
+                    onClick={() => {
+                      handleEdit();
+                    }}
+                  >
+                    Edit
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       ) : (
         <div className="loader"></div>
