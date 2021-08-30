@@ -15,6 +15,7 @@ import CreateDocumentHeader from "./components/dashboard/components/documents/Cr
 import CreateMedicine from "./components/dashboard/components/documents/pages/CreateMedicine";
 import CreateProcedure from "./components/dashboard/components/documents/pages/CreateProcedure";
 import CreateProtocol from "./components/dashboard/components/documents/pages/CreateProtocol";
+import HomePage from "./components/dashboard/pages/HomePage";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -71,6 +72,7 @@ function App() {
           />
         )}
         <Switch>
+          <Route exact path="/" component={HomePage} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/dashboard">
