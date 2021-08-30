@@ -32,63 +32,63 @@ export default function CreateDocument({
 
   const initialFlowData = Object.freeze({
     flow_data: [
-      {
-        id: "db298467-ac3b-4098-a072-b2c568299e24",
-        data: { label: "Click on any node to edit it" },
-        type: "default",
-        position: { x: 314, y: 12 },
-        style: {
-          width: 250,
-          background: "#b0e1ff",
-          border: "1px solid black",
-          whiteSpace: "pre-wrap",
-          color: "black",
-        },
-      },
-      {
-        id: "b5271a67-7db5-466b-a8a4-18e6d73644e5",
-        data: {
-          label: "Press the backspace key after selecting a node to delete it.",
-        },
-        type: "default",
-        position: { x: 489.49364928886416, y: 246.13306796587497 },
-        style: {
-          width: 400,
-          background: "white",
-          border: "1px solid black",
-          whiteSpace: "pre-wrap",
-          color: "red",
-        },
-      },
-      {
-        id: "845e2c49-d68e-4879-8ff6-6fadc28a587d",
-        data: { label: "Lines can be customized too" },
-        type: "default",
-        position: { x: 476.9840601587707, y: 133.54676579503385 },
-        style: {
-          width: 150,
-          background: "#fcffa4",
-          border: "1px solid black",
-          whiteSpace: "pre-wrap",
-          color: "black",
-        },
-      },
-      {
-        id: "reactflow__edge-db298467-ac3b-4098-a072-b2c568299e24null-845e2c49-d68e-4879-8ff6-6fadc28a587dnull",
-        type: "custom",
-        animated: true,
-        data: { label: "Click" },
-        source: "db298467-ac3b-4098-a072-b2c568299e24",
-        target: "845e2c49-d68e-4879-8ff6-6fadc28a587d",
-      },
-      {
-        id: "reactflow__edge-845e2c49-d68e-4879-8ff6-6fadc28a587dnull-b5271a67-7db5-466b-a8a4-18e6d73644e5null",
-        type: "custom",
-        animated: false,
-        data: { label: "" },
-        source: "845e2c49-d68e-4879-8ff6-6fadc28a587d",
-        target: "b5271a67-7db5-466b-a8a4-18e6d73644e5",
-      },
+      // {
+      //   id: "db298467-ac3b-4098-a072-b2c568299e24",
+      //   data: { label: "Click on any node to edit it" },
+      //   type: "default",
+      //   position: { x: 314, y: 12 },
+      //   style: {
+      //     width: 250,
+      //     background: "#b0e1ff",
+      //     border: "1px solid black",
+      //     whiteSpace: "pre-wrap",
+      //     color: "black",
+      //   },
+      // },
+      // {
+      //   id: "b5271a67-7db5-466b-a8a4-18e6d73644e5",
+      //   data: {
+      //     label: "Press the backspace key after selecting a node to delete it.",
+      //   },
+      //   type: "default",
+      //   position: { x: 489.49364928886416, y: 246.13306796587497 },
+      //   style: {
+      //     width: 400,
+      //     background: "white",
+      //     border: "1px solid black",
+      //     whiteSpace: "pre-wrap",
+      //     color: "red",
+      //   },
+      // },
+      // {
+      //   id: "845e2c49-d68e-4879-8ff6-6fadc28a587d",
+      //   data: { label: "Lines can be customized too" },
+      //   type: "default",
+      //   position: { x: 476.9840601587707, y: 133.54676579503385 },
+      //   style: {
+      //     width: 150,
+      //     background: "#fcffa4",
+      //     border: "1px solid black",
+      //     whiteSpace: "pre-wrap",
+      //     color: "black",
+      //   },
+      // },
+      // {
+      //   id: "reactflow__edge-db298467-ac3b-4098-a072-b2c568299e24null-845e2c49-d68e-4879-8ff6-6fadc28a587dnull",
+      //   type: "custom",
+      //   animated: true,
+      //   data: { label: "Click" },
+      //   source: "db298467-ac3b-4098-a072-b2c568299e24",
+      //   target: "845e2c49-d68e-4879-8ff6-6fadc28a587d",
+      // },
+      // {
+      //   id: "reactflow__edge-845e2c49-d68e-4879-8ff6-6fadc28a587dnull-b5271a67-7db5-466b-a8a4-18e6d73644e5null",
+      //   type: "custom",
+      //   animated: false,
+      //   data: { label: "" },
+      //   source: "845e2c49-d68e-4879-8ff6-6fadc28a587d",
+      //   target: "b5271a67-7db5-466b-a8a4-18e6d73644e5",
+      // },
     ],
   });
 
@@ -96,7 +96,6 @@ export default function CreateDocument({
     details || initialDetails
   );
   const [detail, setDetail] = useState({});
-  const [documentName, setDocumentName] = useState("");
   const [tableData, setTableData] = useState(tableDetails || initialTableData);
   const [flowData, setFlowData] = useState(flowDetails || initialFlowData);
 
@@ -113,14 +112,9 @@ export default function CreateDocument({
 
   const handleDocumentNameChange = (e) => {
     e.preventDefault();
-    setDocumentName(e.target.value);
-  };
-
-  const addDocumentName = (e) => {
-    e.preventDefault();
     setNewDocumentDetails({
       ...newDocumentDetails,
-      document_name: documentName,
+      document_name: e.target.value,
     });
   };
 
@@ -223,10 +217,11 @@ export default function CreateDocument({
             type="text"
             name="document_name"
             onChange={handleDocumentNameChange}
+            value={newDocumentDetails.document_name}
           />
-          <button className="btn btn-accent mt-4" onClick={addDocumentName}>
+          {/* <button className="btn btn-accent mt-4" onClick={addDocumentName}>
             Add
-          </button>
+          </button> */}
         </div>
       </div>
 

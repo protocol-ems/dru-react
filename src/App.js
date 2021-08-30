@@ -25,38 +25,39 @@ function App() {
 
   const history = useHistory();
 
-  useEffect(() => {
-    const getUserInfo = async () => {
-      let token = localStorage.getItem("Authorization");
+  // I do not think I need to be setting the user at the very top of the app. In the dashboard seems to be fine. Leaving code for now to make sure nothing breaks 8/30/21
 
-      if (token === null || undefined) {
-        localStorage.setItem("Authorization", "");
-        token = "";
-      }
+  // useEffect(() => {
 
-      if (token !== "") {
-        // I am curious if there is a better way to handle the history.push
-        // I am unusure if it should be after catching the error or if it shoud be before.
-        // for now it works - will follow up 8/1/21
-        axiosInstance
-          .get("/users/info/")
-          .then((res) => {
-            setUserData({
-              user: res.data[0],
-            });
-          })
-          .then(() => {
-            history.push("/dashboard");
-          })
+  //   const getUserInfo = async () => {
+  //     let token = localStorage.getItem("Authorization");
 
-          .catch((err) => {
-            err ? setErrorMessage("Please log in") : setErrorMessage(undefined);
-          });
-      }
-    };
+  //     if (token === null || undefined) {
+  //       localStorage.setItem("Authorization", "");
+  //       token = "";
+  //     }
 
-    getUserInfo();
-  }, [history]);
+  //     if (token !== "") {
+  //       // I am curious if there is a better way to handle the history.push
+  //       // I am unusure if it should be after catching the error or if it shoud be before.
+  //       // for now it works - will follow up 8/1/21
+  //       axiosInstance.get("/users/info/").then((res) => {
+  //         setUserData({
+  //           user: res.data[0],
+  //         });
+  //       });
+  //       // .then(() => {
+  //       //   history.push("/dashboard");
+  //       // })
+
+  //       // .catch((err) => {
+  //       //   err ? setErrorMessage("Please log in") : setErrorMessage(undefined);
+  //       // });
+  //     }
+  //   };
+
+  //   getUserInfo();
+  // }, [history]);
 
   return (
     <div className="App">

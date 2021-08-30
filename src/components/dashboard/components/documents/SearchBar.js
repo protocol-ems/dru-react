@@ -42,9 +42,7 @@ export default function SearchBar({
   return (
     <div className="mb-12">
       <div className="flex flex-col mb-4 rounded md:items-center ">
-        <label className="mb-2 uppercase font-bold text-lg text-green-400">
-          Search
-        </label>
+        <label className="mb-2 uppercase font-bold text-2xl bold">Search</label>
 
         <input
           value={searchText}

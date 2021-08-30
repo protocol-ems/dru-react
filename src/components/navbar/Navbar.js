@@ -14,30 +14,51 @@ export default function Navbar() {
           <nav className="flex flex-wrap items-center justify-start text-base ">
             <ul className="items-center inline-block list-none lg:inline-flex">
               <li>
-                <a
-                  href="/"
+                <Link
+                  to="/"
                   className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400 "
                 >
                   Pricing
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
-          <a
-            href="/"
-            className="justify-center focus:outline-none md:ml-auto md:mr-auto"
-          >
-            <h2 className="block p-2 text-xl font-medium tracking-tighter text-black transition duration-500 ease-in-out transform cursor-pointer hover:text-blueGray-500 lg:text-x lg:mr-8">
-              {" "}
-              Protocol{" "}
-            </h2>
-          </a>
+          {userData.user !== null ? (
+            <Link
+              to="/dashboard"
+              className="justify-center focus:outline-none md:ml-auto md:mr-auto"
+            >
+              <h2 className="block p-2 text-xl font-medium tracking-tighter text-black transition duration-500 ease-in-out transform cursor-pointer hover:text-blueGray-500 lg:text-x lg:mr-8">
+                {" "}
+                Protocol{" "}
+              </h2>
+            </Link>
+          ) : (
+            <Link
+              to="/"
+              className="justify-center focus:outline-none md:ml-auto md:mr-auto"
+            >
+              <h2 className="block p-2 text-xl font-medium tracking-tighter text-black transition duration-500 ease-in-out transform cursor-pointer hover:text-blueGray-500 lg:text-x lg:mr-8">
+                {" "}
+                Protocol{" "}
+              </h2>
+            </Link>
+          )}
+
           <nav className="flex flex-wrap items-center justify-start text-base ">
             <ul className="items-center inline-block list-none lg:inline-flex">
               {userData.user !== null ? (
-                <li className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400">
-                  <Logout />
-                </li>
+                <div className="flex flex-wrap items-center justify-start">
+                  <li className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400">
+                    <Logout />
+                  </li>
+                  <Link
+                    to="/dashboard"
+                    className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400 "
+                  >
+                    Dashboard
+                  </Link>
+                </div>
               ) : (
                 <div>
                   <Link

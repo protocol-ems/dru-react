@@ -14,6 +14,13 @@ import NodeEditor from "./NodeEditor";
 import CustomEdge from "./CustomEdge";
 
 export default function CreateFlow({ flowData, setFlowData }) {
+  const initialChartState = () => {
+    if (flowData.flow_data.length > 0) {
+      return true;
+    }
+    return false;
+  };
+
   const edgeTypes = {
     custom: CustomEdge,
   };
@@ -23,7 +30,7 @@ export default function CreateFlow({ flowData, setFlowData }) {
   const [editNode, setEditNode] = useState({});
   const [animated, setAnimated] = useState(false);
   const [bottom, setBottom] = useState(100);
-  const [chart, setChart] = useState(false);
+  const [chart, setChart] = useState(initialChartState());
 
   const reactFlowWrapper = useRef(null);
 
@@ -163,6 +170,7 @@ export default function CreateFlow({ flowData, setFlowData }) {
       <div className="font-bold text-3xl py-8 text-center">
         Create Flow Chart Section
       </div>
+
       {chart ? (
         <div className="border rounded py-4 px-2">
           <ReactFlowProvider>

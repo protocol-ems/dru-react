@@ -8,9 +8,16 @@ export default function CreateTableSection({
   setTableData,
   initialTableData,
 }) {
+  const initialTableState = () => {
+    if (tableData.columns.length > 0) {
+      return true;
+    }
+    return false;
+  };
+
   const [rows, setRows] = useState(0);
   const [columns, setCoulmns] = useState(0);
-  const [table, setTable] = useState(false);
+  const [table, setTable] = useState(initialTableState());
 
   const handleRow = (e) => {
     setRows(e.target.value);
@@ -118,16 +125,25 @@ export default function CreateTableSection({
                 className="textarea h-24 textarea-bordered"
                 placeholder="Table Description..."
                 onChange={handleTableDescription}
+                value={tableData.table_description}
               ></textarea>
             </div>
             <TablePreview tableData={tableData} />
+            <button
+              className="btn btn-info"
+              onClick={() => {
+                console.log(tableData.rows);
+              }}
+            >
+              See Table Data
+            </button>
             <div className="text-3xl font-bold pt-12">Enter Data Below</div>
             <div className="overflow-auto">
               <table className="border-collapse w-full table-fixed break-word mt-4 ">
                 <thead>
                   <tr>
                     {tableData.columns.length > 0 ? (
-                      tableData.columns.map((column) => {
+                      tableData.columns.map((column, index) => {
                         return (
                           <th
                             key={column.id}
@@ -138,6 +154,7 @@ export default function CreateTableSection({
                               type="text"
                               className="input input-ghosted input-sm w-full rounded-none "
                               onChange={handleColumnChange}
+                              value={tableData.columns[index].value}
                             ></input>
                           </th>
                         );
@@ -156,7 +173,7 @@ export default function CreateTableSection({
                           key={i}
                           id={i}
                         >
-                          {row.map((el) => {
+                          {row.map((el, index) => {
                             return (
                               <td className="border" key={el.id}>
                                 <input
@@ -165,6 +182,7 @@ export default function CreateTableSection({
                                   id={el.id}
                                   className="input input-ghosted input-sm w-full rounded-none "
                                   onChange={handleRowChange}
+                                  value={tableData.rows[i][index].value}
                                 ></input>
                               </td>
                             );
@@ -191,14 +209,6 @@ export default function CreateTableSection({
               Generate Table Table
             </button>
             <div className="flex">
-              <button
-                className="btn"
-                onClick={() => {
-                  console.log(JSON.stringify(tableData));
-                }}
-              >
-                Log Data
-              </button>
               <button
                 className="btn btn-warning"
                 onClick={() => {
