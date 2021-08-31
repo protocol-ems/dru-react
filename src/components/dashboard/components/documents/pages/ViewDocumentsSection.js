@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import SearchBar from "../SearchBar";
 import DocumentView from "../DocumentView";
@@ -8,7 +8,11 @@ import CreateMedicine from "./CreateMedicine";
 import CreateProcedure from "./CreateProcedure";
 import CreateProtocol from "./CreateProtocol";
 
+import UserContext from "../../../../context/UserContext";
+
 export default function ViewDocumentsSection({ documents }) {
+  const { userData } = useContext(UserContext);
+
   const [filteredDocuments, setFilteredDocuments] = useState();
   const [currentDocument, setCurrentDocument] = useState({});
   const [searchText, setSearchText] = useState("");
@@ -118,18 +122,20 @@ export default function ViewDocumentsSection({ documents }) {
               />
               {tableData ? <TablePreview tableData={tableData} /> : ""}
               {flowData ? <FlowView elements={flowData} /> : ""}
-              {currentDocument.id && (
-                <div className="flex justify-center p-4">
-                  <button
-                    className="btn-warning btn w-1/2"
-                    onClick={() => {
-                      handleEdit();
-                    }}
-                  >
-                    Edit
-                  </button>
-                </div>
-              )}
+              {currentDocument.id &&
+                userData.user &&
+                userData.user.employee_type === 4 && (
+                  <div className="flex justify-center p-4">
+                    <button
+                      className="btn-warning btn w-1/2"
+                      onClick={() => {
+                        handleEdit();
+                      }}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                )}
             </div>
           )}
         </div>

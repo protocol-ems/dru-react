@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
-import { axiosInstance } from "./axios";
+import React, { useState } from "react";
+import { Switch, Route } from "react-router-dom";
 
 import UserContext from "./components/context/UserContext";
 
@@ -23,8 +22,6 @@ function App() {
   });
 
   const [errorMessage, setErrorMessage] = useState(undefined);
-
-  const history = useHistory();
 
   // I do not think I need to be setting the user at the very top of the app. In the dashboard seems to be fine. Leaving code for now to make sure nothing breaks 8/30/21
 
