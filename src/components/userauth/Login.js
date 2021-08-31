@@ -66,7 +66,7 @@ export default function Register() {
   return (
     <div>
       <div className="min-h-screen  container items-center py-12 mx-auto">
-        <div className=" flex flex-col w-full p-10 mx-auto my-6 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-2/6 md:w-1/2 md:mt-0">
+        <div className=" flex flex-col w-full p-10 mx-auto my-6 transition duration-500 ease-in-out transform bg-gray-50 border rounded-lg lg:w-2/6 md:w-1/2 md:mt-0">
           <h1>Login</h1>
           {errorMessage && (
             <Error
@@ -82,7 +82,7 @@ export default function Register() {
               <input
                 type="email"
                 placeholder="Email"
-                className="input input-bordered"
+                className="input input-bordered input-accent"
                 name="username"
                 id="username"
                 onChange={handleChange}
@@ -95,7 +95,7 @@ export default function Register() {
               <input
                 type="password"
                 placeholder="Password"
-                className="input input-bordered"
+                className="input input-bordered input-accent"
                 name="password"
                 id="password"
                 onChange={handleChange}
@@ -104,7 +104,7 @@ export default function Register() {
 
             <button
               type="submit"
-              className="w-full px-16 py-2 my-2 mr-2 text-base text-white transition duration-500 ease-in-out transform bg-green-300 border-green-600 rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-green-400"
+              className="btn btn-accent w-full mt-4"
               onClick={handleSubmit}
             >
               Login

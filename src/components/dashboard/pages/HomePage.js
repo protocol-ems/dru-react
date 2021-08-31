@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 
 import CostCalculator from "../components/CostCalculator";
+import MoreInfoSection from "./MoreInfoSection";
 
 import notes from "../../../images/notes.svg";
 
 export default function HomePage() {
+  const learnMore = useRef(null);
+
+  const toMore = () => {
+    console.log(learnMore);
+    window.scrollTo(0, learnMore.current.offsetTop);
+  };
+  const toTop = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <div>
       <div className=" flex flex-col md:flex-row mt-24 container mx-auto">
         <div className="flex flex-col md:w-1/2">
-          <h1 className="text-4xl font-bold py-4 text-black">Our Protocol</h1>
+          <h1 className="text-4xl font-bold py-4 text-black">OurProtocol</h1>
           <p className="mb-8 text-2xl font-black tracking-tighter text-gray-700 md:text-3xl title-font px-4">
             The world's first EMS specific protcol platform.
           </p>
@@ -24,18 +35,20 @@ export default function HomePage() {
             Increase patient care by making information readily avaliable.
           </p>
           <div className="flex justify-around">
-            <button className="btn btn-outline btn-accent">
+            <button className="btn btn-outline btn-accent" onClick={toMore}>
               Learn more here
             </button>
-            <button className="btn  btn-accent">Register Today</button>
+            <Link to="/register" className="btn  btn-accent" onClick={toTop}>
+              Register Today
+            </Link>
           </div>
         </div>
 
         <div className="md:w-1/2 mt-12 md:mt-0">
-          <img src={notes} alt="" />
+          <img src={notes} alt="showcase" />
         </div>
       </div>
-      <div className="bg-gray-100">
+      <div className="bg-gray-100 pb-24">
         <div className="text-center py-12 text-4xl font-bold ">
           Scaled Pricing
         </div>
@@ -63,6 +76,9 @@ export default function HomePage() {
           </div>
           <CostCalculator />
         </div>
+      </div>
+      <div ref={learnMore}>
+        <MoreInfoSection />
       </div>
     </div>
   );
