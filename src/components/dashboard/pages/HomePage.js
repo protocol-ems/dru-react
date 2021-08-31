@@ -5,6 +5,7 @@ import CostCalculator from "../components/CostCalculator";
 import MoreInfoSection from "./MoreInfoSection";
 
 import notes from "../../../images/notes.svg";
+import wave from "../../../images/wave1.svg";
 
 export default function HomePage() {
   const learnMore = useRef(null);
@@ -48,8 +49,11 @@ export default function HomePage() {
           <img src={notes} alt="showcase" />
         </div>
       </div>
-      <div className="bg-gray-100 pb-24">
-        <div className="text-center py-12 text-4xl font-bold ">
+      <div
+        className="bg-gray-100 bg-local bg-no-repeat bg-left-bottom "
+        style={{ backgroundImage: `url(${wave}) ` }}
+      >
+        <div className="text-center p-12 text-4xl font-bold ">
           Scaled Pricing
         </div>
         <div className="flex flex-col sm:flex-row">

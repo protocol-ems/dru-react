@@ -129,14 +129,7 @@ export default function CreateTableSection({
               ></textarea>
             </div>
             <TablePreview tableData={tableData} />
-            <button
-              className="btn btn-info"
-              onClick={() => {
-                console.log(tableData.rows);
-              }}
-            >
-              See Table Data
-            </button>
+
             <div className="text-3xl font-bold pt-12">Enter Data Below</div>
             <div className="overflow-auto">
               <table className="border-collapse w-full table-fixed break-word mt-4 ">

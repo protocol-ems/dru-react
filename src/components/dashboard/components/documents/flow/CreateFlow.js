@@ -273,14 +273,6 @@ export default function CreateFlow({ flowData, setFlowData }) {
             >
               Remove The Flow Chart
             </button>
-            <button
-              className="btn btn-warning"
-              onClick={() => {
-                console.log(JSON.stringify(flowData));
-              }}
-            >
-              Log JSON String
-            </button>
           </div>
           <div>
             {elements.map((el) => {
