@@ -3,6 +3,7 @@ import DocumentPreview from "./DocumentPreview";
 import UserContext from "../../../context/UserContext";
 import { axiosInstance } from "../../../../axios";
 import { v4 as uuidv4 } from "uuid";
+import { useHistory } from "react-router-dom";
 import CreateTableSection from "./CreateTableSection";
 import CreateFlowSection from "./CreateFlowSection";
 
@@ -16,6 +17,7 @@ export default function CreateDocument({
   editId,
   setEdit,
 }) {
+  const history = useHistory();
   const { userData } = useContext(UserContext);
 
   const initialDetails = Object.freeze({
@@ -31,65 +33,7 @@ export default function CreateDocument({
   });
 
   const initialFlowData = Object.freeze({
-    flow_data: [
-      // {
-      //   id: "db298467-ac3b-4098-a072-b2c568299e24",
-      //   data: { label: "Click on any node to edit it" },
-      //   type: "default",
-      //   position: { x: 314, y: 12 },
-      //   style: {
-      //     width: 250,
-      //     background: "#b0e1ff",
-      //     border: "1px solid black",
-      //     whiteSpace: "pre-wrap",
-      //     color: "black",
-      //   },
-      // },
-      // {
-      //   id: "b5271a67-7db5-466b-a8a4-18e6d73644e5",
-      //   data: {
-      //     label: "Press the backspace key after selecting a node to delete it.",
-      //   },
-      //   type: "default",
-      //   position: { x: 489.49364928886416, y: 246.13306796587497 },
-      //   style: {
-      //     width: 400,
-      //     background: "white",
-      //     border: "1px solid black",
-      //     whiteSpace: "pre-wrap",
-      //     color: "red",
-      //   },
-      // },
-      // {
-      //   id: "845e2c49-d68e-4879-8ff6-6fadc28a587d",
-      //   data: { label: "Lines can be customized too" },
-      //   type: "default",
-      //   position: { x: 476.9840601587707, y: 133.54676579503385 },
-      //   style: {
-      //     width: 150,
-      //     background: "#fcffa4",
-      //     border: "1px solid black",
-      //     whiteSpace: "pre-wrap",
-      //     color: "black",
-      //   },
-      // },
-      // {
-      //   id: "reactflow__edge-db298467-ac3b-4098-a072-b2c568299e24null-845e2c49-d68e-4879-8ff6-6fadc28a587dnull",
-      //   type: "custom",
-      //   animated: true,
-      //   data: { label: "Click" },
-      //   source: "db298467-ac3b-4098-a072-b2c568299e24",
-      //   target: "845e2c49-d68e-4879-8ff6-6fadc28a587d",
-      // },
-      // {
-      //   id: "reactflow__edge-845e2c49-d68e-4879-8ff6-6fadc28a587dnull-b5271a67-7db5-466b-a8a4-18e6d73644e5null",
-      //   type: "custom",
-      //   animated: false,
-      //   data: { label: "" },
-      //   source: "845e2c49-d68e-4879-8ff6-6fadc28a587d",
-      //   target: "b5271a67-7db5-466b-a8a4-18e6d73644e5",
-      // },
-    ],
+    flow_data: [],
   });
 
   const [newDocumentDetails, setNewDocumentDetails] = useState(
@@ -148,14 +92,16 @@ export default function CreateDocument({
   };
 
   const submitDocument = () => {
-    axiosInstance.post("/documents/", {
-      company: userData.user.company,
-      document_type: documentType,
-      document_name: newDocumentDetails.document_name,
-      documentDetails: newDocumentDetails.documentDetails,
-      table_data: tableData,
-      flow_data: flowData,
-    });
+    axiosInstance
+      .post("/documents/", {
+        company: userData.user.company,
+        document_type: documentType,
+        document_name: newDocumentDetails.document_name,
+        documentDetails: newDocumentDetails.documentDetails,
+        table_data: tableData,
+        flow_data: flowData,
+      })
+      .then(() => history.push("/dashboard"));
   };
 
   const submitEdits = () => {
@@ -179,25 +125,10 @@ export default function CreateDocument({
 
   return (
     <div className="container mx-auto">
-      {editMode ? (
-        <div>
-          <button className="btn btn-info" onClick={submitEdits}>
-            Confirm Edits
-          </button>
-          <button className="btn btn-warning" onClick={() => setEdit(false)}>
-            Cancel Edits
-          </button>
-        </div>
-      ) : (
-        <button className="btn" onClick={submitDocument}>
-          submit data
-        </button>
-      )}
-
       {/* <button className="btn" onClick={logData}>
         Log Data
       </button> */}
-      <div className="text-4xl  text-center">Preview</div>
+      <div className="text-4xl  text-center mt-12">Preview</div>
       <div className="border my-12 ">
         <DocumentPreview
           documentDetails={newDocumentDetails}
@@ -216,6 +147,7 @@ export default function CreateDocument({
             className="input input-bordered input-accent "
             type="text"
             name="document_name"
+            placeholder="Please enter a name"
             onChange={handleDocumentNameChange}
             value={newDocumentDetails.document_name}
           />
@@ -272,6 +204,20 @@ export default function CreateDocument({
         setFlowData={setFlowData}
         initialFlowData={initialFlowData}
       />
+      {editMode ? (
+        <div>
+          <button className="btn btn-info" onClick={submitEdits}>
+            Confirm Edits
+          </button>
+          <button className="btn btn-warning" onClick={() => setEdit(false)}>
+            Cancel Edits
+          </button>
+        </div>
+      ) : (
+        <button className="btn btn-info w-full my-12 " onClick={submitDocument}>
+          Create Document
+        </button>
+      )}
     </div>
   );
 }

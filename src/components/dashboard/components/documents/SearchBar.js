@@ -26,8 +26,9 @@ export default function SearchBar({
 
       setFilteredDocuments(documentList);
     }
-    if (documents && searchText.length === 0) {
+    if (documents && searchText.length === 0 && documents.length > 1) {
       setFilteredDocuments(documents);
+      setCurrentDocument(documents[0]);
     }
   }, [searchText, setCurrentDocument, documents, setFilteredDocuments]);
 
@@ -54,7 +55,7 @@ export default function SearchBar({
           autoComplete="off"
         ></input>
       </div>
-      <div className="flex overflow-auto p-2 m-2 ">
+      <div className="flex overflow-auto p-2 m-2   scrollbar-thumb-rounded-xl scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-100 ">
         {filteredDocuments
           ? filteredDocuments.map((document, index) => {
               return (

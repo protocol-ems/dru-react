@@ -65,7 +65,7 @@ export default function ViewDocumentsSection({ documents }) {
   };
 
   return (
-    <div className="border p-4 rounded-xl min-h-screen my-4 shadow-xl z-10">
+    <div className=" p-4  min-h-screen my-4  z-10">
       {/* <button
         className="btn"
         onClick={() => console.log(currentDocument.document_type)}

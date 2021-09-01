@@ -19,7 +19,7 @@ export default function DocumentView({
                 ? details.map((detail) => {
                     return (
                       <li className="sm:w-2/5 ml-4 sm:ml-24" key={detail[0]}>
-                        <div className="text-lg font-medium leading-6 text-green-400">
+                        <div className="text-lg font-medium leading-6 text-accent">
                           {detail[0]}
                         </div>
                         <ul className="mt-2 list-disc">

@@ -25,14 +25,16 @@ export default function ViewDocuments({ companyDocuments }) {
   }, [companyDocuments]);
 
   return (
-    <div>
-      <div className="tabs tabs-boxed p-4 ">
+    <div className="border  shadow-xl rounded-xl my-12">
+      <div className="flex justify-around p-4 ">
         <div
           onClick={() => {
             focusHandler(1);
           }}
           className={
-            documentFocus === 1 ? "tab tab-lg tab-active" : "tab tab-lg"
+            documentFocus === 1
+              ? "font-bold text-2xl uppercase text-black w-full text-center border-l-2 border-t-2 border-r-2 cursor-pointer shadow-inner p-4"
+              : " text-2xl uppercase text-gray-500 w-full text-center border-b-2 cursor-pointer p-4"
           }
         >
           Medicine
@@ -42,7 +44,9 @@ export default function ViewDocuments({ companyDocuments }) {
             focusHandler(2);
           }}
           className={
-            documentFocus === 2 ? "tab tab-lg tab-active" : "tab tab-lg"
+            documentFocus === 2
+              ? "font-bold text-2xl uppercase text-black w-full text-center border-l-2 border-t-2 border-r-2 cursor-pointer shadow-inner p-4"
+              : "text-2xl uppercase text-gray-500 w-full text-center border-b-2 cursor-pointer p-4"
           }
         >
           Procedure
@@ -52,7 +56,9 @@ export default function ViewDocuments({ companyDocuments }) {
             focusHandler(3);
           }}
           className={
-            documentFocus === 3 ? "tab tab-lg tab-active" : "tab tab-lg"
+            documentFocus === 3
+              ? "font-bold text-2xl uppercase text-black w-full text-center border-l-2 border-t-2 border-r-2 cursor-pointer shadow-inner p-4"
+              : "text-2xl uppercase text-gray-500 w-full text-center border-b-2 cursor-pointer p-4"
           }
         >
           Protocol
@@ -69,5 +75,49 @@ export default function ViewDocuments({ companyDocuments }) {
         {documentFocus === 3 && <ViewDocumentsSection documents={protocols} />}
       </div>
     </div>
+    // <div>
+    //   <div className="tabs tabs-boxed p-4 ">
+    //     <div
+    //       onClick={() => {
+    //         focusHandler(1);
+    //       }}
+    //       className={
+    //         documentFocus === 1 ? "tab tab-lg tab-active" : "tab tab-lg"
+    //       }
+    //     >
+    //       Medicine
+    //     </div>
+    //     <div
+    //       onClick={() => {
+    //         focusHandler(2);
+    //       }}
+    //       className={
+    //         documentFocus === 2 ? "tab tab-lg tab-active" : "tab tab-lg"
+    //       }
+    //     >
+    //       Procedure
+    //     </div>
+    //     <div
+    //       onClick={() => {
+    //         focusHandler(3);
+    //       }}
+    //       className={
+    //         documentFocus === 3 ? "tab tab-lg tab-active" : "tab tab-lg"
+    //       }
+    //     >
+    //       Protocol
+    //     </div>
+    //   </div>
+
+    //   <div>
+    //     {documentFocus === 1 && <ViewDocumentsSection documents={medicines} />}
+    //   </div>
+    //   <div>
+    //     {documentFocus === 2 && <ViewDocumentsSection documents={procedures} />}
+    //   </div>
+    //   <div>
+    //     {documentFocus === 3 && <ViewDocumentsSection documents={protocols} />}
+    //   </div>
+    // </div>
   );
 }

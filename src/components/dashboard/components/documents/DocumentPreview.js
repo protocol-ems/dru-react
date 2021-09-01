@@ -123,7 +123,7 @@ export default function DocumentPreview({
               ? labels.map((label) => {
                   return (
                     <li className="w-2/5" key={label.id}>
-                      <div className="text-lg font-medium leading-6 text-green-400">
+                      <div className="text-lg font-medium leading-6 text-accent">
                         {label.document_detail_name}
                       </div>
                       <ul className="mt-2 list-disc">
