@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { axiosInstance } from "../../axios";
+import { registerInstance } from "../../axios";
 import { useHistory } from "react-router-dom";
 
 import Error from "../misc/Error";
@@ -31,14 +31,14 @@ export default function Register() {
     // removing the local storage authorization value to prevent a bug from the axios instance.
 
     let email = formData.username;
-    localStorage.removeItem("Authorization");
+    // localStorage.removeItem("Authorization");
     if (
       formData.username.length > 0 &&
       formData.password.length > 0 &&
       formData.first_name.length > 0 &&
       formData.last_name.length > 0
     ) {
-      axiosInstance
+      registerInstance
         .post("api/register/", {
           username: formData.username,
           password: formData.password,

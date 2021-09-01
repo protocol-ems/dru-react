@@ -14,6 +14,11 @@ export const axiosInstance = axios.create({
   },
 });
 
+export const registerInstance = axios.create({
+  baseURL: baseURL,
+  timeout: 5000,
+});
+
 export const axiosInstanceWithImage = axios.create({
   baseURL: baseURL,
   timeout: 5000,
