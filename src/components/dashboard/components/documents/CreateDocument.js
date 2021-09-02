@@ -119,6 +119,11 @@ export default function CreateDocument({
       });
   };
 
+  const cancelEdits = () => {
+    setEdit(false);
+    window.scrollTo(0, 0);
+  };
+
   // const logData = () => {
   //   console.log(editId);
   // };
@@ -206,10 +211,13 @@ export default function CreateDocument({
       />
       {editMode ? (
         <div>
-          <button className="btn btn-info" onClick={submitEdits}>
+          <button className="btn btn-info w-full my-6" onClick={submitEdits}>
             Confirm Edits
           </button>
-          <button className="btn btn-warning" onClick={() => setEdit(false)}>
+          <button
+            className="btn btn-warning w-full my-6"
+            onClick={() => cancelEdits()}
+          >
             Cancel Edits
           </button>
         </div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import UserContext from "./components/context/UserContext";
+import PrivateRoute from "./components/misc/PrivateRoute";
 
 import Navbar from "./components/navbar/Navbar";
 import Register from "./components/userauth/Register";
@@ -72,20 +73,34 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/dashboard">
-            <Dashboard></Dashboard>
-          </Route>
-          <Route exact path="/create-company" component={CreateCompany} />
-          <Route exact path="/join-company" component={JoinCompany} />
-          <Route
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute
+            exact
+            path="/create-company"
+            component={CreateCompany}
+          />
+          <PrivateRoute exact path="/join-company" component={JoinCompany} />
+          <PrivateRoute
             exact
             path="/create-document-header"
             component={CreateDocumentHeader}
           />
-          <Route exact path="/create-medicine" component={CreateMedicine} />
+          <PrivateRoute
+            exact
+            path="/create-medicine"
+            component={CreateMedicine}
+          />
 
-          <Route exact path="/create-procedure" component={CreateProcedure} />
-          <Route exact path="/create-protocol" component={CreateProtocol} />
+          <PrivateRoute
+            exact
+            path="/create-procedure"
+            component={CreateProcedure}
+          />
+          <PrivateRoute
+            exact
+            path="/create-protocol"
+            component={CreateProtocol}
+          />
         </Switch>
       </UserContext.Provider>
     </div>
