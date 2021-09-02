@@ -10,6 +10,7 @@ export default function CreateProcedure({
   editMode,
   editId,
   setEdit,
+  setDocuments,
 }) {
   const { userData } = useContext(UserContext);
 
@@ -46,6 +47,7 @@ export default function CreateProcedure({
           editMode={editMode}
           editId={editId}
           setEdit={setEdit}
+          setDocuments={setDocuments}
         />
       ) : (
         <div className=" mx-auto text-center pt-24">

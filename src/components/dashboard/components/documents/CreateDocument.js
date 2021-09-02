@@ -16,6 +16,7 @@ export default function CreateDocument({
   editMode,
   editId,
   setEdit,
+  setDocuments,
 }) {
   const history = useHistory();
   const { userData } = useContext(UserContext);
@@ -42,6 +43,7 @@ export default function CreateDocument({
   const [detail, setDetail] = useState({});
   const [tableData, setTableData] = useState(tableDetails || initialTableData);
   const [flowData, setFlowData] = useState(flowDetails || initialFlowData);
+  const [deleteDocument, setDeleteDocument] = useState(false);
 
   const handleDetailChange = (e) => {
     //need a different way to handle the id. will come back.
@@ -115,6 +117,22 @@ export default function CreateDocument({
         flow_data: flowData,
       })
       .then(() => {
+        getCompanyDocuments();
+      })
+      .then(() => {
+        window.scrollTo(0, 0);
+        setEdit(false);
+      });
+  };
+
+  const submitDelete = () => {
+    axiosInstance
+      .delete(`/documents/${editId}/`)
+      .then(() => {
+        getCompanyDocuments();
+      })
+      .then(() => {
+        window.scrollTo(0, 0);
         setEdit(false);
       });
   };
@@ -122,6 +140,13 @@ export default function CreateDocument({
   const cancelEdits = () => {
     setEdit(false);
     window.scrollTo(0, 0);
+  };
+
+  const getCompanyDocuments = async () => {
+    let companyId = userData.user.company || 1;
+    await axiosInstance.get(`company-documents/${companyId}/`).then((res) => {
+      setDocuments(res.data);
+    });
   };
 
   // const logData = () => {
@@ -210,20 +235,37 @@ export default function CreateDocument({
         initialFlowData={initialFlowData}
       />
       {editMode ? (
-        <div>
-          <button className="btn btn-info w-full my-6" onClick={submitEdits}>
+        <div className="flex justify-around items-center flex-col md:items-start md:flex-row ">
+          <button
+            className="btn btn-info w-full md:w-1/4 my-6"
+            onClick={submitEdits}
+          >
             Confirm Edits
           </button>
           <button
-            className="btn btn-warning w-full my-6"
+            className="btn btn-warning w-full md:w-1/4 my-6"
             onClick={() => cancelEdits()}
           >
             Cancel Edits
+          </button>
+          <button
+            className="btn md:w-1/4  w-full my-6"
+            onClick={() => setDeleteDocument(true)}
+          >
+            Delete
           </button>
         </div>
       ) : (
         <button className="btn btn-info w-full my-12 " onClick={submitDocument}>
           Create Document
+        </button>
+      )}
+      {deleteDocument && (
+        <button
+          className="btn btn-error   w-full my-6"
+          onClick={() => submitDelete()}
+        >
+          Confirm Delete
         </button>
       )}
     </div>

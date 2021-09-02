@@ -10,7 +10,7 @@ import CreateProtocol from "./CreateProtocol";
 
 import UserContext from "../../../../context/UserContext";
 
-export default function ViewDocumentsSection({ documents }) {
+export default function ViewDocumentsSection({ documents, setDocuments }) {
   const { userData } = useContext(UserContext);
 
   const [filteredDocuments, setFilteredDocuments] = useState();
@@ -79,6 +79,7 @@ export default function ViewDocumentsSection({ documents }) {
               editMode={edit}
               editId={currentDocument.id}
               setEdit={setEdit}
+              setDocuments={setDocuments}
             />
           )}
           {edit && currentDocument.document_type === "2" && (
@@ -89,6 +90,7 @@ export default function ViewDocumentsSection({ documents }) {
               editMode={edit}
               editId={currentDocument.id}
               setEdit={setEdit}
+              setDocuments={setDocuments}
             />
           )}
           {edit && currentDocument.document_type === "3" && (
@@ -99,6 +101,7 @@ export default function ViewDocumentsSection({ documents }) {
               editMode={edit}
               editId={currentDocument.id}
               setEdit={setEdit}
+              setDocuments={setDocuments}
             />
           )}
           {!edit && (

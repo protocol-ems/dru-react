@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import ViewDocumentsSection from "./pages/ViewDocumentsSection.js";
 
-export default function ViewDocuments({ companyDocuments }) {
+export default function ViewDocuments({
+  companyDocuments,
+  setCompanyDocuments,
+}) {
   const [documentFocus, setDocumentFocus] = useState(1);
   const [medicines, setMedicines] = useState();
   const [procedures, setProcedures] = useState();
@@ -66,13 +69,28 @@ export default function ViewDocuments({ companyDocuments }) {
       </div>
 
       <div>
-        {documentFocus === 1 && <ViewDocumentsSection documents={medicines} />}
+        {documentFocus === 1 && (
+          <ViewDocumentsSection
+            documents={medicines}
+            setDocuments={setCompanyDocuments}
+          />
+        )}
       </div>
       <div>
-        {documentFocus === 2 && <ViewDocumentsSection documents={procedures} />}
+        {documentFocus === 2 && (
+          <ViewDocumentsSection
+            documents={procedures}
+            setDocuments={setCompanyDocuments}
+          />
+        )}
       </div>
       <div>
-        {documentFocus === 3 && <ViewDocumentsSection documents={protocols} />}
+        {documentFocus === 3 && (
+          <ViewDocumentsSection
+            documents={protocols}
+            setDocuments={setCompanyDocuments}
+          />
+        )}
       </div>
     </div>
     // <div>
