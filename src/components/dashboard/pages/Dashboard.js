@@ -1,19 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../../context/UserContext";
 import { axiosInstance } from "../../../axios";
-
+import { useHistory } from "react-router-dom";
 import CreateOrJoinHeader from "../components/CreateOrJoinHeader";
 import DashboardContent from "../components/DashboardContent";
 
 export default function Dashboard() {
   const { userData } = useContext(UserContext);
+  const history = useHistory();
 
   const [companyUsers, setCompanyUsers] = useState(null);
   const [userWaitList, setUserWaitList] = useState(null);
   const [companyDocuments, setCompanyDocuments] = useState([]);
 
   useEffect(() => {
-    console.log(userData);
     let token = localStorage.getItem("Authorization");
     const getCompanyInfo = async () => {
       if (token !== "" && userData.user.company) {
@@ -48,8 +48,12 @@ export default function Dashboard() {
     if (userData.user !== null && userData.user.employee_type !== 4) {
       getCompanyDocuments();
     }
-  }, [userData.user, userData]);
+    if (token === "null" && !userData.user) {
+      history.push("/login");
+    }
+  }, [userData.user, userData, history]);
 
+  // const history = useHistory();
   // useEffect(() => {
   //   const getUserInfo = async () => {
   //     let token = localStorage.getItem("Authorization");

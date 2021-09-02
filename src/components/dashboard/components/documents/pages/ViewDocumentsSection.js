@@ -66,10 +66,7 @@ export default function ViewDocumentsSection({ documents }) {
 
   return (
     <div className=" p-4  min-h-screen my-4  z-10">
-      {/* <button
-        className="btn"
-        onClick={() => console.log(currentDocument.document_type)}
-      >
+      {/* <button className="btn" onClick={() => console.log(currentDocument)}>
         log docs
       </button> */}
       {documents ? (
@@ -122,6 +119,13 @@ export default function ViewDocumentsSection({ documents }) {
               />
               {tableData ? <TablePreview tableData={tableData} /> : ""}
               {flowData ? <FlowView elements={flowData} /> : ""}
+              <div>
+                {currentDocument.modified && (
+                  <div className="text-gray-500 text-right text-sm">
+                    Last Updated: {currentDocument.modified.slice(0, 10)}
+                  </div>
+                )}
+              </div>
               {currentDocument.id &&
                 userData.user &&
                 userData.user.employee_type === 4 && (

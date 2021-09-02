@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import UserContext from "./components/context/UserContext";
 import PrivateRoute from "./components/misc/PrivateRoute";
+import { axiosInstance } from "./axios";
 
 import Navbar from "./components/navbar/Navbar";
 import Register from "./components/userauth/Register";
@@ -26,37 +27,25 @@ function App() {
 
   // I do not think I need to be setting the user at the very top of the app. In the dashboard seems to be fine. Leaving code for now to make sure nothing breaks 8/30/21
 
-  // useEffect(() => {
+  useEffect(() => {
+    const getUserInfo = async () => {
+      let token = localStorage.getItem("Authorization");
 
-  //   const getUserInfo = async () => {
-  //     let token = localStorage.getItem("Authorization");
+      if (token === null || undefined) {
+        localStorage.setItem("Authorization", "");
+        token = "";
+      }
+      if (token !== "null") {
+        axiosInstance.get("/users/info/").then((res) => {
+          setUserData({
+            user: res.data[0],
+          });
+        });
+      }
+    };
 
-  //     if (token === null || undefined) {
-  //       localStorage.setItem("Authorization", "");
-  //       token = "";
-  //     }
-
-  //     if (token !== "") {
-  //       // I am curious if there is a better way to handle the history.push
-  //       // I am unusure if it should be after catching the error or if it shoud be before.
-  //       // for now it works - will follow up 8/1/21
-  //       axiosInstance.get("/users/info/").then((res) => {
-  //         setUserData({
-  //           user: res.data[0],
-  //         });
-  //       });
-  //       // .then(() => {
-  //       //   history.push("/dashboard");
-  //       // })
-
-  //       // .catch((err) => {
-  //       //   err ? setErrorMessage("Please log in") : setErrorMessage(undefined);
-  //       // });
-  //     }
-  //   };
-
-  //   getUserInfo();
-  // }, [history]);
+    getUserInfo();
+  }, [setUserData]);
 
   return (
     <div className="App">
@@ -73,7 +62,7 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/dashboard" component={Dashboard} />
           <PrivateRoute
             exact
             path="/create-company"
