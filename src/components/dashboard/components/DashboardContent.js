@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import ViewDocuments from "./documents/ViewDocuments";
 
 import UserContext from "../../context/UserContext";
+import ImageCenter from "./documents/ImageCenter";
 
 export default function DashboardContent({
   companyUsers,
@@ -75,6 +76,12 @@ export default function DashboardContent({
             ) : (
               <div className="mx-auto loader">Loading</div>
             )}
+          </div>
+          <div className="divider py-8"></div>
+
+          <div className="bg-white border rounded-3xl mb-4 p-4 shadow-xl">
+            <div className="text-center text-4xl py-4">Image Center</div>
+            <ImageCenter companyDocuments={companyDocuments} />
           </div>
         </div>
       )}
