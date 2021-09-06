@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import DocumentPreview from "./DocumentPreview";
 import UserContext from "../../../context/UserContext";
 import { axiosInstance } from "../../../../axios";
@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useHistory } from "react-router-dom";
 import CreateTableSection from "./CreateTableSection";
 import CreateFlowSection from "./CreateFlowSection";
+import Error from "../../../misc/Error";
 
 export default function CreateDocument({
   labels,
@@ -22,7 +23,7 @@ export default function CreateDocument({
   const { userData } = useContext(UserContext);
 
   const initialDetails = Object.freeze({
-    document_name: undefined,
+    document_name: "",
     documentDetails: [],
     table_data: {},
   });
@@ -40,6 +41,10 @@ export default function CreateDocument({
   const [newDocumentDetails, setNewDocumentDetails] = useState(
     details || initialDetails
   );
+
+  const documentError = useRef(null);
+
+  const [errorMessage, setErrorMessage] = useState(undefined);
   const [detail, setDetail] = useState({});
   const [tableData, setTableData] = useState(tableDetails || initialTableData);
   const [flowData, setFlowData] = useState(flowDetails || initialFlowData);
@@ -94,35 +99,48 @@ export default function CreateDocument({
   };
 
   const submitDocument = () => {
-    axiosInstance
-      .post("/documents/", {
-        company: userData.user.company,
-        document_type: documentType,
-        document_name: newDocumentDetails.document_name,
-        documentDetails: newDocumentDetails.documentDetails,
-        table_data: tableData,
-        flow_data: flowData,
-      })
-      .then(() => history.push("/dashboard"));
+    if (newDocumentDetails.document_name.length < 1) {
+      window.scrollTo(0, documentError.current.offsetTop - 25);
+      setErrorMessage("Please name the Document");
+    }
+    if (newDocumentDetails.document_name.length > 1) {
+      axiosInstance
+        .post("/documents/", {
+          company: userData.user.company,
+          document_type: documentType,
+          document_name: newDocumentDetails.document_name,
+          documentDetails: newDocumentDetails.documentDetails,
+          table_data: tableData,
+          flow_data: flowData,
+        })
+        .then(() => history.push("/dashboard"));
+    }
   };
 
   const submitEdits = () => {
-    axiosInstance
-      .patch(`/documents/${editId}/`, {
-        company: userData.user.company,
-        document_type: documentType,
-        document_name: newDocumentDetails.document_name,
-        documentDetails: newDocumentDetails.documentDetails,
-        table_data: tableData,
-        flow_data: flowData,
-      })
-      .then(() => {
-        getCompanyDocuments();
-      })
-      .then(() => {
-        window.scrollTo(0, 0);
-        setEdit(false);
-      });
+    if (newDocumentDetails.document_name.length < 1) {
+      window.scrollTo(0, documentError.current.offsetTop - 25);
+      setErrorMessage("Please name the Document");
+    }
+
+    if (newDocumentDetails.document_name.length > 1) {
+      axiosInstance
+        .patch(`/documents/${editId}/`, {
+          company: userData.user.company,
+          document_type: documentType,
+          document_name: newDocumentDetails.document_name,
+          documentDetails: newDocumentDetails.documentDetails,
+          table_data: tableData,
+          flow_data: flowData,
+        })
+        .then(() => {
+          getCompanyDocuments();
+        })
+        .then(() => {
+          window.scrollTo(0, 0);
+          setEdit(false);
+        });
+    }
   };
 
   const submitDelete = () => {
@@ -168,6 +186,14 @@ export default function CreateDocument({
       </div>
       <div className="form-control md:w-1/2 mx-auto flex flex-col">
         <div className="flex flex-col">
+          <div ref={documentError}>
+            {errorMessage && (
+              <Error
+                errorMessage={errorMessage}
+                clearError={() => setErrorMessage(undefined)}
+              />
+            )}
+          </div>
           <label className="lable py-4">
             <span className="font-bold text-3xl">
               {documentTypeSetter(documentType) + " Name"}
