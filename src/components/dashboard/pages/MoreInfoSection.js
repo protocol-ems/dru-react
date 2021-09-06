@@ -1,5 +1,6 @@
 import React from "react";
 import test from "../../../images/test1.gif";
+
 export default function MoreInfoSection() {
   return (
     <div className="container mx-auto mt-12">

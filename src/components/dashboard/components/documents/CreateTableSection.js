@@ -119,7 +119,7 @@ export default function CreateTableSection({
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Table Description</span>
+                <span className="label text-3xl">Table Description</span>
               </label>
               <textarea
                 className="textarea h-24 textarea-bordered"
@@ -128,9 +128,33 @@ export default function CreateTableSection({
                 value={tableData.table_description}
               ></textarea>
             </div>
+            <div className="flex justify-around my-4">
+              <button
+                className="btn"
+                onClick={() => {
+                  createTable();
+                }}
+              >
+                Generate Table Table
+              </button>
+              <div className="flex">
+                <button
+                  className="btn btn-warning"
+                  onClick={() => {
+                    removeTable();
+                  }}
+                >
+                  Remove Table
+                </button>
+              </div>
+            </div>
             <TablePreview tableData={tableData} />
+            {tableData.columns.length > 0 && (
+              <div className="text-3xl font-bold pt-12 text-left">
+                Enter Data Below
+              </div>
+            )}
 
-            <div className="text-3xl font-bold pt-12">Enter Data Below</div>
             <div className="overflow-auto">
               <table className="border-collapse w-full table-fixed break-word mt-4 ">
                 <thead>
@@ -190,26 +214,6 @@ export default function CreateTableSection({
                   )}
                 </tbody>
               </table>
-            </div>
-          </div>
-          <div className="flex justify-between">
-            <button
-              className="btn"
-              onClick={() => {
-                createTable();
-              }}
-            >
-              Generate Table Table
-            </button>
-            <div className="flex">
-              <button
-                className="btn btn-warning"
-                onClick={() => {
-                  removeTable();
-                }}
-              >
-                Remove Table
-              </button>
             </div>
           </div>
         </div>
