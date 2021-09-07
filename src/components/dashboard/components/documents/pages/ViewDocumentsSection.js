@@ -7,6 +7,7 @@ import FlowView from "../flow/FlowView";
 import CreateMedicine from "./CreateMedicine";
 import CreateProcedure from "./CreateProcedure";
 import CreateProtocol from "./CreateProtocol";
+import ImageView from "../ImageView";
 
 import UserContext from "../../../../context/UserContext";
 
@@ -120,8 +121,12 @@ export default function ViewDocumentsSection({ documents, setDocuments }) {
                 currentDocument={currentDocument}
                 details={details}
               />
-              {tableData ? <TablePreview tableData={tableData} /> : ""}
-              {flowData ? <FlowView elements={flowData} /> : ""}
+              {tableData && <TablePreview tableData={tableData} />}
+              {flowData && <FlowView elements={flowData} />}
+              {currentDocument.document_images &&
+                currentDocument.document_images.length > 0 && (
+                  <ImageView currentDocument={currentDocument} />
+                )}
               <div>
                 {currentDocument.modified && (
                   <div className="text-gray-500 text-right text-sm">
