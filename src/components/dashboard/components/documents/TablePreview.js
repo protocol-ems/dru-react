@@ -15,7 +15,7 @@ export default function TablePreview({ tableData }) {
         )}
       </div>
       {tableData.columns.length > 0 ? (
-        <div className="overflow-auto">
+        <div className="overflow-auto scrollbar-thumb-rounded-xl scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-100">
           <table className="border-collapse w-full table-fixed break-word mt-12">
             <thead>
               <tr className="h-12">

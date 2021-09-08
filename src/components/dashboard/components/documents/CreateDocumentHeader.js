@@ -121,7 +121,7 @@ export default function CreateDocumentHeader() {
         <div className="flex flex-col w-full pt-24 ">
           <div className="text-center text-4xl py-4">Medicine Labels</div>
           <div className="grid card rounded-box">
-            <div className="h-64 overflow-auto">
+            <div className="h-64 overflow-auto scrollbar-thumb-rounded-xl scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-100">
               <LabelList
                 labels={documentLabels.filter(
                   (label) => label.document_type === 1

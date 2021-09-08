@@ -104,7 +104,7 @@ export default function LabelList({ labels, setLabels }) {
           clearError={() => setErrorMessage(undefined)}
         />
       )}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto scrollbar-thumb-rounded-xl scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-100">
         <table className="table w-full ">
           <thead>
             <tr>
