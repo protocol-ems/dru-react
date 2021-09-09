@@ -124,22 +124,29 @@ export default function ViewDocumentsSection({ documents, setDocuments }) {
               {tableData && <TablePreview tableData={tableData} />}
               {flowData && <FlowView elements={flowData} />}
               {currentDocument.document_images &&
-                currentDocument.document_images.length > 0 && (
-                  <ImageView currentDocument={currentDocument} />
+                currentDocument.document_images.length > 0 &&
+                userData.user.employee_type === 4 && (
+                  <ImageView
+                    currentDocument={currentDocument}
+                    editImages={true}
+                  />
                 )}
-              <div>
-                {currentDocument.modified && (
-                  <div className="text-gray-500 text-right text-sm">
-                    Last Updated: {currentDocument.modified.slice(0, 10)}
-                  </div>
+              {currentDocument.document_images &&
+                currentDocument.document_images.length > 0 &&
+                userData.user.employee_type !== 4 && (
+                  <ImageView
+                    currentDocument={currentDocument}
+                    setDocuments={setDocuments}
+                    editImages={false}
+                  />
                 )}
-              </div>
+
               {currentDocument.id &&
                 userData.user &&
                 userData.user.employee_type === 4 && (
-                  <div className="flex justify-center p-4">
+                  <div className="flex justify-end p-4 my-12">
                     <button
-                      className="btn-warning btn w-1/2"
+                      className="btn-warning btn w-1/4"
                       onClick={() => {
                         handleEdit();
                       }}
@@ -148,6 +155,13 @@ export default function ViewDocumentsSection({ documents, setDocuments }) {
                     </button>
                   </div>
                 )}
+              <div>
+                {currentDocument.modified && (
+                  <div className="text-gray-500 text-right text-sm">
+                    Last Updated: {currentDocument.modified.slice(0, 10)}
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>

@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 
+import { useHistory } from "react-router-dom";
 import UserContext from "../../../context/UserContext";
 
 export default function ImageCenter({ companyDocuments }) {
   const { userData } = useContext(UserContext);
+  const history = useHistory();
 
   const [image, setImage] = useState();
   const [imageFormat, setImageFormat] = useState(false);
@@ -23,7 +25,10 @@ export default function ImageCenter({ companyDocuments }) {
     fetch("http://127.0.0.1:8000/images/", {
       method: "POST",
       body: uploadData,
-    }).then((res) => console.log(res));
+    }).then(() => {
+      window.scrollTo(0, 0);
+      history.go(0);
+    });
   };
 
   const handleChange = (e) => {
