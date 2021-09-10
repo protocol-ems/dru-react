@@ -99,11 +99,18 @@ export default function CreateDocument({
   };
 
   const submitDocument = () => {
+    if (newDocumentDetails.document_name.indexOf("/") !== -1) {
+      window.scrollTo(0, documentError.current.offsetTop - 25);
+      setErrorMessage("' / 's are not allowed in the name");
+    }
     if (newDocumentDetails.document_name.length < 1) {
       window.scrollTo(0, documentError.current.offsetTop - 25);
       setErrorMessage("Please name the Document");
     }
-    if (newDocumentDetails.document_name.length > 1) {
+    if (
+      newDocumentDetails.document_name.length > 1 &&
+      newDocumentDetails.document_name.indexOf("/") === -1
+    ) {
       axiosInstance
         .post("/documents/", {
           company: userData.user.company,
@@ -120,12 +127,19 @@ export default function CreateDocument({
   const submitEdits = () => {
     // right now all the data is being 're-patched' seems like this could be troublesome. It might be nice to only patch what is changed. But I am not sure. 9/6
 
+    if (newDocumentDetails.document_name.indexOf("/") !== -1) {
+      window.scrollTo(0, documentError.current.offsetTop - 25);
+      setErrorMessage("' / 's are not allowed in the name");
+    }
     if (newDocumentDetails.document_name.length < 1) {
       window.scrollTo(0, documentError.current.offsetTop - 25);
       setErrorMessage("Please name the Document");
     }
 
-    if (newDocumentDetails.document_name.length > 1) {
+    if (
+      newDocumentDetails.document_name.length > 1 &&
+      newDocumentDetails.document_name.indexOf("/") === -1
+    ) {
       axiosInstance
         .patch(`/documents/${editId}/`, {
           company: userData.user.company,
