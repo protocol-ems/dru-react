@@ -39,6 +39,9 @@ export default function DashboardContent({
           <Link to="/create-protocol" className="btn btn-accent my-4">
             Create New Protocol
           </Link>
+          <Link to="/create-subscription" className="btn btn-accent my-4">
+            Create Subscripition
+          </Link>
         </div>
       )}
       {userData.user && userData.user.employee_type === 4 && (

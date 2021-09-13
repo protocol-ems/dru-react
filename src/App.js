@@ -4,6 +4,9 @@ import { Switch, Route } from "react-router-dom";
 import UserContext from "./components/context/UserContext";
 import PrivateRoute from "./components/misc/PrivateRoute";
 import { axiosInstance } from "./axios";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CreateSubscriptionSection from "./components/dashboard/components/payments/CreateSubscriptionSection";
 
 import Navbar from "./components/navbar/Navbar";
 import Register from "./components/userauth/Register";
@@ -19,6 +22,10 @@ import CreateProtocol from "./components/dashboard/components/documents/pages/Cr
 import HomePage from "./components/dashboard/pages/HomePage";
 
 function App() {
+  const stripePromise = loadStripe(
+    "pk_test_51JWjDxJEjyoAE1rtYIa5QzZgcsRyvuJ6lCkSSpHapygbSvFMHKkoEOUaEoXqdme01VDg2t2b3w2rPpN0QTWvTUtN00SPwLlYgz"
+  );
+
   const [userData, setUserData] = useState({
     user: null,
   });
@@ -90,6 +97,13 @@ function App() {
             path="/create-protocol"
             component={CreateProtocol}
           />
+          <Elements stripe={stripePromise}>
+            <PrivateRoute
+              exact
+              to="/create-subscription"
+              component={CreateSubscriptionSection}
+            />
+          </Elements>
         </Switch>
       </UserContext.Provider>
     </div>
