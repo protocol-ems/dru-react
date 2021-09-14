@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import ApiService from "../../../../axios";
 import stripeLogo from "../../../../images/stripe.svg";
+import UserContext from "../../../context/UserContext";
+import { axiosInstance } from "../../../../axios";
 
 export default function CreateSubscriptionSection() {
+  const { userData } = useContext(UserContext);
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -14,7 +17,8 @@ export default function CreateSubscriptionSection() {
   const [state, setState] = useState("");
   const [postalCode, setPostalCode] = useState("");
 
-  const [subscriptionType, setSubscriptionType] = useState("");
+  const [subscriptionTiers, setSubscriptionTiers] = useState();
+  const [subscriptionType, setSubscriptionType] = useState();
   const stripe = useStripe();
   const elements = useElements();
   // Handle real-time validation errors from the CardElement.
@@ -37,7 +41,7 @@ export default function CreateSubscriptionSection() {
     ApiService.saveStripeInfo({
       email,
       payment_method_id: paymentMethod.id,
-      subscription_type: subscriptionType,
+      subscription_type_id: subscriptionType,
       billing_details: {
         address: {
           city: city,
@@ -50,6 +54,7 @@ export default function CreateSubscriptionSection() {
         name: name,
         phone: phone,
       },
+      company: userData.user.company,
     })
       .then((response) => {
         console.log(response.data);
@@ -59,8 +64,17 @@ export default function CreateSubscriptionSection() {
       });
   };
 
+  useEffect(() => {
+    const getSubscriptionTiers = async () => {
+      await axiosInstance.get("/payments/subscriptions/").then((res) => {
+        setSubscriptionTiers(res.data);
+      });
+    };
+    getSubscriptionTiers();
+  }, []);
+
   const tierList = [
-    { value: "small", description: "Small Tier - 20 user max - $50 per month" },
+    { value: "small", description: "Small Tier - 25 user max - $50 per month" },
     {
       value: "medium",
       description: "Medium Tier - 100 user max - $100 per month",
@@ -96,13 +110,14 @@ export default function CreateSubscriptionSection() {
             <option value="DEFAULT" disabled="disabled">
               Select your tier
             </option>
-            {tierList.map((tier) => {
-              return (
-                <option value={tier.value} key={tier.value}>
-                  {tier.description}
-                </option>
-              );
-            })}
+            {subscriptionTiers &&
+              subscriptionTiers.map((tier) => {
+                return (
+                  <option value={tier.id} key={tier.id}>
+                    {`${tier.user_max} max users at $${tier.price} per month`}
+                  </option>
+                );
+              })}
           </select>
           <label className="label" htmlFor="name">
             Billing Name
@@ -168,6 +183,7 @@ export default function CreateSubscriptionSection() {
           />
           <input
             className="input input-accent  w-full block my-2"
+            required="no"
             id="address2"
             name="address2"
             type="address2"
@@ -239,8 +255,8 @@ export default function CreateSubscriptionSection() {
             <div className="text-sm text-gray-500 py-4">
               Card payments are processed by Stripe. Stripe performs card
               processing for millions of businesses. No card information is
-              stored on OurProtocol servers. Click the stripe logo below to see
-              their website.
+              stored on OurProtocol servers. Click the stripe logo below to
+              learn more about Stripe.
             </div>
             <a href="https://www.stripe.com" rel="noreferrer" target="_blank">
               <img src={stripeLogo} alt="stripe" width="175" />
