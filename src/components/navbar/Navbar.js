@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
 
 import Logout from "../userauth/Logout";
-
 export default function Navbar() {
   const { userData } = useContext(UserContext);
 
