@@ -73,22 +73,6 @@ export default function CreateSubscriptionSection() {
     getSubscriptionTiers();
   }, []);
 
-  const tierList = [
-    { value: "small", description: "Small Tier - 25 user max - $50 per month" },
-    {
-      value: "medium",
-      description: "Medium Tier - 100 user max - $100 per month",
-    },
-    {
-      value: "large",
-      description: "Large Tier - 200 user max - $200 per month",
-    },
-    {
-      value: "xl-large",
-      description: "Extra Large Tier - 400 user max - $300 per month",
-    },
-  ];
-
   return (
     <div>
       <div>
@@ -183,12 +167,10 @@ export default function CreateSubscriptionSection() {
           />
           <input
             className="input input-accent  w-full block my-2"
-            required="no"
             id="address2"
             name="address2"
             type="address2"
             placeholder="Address Line 2 - Building #, Suite #, etc..."
-            required
             value={line2}
             onChange={(event) => {
               setLine2(event.target.value);

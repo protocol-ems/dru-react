@@ -5,6 +5,7 @@ import ViewDocuments from "./documents/ViewDocuments";
 
 import UserContext from "../../context/UserContext";
 import ImageCenter from "./documents/ImageCenter";
+import SubscribeToday from "./payments/SubscribeToday";
 
 export default function DashboardContent({
   companyUsers,
@@ -13,6 +14,7 @@ export default function DashboardContent({
   setUserWaitList,
   companyDocuments,
   setCompanyDocuments,
+  companyInfo,
 }) {
   const { userData } = useContext(UserContext);
 
@@ -25,6 +27,12 @@ export default function DashboardContent({
         companyDocuments={companyDocuments}
         setCompanyDocuments={setCompanyDocuments}
       />
+      <button
+        className="btn"
+        onClick={() => console.log(companyDocuments.length)}
+      >
+        Display Company Info
+      </button>
       {userData.user && userData.user.employee_type === 4 && (
         <div className=" bg-white flex flex-row flex-wrap justify-between  card border shadow-xl px-4 py-4 mb-12">
           <Link to="/create-document-header" className="btn btn-accent my-4">
@@ -38,9 +46,6 @@ export default function DashboardContent({
           </Link>
           <Link to="/create-protocol" className="btn btn-accent my-4">
             Create New Protocol
-          </Link>
-          <Link to="/create-subscription" className="btn btn-accent my-4">
-            Create Subscripition
           </Link>
         </div>
       )}
@@ -67,24 +72,34 @@ export default function DashboardContent({
             <h2 className="text-center text-4xl py-4">
               Users who have requested acess
             </h2>
-            {companyUsers !== null ? (
-              <div className=" h-64 overflow-auto scrollbar-thumb-rounded-xl scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-                <UserList
-                  users={userWaitList}
-                  setUserWaitList={setUserWaitList}
-                  setCompanyUsers={setCompanyUsers}
-                  list="requested"
-                />
+            {companyInfo && companyInfo.is_active ? (
+              <div>
+                {companyUsers !== null ? (
+                  <div className=" h-64 overflow-auto scrollbar-thumb-rounded-xl scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+                    <UserList
+                      users={userWaitList}
+                      setUserWaitList={setUserWaitList}
+                      setCompanyUsers={setCompanyUsers}
+                      list="requested"
+                    />
+                  </div>
+                ) : (
+                  <div className="mx-auto loader">Loading</div>
+                )}
               </div>
             ) : (
-              <div className="mx-auto loader">Loading</div>
+              <SubscribeToday />
             )}
           </div>
           <div className="divider py-8"></div>
 
           <div className="bg-white border rounded-3xl mb-4 p-4 shadow-xl">
             <div className="text-center text-4xl py-4">Image Center</div>
-            <ImageCenter companyDocuments={companyDocuments} />
+            {companyInfo && companyInfo.is_active ? (
+              <ImageCenter companyDocuments={companyDocuments} />
+            ) : (
+              <SubscribeToday />
+            )}
           </div>
         </div>
       )}

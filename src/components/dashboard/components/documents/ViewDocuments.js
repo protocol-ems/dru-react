@@ -93,49 +93,5 @@ export default function ViewDocuments({
         )}
       </div>
     </div>
-    // <div>
-    //   <div className="tabs tabs-boxed p-4 ">
-    //     <div
-    //       onClick={() => {
-    //         focusHandler(1);
-    //       }}
-    //       className={
-    //         documentFocus === 1 ? "tab tab-lg tab-active" : "tab tab-lg"
-    //       }
-    //     >
-    //       Medicine
-    //     </div>
-    //     <div
-    //       onClick={() => {
-    //         focusHandler(2);
-    //       }}
-    //       className={
-    //         documentFocus === 2 ? "tab tab-lg tab-active" : "tab tab-lg"
-    //       }
-    //     >
-    //       Procedure
-    //     </div>
-    //     <div
-    //       onClick={() => {
-    //         focusHandler(3);
-    //       }}
-    //       className={
-    //         documentFocus === 3 ? "tab tab-lg tab-active" : "tab tab-lg"
-    //       }
-    //     >
-    //       Protocol
-    //     </div>
-    //   </div>
-
-    //   <div>
-    //     {documentFocus === 1 && <ViewDocumentsSection documents={medicines} />}
-    //   </div>
-    //   <div>
-    //     {documentFocus === 2 && <ViewDocumentsSection documents={procedures} />}
-    //   </div>
-    //   <div>
-    //     {documentFocus === 3 && <ViewDocumentsSection documents={protocols} />}
-    //   </div>
-    // </div>
   );
 }

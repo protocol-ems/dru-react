@@ -9,6 +9,7 @@ export default function Dashboard() {
   const { userData } = useContext(UserContext);
   const history = useHistory();
 
+  const [companyInfo, setCompanyInfo] = useState();
   const [companyUsers, setCompanyUsers] = useState(null);
   const [userWaitList, setUserWaitList] = useState(null);
   const [companyDocuments, setCompanyDocuments] = useState([]);
@@ -18,6 +19,9 @@ export default function Dashboard() {
     const getCompanyInfo = async () => {
       if (token !== "" && userData.user.company) {
         let companyId = userData.user.company;
+        await axiosInstance
+          .get(`company/${companyId}/`)
+          .then((res) => setCompanyInfo(res.data));
         await axiosInstance
           .get(`/company-users/${companyId}/`)
           .then((res) => {
@@ -112,6 +116,7 @@ export default function Dashboard() {
           setUserWaitList={setUserWaitList}
           companyDocuments={companyDocuments}
           setCompanyDocuments={setCompanyDocuments}
+          companyInfo={companyInfo}
         />
       )}
     </div>
