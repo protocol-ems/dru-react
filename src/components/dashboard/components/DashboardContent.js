@@ -5,6 +5,7 @@ import ViewDocuments from "./documents/ViewDocuments";
 
 import UserContext from "../../context/UserContext";
 import ImageCenter from "./documents/ImageCenter";
+import BillingCenter from "./payments/BillingCenter";
 import SubscribeToday from "./payments/SubscribeToday";
 
 export default function DashboardContent({
@@ -15,22 +16,23 @@ export default function DashboardContent({
   companyDocuments,
   setCompanyDocuments,
   companyInfo,
+  subscriptionInfo,
 }) {
   const { userData } = useContext(UserContext);
 
   return (
     <div className="flex flex-col w-full ">
-      {/* <button className="btn btn-info" onClick={() => console.log(userData)}>
+      {/* <button
+        className="btn btn-info"
+        onClick={() => console.log(subscriptionInfo)}
+      >
         Log user Data
       </button> */}
       <ViewDocuments
         companyDocuments={companyDocuments}
         setCompanyDocuments={setCompanyDocuments}
       />
-      <button
-        className="btn"
-        onClick={() => console.log(companyDocuments.length)}
-      >
+      <button className="btn" onClick={() => console.log(companyInfo)}>
         Display Company Info
       </button>
       {userData.user && userData.user.employee_type === 4 && (
@@ -103,6 +105,20 @@ export default function DashboardContent({
           </div>
         </div>
       )}
+      {userData.user &&
+        (userData.user.employee_type === 4 ||
+          userData.user.employee_type === 6) && (
+          <div>
+            <div className="divider py-8"></div>
+            <div className="bg-white border rounded-3xl mb-4 p-4 shadow-xl">
+              <div className="text-center text-4xl py-4">Billing Center</div>
+              <BillingCenter
+                companyInfo={companyInfo}
+                subscriptionInfo={subscriptionInfo}
+              />
+            </div>
+          </div>
+        )}
     </div>
   );
 }

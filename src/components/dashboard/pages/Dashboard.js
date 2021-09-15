@@ -10,6 +10,7 @@ export default function Dashboard() {
   const history = useHistory();
 
   const [companyInfo, setCompanyInfo] = useState();
+  const [subscriptionInfo, setSubscriptionInfo] = useState();
   const [companyUsers, setCompanyUsers] = useState(null);
   const [userWaitList, setUserWaitList] = useState(null);
   const [companyDocuments, setCompanyDocuments] = useState([]);
@@ -22,6 +23,7 @@ export default function Dashboard() {
         await axiosInstance
           .get(`company/${companyId}/`)
           .then((res) => setCompanyInfo(res.data));
+
         await axiosInstance
           .get(`/company-users/${companyId}/`)
           .then((res) => {
@@ -57,55 +59,21 @@ export default function Dashboard() {
     }
   }, [userData.user, userData, history]);
 
-  // const history = useHistory();
-  // useEffect(() => {
-  //   const getUserInfo = async () => {
-  //     let token = localStorage.getItem("Authorization");
-
-  //     if (token === null || undefined) {
-  //       localStorage.setItem("Authorization", "");
-  //       token = "";
-  //     }
-
-  //     if (token !== "null") {
-  //       // I am curious if there is a better way to handle the history.push
-  //       // I am unusure if it should be after catching the error or if it shoud be before.
-  //       // for now it works - will follow up 8/1/21
-
-  //       axiosInstance.get("/users/info/").then((res) => {
-  //         setUserData({
-  //           user: res.data[0],
-  //         });
-  //       });
-  //       // .then(() => {
-  //       //   history.push("/dashboard");
-  //       // })
-
-  //       // .catch((err) => {
-  //       //   err ? setErrorMessage("Please log in") : setErrorMessage(undefined);
-  //       // });
-  //     }
-  //     // if (token === "null") {
-  //     //   console.log("no user logged in");
-  //     //   history.push("/login");
-  //     // }
-  //   };
-
-  //   getUserInfo();
-  // }, [history, setUserData]);
+  useEffect(() => {
+    const getSubscriptionDetails = async () => {
+      await axiosInstance
+        .get(`payments/subscription-detail/${companyInfo.subscription}/`)
+        .then((res) => {
+          setSubscriptionInfo(res.data);
+        });
+    };
+    if (companyInfo && companyInfo.subscription !== null) {
+      getSubscriptionDetails();
+    }
+  }, [companyInfo]);
 
   return (
     <div className="container mx-auto ">
-      {/* <h1 className="text-5xl mx-auto">Dashboard</h1>
-      {userData.user !== null ? (
-        <h1>Currently logged in as: {userData.user.username}</h1>
-      ) : (
-        "Please log in"
-      )} */}
-
-      {/* <button className="btn" onClick={() => console.log(userData.user)}>
-        click
-      </button> */}
       {userData.user !== null && userData.user.company === 1 ? (
         <CreateOrJoinHeader />
       ) : (
@@ -117,6 +85,7 @@ export default function Dashboard() {
           companyDocuments={companyDocuments}
           setCompanyDocuments={setCompanyDocuments}
           companyInfo={companyInfo}
+          subscriptionInfo={subscriptionInfo}
         />
       )}
     </div>
