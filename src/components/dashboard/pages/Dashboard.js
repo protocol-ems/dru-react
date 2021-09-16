@@ -15,6 +15,15 @@ export default function Dashboard() {
   const [userWaitList, setUserWaitList] = useState(null);
   const [companyDocuments, setCompanyDocuments] = useState([]);
 
+  // This is the heart of the app
+  // First we check auth of the user -> it will redirect to login on fail
+  // If the user is good - then it will show either a join company / create company screen if the user is not in a company or it will show the main dashboard view.
+  // if the user is a part of a company, it sets a few props the drill down through the app.
+  // CompanyInfo shows us all of the specifics to the company but not the detail of each item. For example, it shows all user id's but not each users' details.
+  // subscriptionInfo - a break down of company's subscription status and values - will be used to set user cap on the front end and display costs
+  // company users and user waitlist are set to show who is in the company and who is trying to get in
+  // company documents is the details of each document and is passed down as a prop to be used.
+
   useEffect(() => {
     let token = localStorage.getItem("Authorization");
     const getCompanyInfo = async () => {
@@ -67,7 +76,11 @@ export default function Dashboard() {
           setSubscriptionInfo(res.data);
         });
     };
-    if (companyInfo && companyInfo.subscription !== null) {
+    if (
+      companyInfo &&
+      companyInfo.subscription !== null &&
+      (userData.user.employee_type === 4 || userData.user.employee_type === 6)
+    ) {
       getSubscriptionDetails();
     }
   }, [companyInfo]);

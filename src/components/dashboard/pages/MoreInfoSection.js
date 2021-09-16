@@ -2,6 +2,7 @@ import React from "react";
 import test from "../../../images/test1.gif";
 
 export default function MoreInfoSection() {
+  // A subsection of the Homepage with details on the app.
   return (
     <div className="container mx-auto mt-12">
       <div className="flex flex-col md:flex-row justify-start">

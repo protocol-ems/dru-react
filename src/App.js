@@ -22,17 +22,22 @@ import CreateProtocol from "./components/dashboard/components/documents/pages/Cr
 import HomePage from "./components/dashboard/pages/HomePage";
 
 function App() {
+  // This is required for the stripe program. Get when logged in at stripe.com
   const stripePromise = loadStripe(
     "pk_test_51JWjDxJEjyoAE1rtYIa5QzZgcsRyvuJ6lCkSSpHapygbSvFMHKkoEOUaEoXqdme01VDg2t2b3w2rPpN0QTWvTUtN00SPwLlYgz"
   );
-
+  //this is what we use to set our one useContext
+  // this userData can be accessed any where with useContext
+  // userData is set after logging in.
   const [userData, setUserData] = useState({
     user: null,
   });
 
+  // generic error msg component. Not the greatest but it works.
   const [errorMessage, setErrorMessage] = useState(undefined);
 
-  // I do not think I need to be setting the user at the very top of the app. In the dashboard seems to be fine. Leaving code for now to make sure nothing breaks 8/30/21
+  // This useEffect checks local storage and attempts to log the user in if they have a good token.
+  // a 401 error happens when the token is expired
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -54,6 +59,9 @@ function App() {
     getUserInfo();
   }, [setUserData]);
 
+  // The top of the app is wrapped in the user context.
+  // the top of the app has the nav bar than a switch statement for differnt routes.
+  // the private route is a custom route that redicts to the dashboard. And the dashboard will redirect to login. I did this because otherwise it was redirecting to the login on page refresh.
   return (
     <div className="App">
       <UserContext.Provider value={{ userData, setUserData }}>

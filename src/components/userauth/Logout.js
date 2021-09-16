@@ -9,6 +9,7 @@ export default function Logout() {
   const logOutHandler = () => {
     let token = localStorage.getItem("Authorization");
 
+    // the logout component removes userData, redirects to the homepage, and removes the local storage token.
     axiosInstance
       .post("api/logout/", {
         headers: {

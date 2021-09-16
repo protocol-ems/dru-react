@@ -5,7 +5,9 @@ import UserContext from "../context/UserContext";
 import Logout from "../userauth/Logout";
 export default function Navbar() {
   const { userData } = useContext(UserContext);
-
+  // The navbar is dynamic depending on if the user is logged in.
+  // the OurProtocol text will redirect to '/' or '/'dashboard' depending on if the user is logged in.
+  // same with logout / login & register buttons
   return (
     <div className="container items-center mx-auto">
       <div className="text-gray-700 bg-white border rounded-lg">

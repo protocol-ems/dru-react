@@ -7,6 +7,12 @@ import Error from "../misc/Error";
 export default function Register() {
   const history = useHistory();
 
+  //Register works as expected with a few tweeks.
+  // 1st - Django requires a username not a email to login
+  // therefore In the post request you can see that I set the username field and email field to the same value.
+  // there is no seperate username field for the user to sign up to.
+  // There error is not dynamic.
+
   const initialFormData = Object.freeze({
     username: "",
     password: "",

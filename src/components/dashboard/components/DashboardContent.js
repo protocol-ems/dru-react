@@ -22,12 +22,9 @@ export default function DashboardContent({
 
   return (
     <div className="flex flex-col w-full ">
-      {/* <button
-        className="btn btn-info"
-        onClick={() => console.log(subscriptionInfo)}
-      >
+      <button className="btn btn-info" onClick={() => console.log(companyInfo)}>
         Log user Data
-      </button> */}
+      </button>
       <ViewDocuments
         companyDocuments={companyDocuments}
         setCompanyDocuments={setCompanyDocuments}

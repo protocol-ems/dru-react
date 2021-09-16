@@ -8,6 +8,9 @@ import notes from "../../../images/notes.svg";
 import wave from "../../../images/wave1.svg";
 
 export default function HomePage() {
+  // This is the '/' of the app
+  // basic layout with custom html css to display specific information.
+  // Nothing Crazy.
   const learnMore = useRef(null);
 
   const toMore = () => {

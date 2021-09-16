@@ -5,8 +5,12 @@ import UserContext from "../context/UserContext";
 
 import Error from "../misc/Error";
 
-export default function Register() {
+export default function Login() {
   const history = useHistory();
+
+  // The login component sends a post request and then saves the knox token to local storage for authenticaiton .
+  // The error handling is not 'dynamic' and will just say bad info.
+  // After a good login, it will set the userData and redirect to the dashboard.
 
   const initialFormData = Object.freeze({
     username: "",
