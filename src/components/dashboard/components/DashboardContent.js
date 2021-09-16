@@ -22,16 +22,16 @@ export default function DashboardContent({
 
   return (
     <div className="flex flex-col w-full ">
-      <button className="btn btn-info" onClick={() => console.log(companyInfo)}>
+      {/* <button className="btn btn-info" onClick={() => console.log(companyInfo)}>
         Log user Data
-      </button>
+      </button> */}
       <ViewDocuments
         companyDocuments={companyDocuments}
         setCompanyDocuments={setCompanyDocuments}
       />
-      <button className="btn" onClick={() => console.log(companyInfo)}>
+      {/* <button className="btn" onClick={() => console.log(companyInfo)}>
         Display Company Info
-      </button>
+      </button> */}
       {userData.user && userData.user.employee_type === 4 && (
         <div className=" bg-white flex flex-row flex-wrap justify-between  card border shadow-xl px-4 py-4 mb-12">
           <Link to="/create-document-header" className="btn btn-accent my-4">

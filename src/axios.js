@@ -47,4 +47,7 @@ export default class ApiService {
   static getSubscriptionInfo(data = {}) {
     return axiosInstance.post("payments/subscription-info/", data);
   }
+  static changeSubscription(data = {}) {
+    return axiosInstance.post("/payments/change-subscription/", data);
+  }
 }

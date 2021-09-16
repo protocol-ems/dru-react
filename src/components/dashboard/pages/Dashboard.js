@@ -56,8 +56,11 @@ export default function Dashboard() {
           });
       }
     };
-    if (userData.user !== null && userData.user.employee_type === 4) {
-      // getCompanyInfo().then(() => getCompanyDocuments());
+    if (
+      userData.user !== null &&
+      (userData.user.employee_type === 4 || userData.user.employee_type === 6)
+    ) {
+      // if the user is a admin or accounting they get companyInfo
       getCompanyDocuments().then(() => getCompanyInfo());
     }
     if (userData.user !== null && userData.user.employee_type !== 4) {
@@ -83,7 +86,7 @@ export default function Dashboard() {
     ) {
       getSubscriptionDetails();
     }
-  }, [companyInfo]);
+  }, [companyInfo, userData]);
 
   return (
     <div className="container mx-auto ">

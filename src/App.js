@@ -4,10 +4,8 @@ import { Switch, Route } from "react-router-dom";
 import UserContext from "./components/context/UserContext";
 import PrivateRoute from "./components/misc/PrivateRoute";
 import { axiosInstance } from "./axios";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import CreateSubscriptionSection from "./components/dashboard/components/payments/CreateSubscriptionSection";
-
+import SubscriptionWrapper from "./components/dashboard/components/payments/SubscriptionWrapper";
+import CancelSubscription from "./components/dashboard/components/payments/CancelSubscription";
 import Navbar from "./components/navbar/Navbar";
 import Register from "./components/userauth/Register";
 import Login from "./components/userauth/Login";
@@ -22,10 +20,6 @@ import CreateProtocol from "./components/dashboard/components/documents/pages/Cr
 import HomePage from "./components/dashboard/pages/HomePage";
 
 function App() {
-  // This is required for the stripe program. Get when logged in at stripe.com
-  const stripePromise = loadStripe(
-    "pk_test_51JWjDxJEjyoAE1rtYIa5QzZgcsRyvuJ6lCkSSpHapygbSvFMHKkoEOUaEoXqdme01VDg2t2b3w2rPpN0QTWvTUtN00SPwLlYgz"
-  );
   //this is what we use to set our one useContext
   // this userData can be accessed any where with useContext
   // userData is set after logging in.
@@ -105,13 +99,21 @@ function App() {
             path="/create-protocol"
             component={CreateProtocol}
           />
-          <Elements stripe={stripePromise}>
-            <PrivateRoute
-              exact
-              to="/create-subscription"
-              component={CreateSubscriptionSection}
-            />
-          </Elements>
+          <PrivateRoute
+            exact
+            to="/create-subscription"
+            component={SubscriptionWrapper}
+          />
+          <PrivateRoute
+            exact
+            to="/create-subscription"
+            component={SubscriptionWrapper}
+          />
+          <PrivateRoute
+            exact
+            to="/cancel-subscription"
+            component={CancelSubscription}
+          />
         </Switch>
       </UserContext.Provider>
     </div>

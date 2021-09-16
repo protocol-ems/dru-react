@@ -248,15 +248,6 @@ export default function CreateSubscriptionSection() {
           <button type="submit" className="submit-btn btn btn-accent">
             Submit Payment
           </button>
-          <button
-            className="btn"
-            onClick={() => {
-              console.log(subscriptionType);
-            }}
-          >
-            {" "}
-            log data
-          </button>
         </form>
       </div>
     </div>
