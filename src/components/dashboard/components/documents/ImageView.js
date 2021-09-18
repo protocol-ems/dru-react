@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { axiosInstance } from "../../../../axios";
+
+import { axiosInstance } from "src/axiosInstance";
+
 
 export default function ImageView({ currentDocument, editImages }) {
   const [images, setImages] = useState([]);

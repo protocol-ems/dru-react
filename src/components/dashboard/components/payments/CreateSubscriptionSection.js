@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import ApiService from "../../../../axios";
-import stripeLogo from "../../../../images/stripe.svg";
-import UserContext from "../../../context/UserContext";
-import { axiosInstance } from "../../../../axios";
+
+import UserContext from "src/components/context/UserContext";
+import ApiService, { axiosInstance } from "src/axiosInstance";
+
+import stripeLogo from "src/images/stripe.svg";
+
 
 export default function CreateSubscriptionSection() {
   const { userData } = useContext(UserContext);

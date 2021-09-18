@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
-import { axiosInstance } from "../../axios";
 import { useHistory } from "react-router-dom";
-import UserContext from "../context/UserContext";
+
+import { axiosInstance } from "src/axiosInstance";
+import UserContext from "src/components/context/UserContext";
+
 
 export default function Logout() {
   const history = useHistory();

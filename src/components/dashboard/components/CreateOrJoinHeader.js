@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import UserContext from "../../context/UserContext";
+
+import UserContext from "src/components/context/UserContext";
+
 
 export default function CreateOrJoinHeader() {
   const { userData } = useContext(UserContext);

@@ -1,12 +1,14 @@
 import React, { useState, useContext, useRef } from "react";
-import DocumentPreview from "./DocumentPreview";
-import UserContext from "../../../context/UserContext";
-import { axiosInstance } from "../../../../axios";
-import { v4 as uuidv4 } from "uuid";
 import { useHistory } from "react-router-dom";
-import CreateTableSection from "./CreateTableSection";
-import CreateFlowSection from "./CreateFlowSection";
-import Error from "../../../misc/Error";
+import { v4 as uuidv4 } from "uuid";
+
+import DocumentPreview from "src/components/dashboard/components/documents/DocumentPreview";
+import CreateTableSection from "src/components/dashboard/components/documents/CreateTableSection";
+import CreateFlowSection from "src/components/dashboard/components/documents/CreateFlowSection";
+import UserContext from "src/components/context/UserContext";
+import { axiosInstance } from "src/axiosInstance";
+import Error from "src/components/misc/Error";
+
 
 export default function CreateDocument({
   labels,

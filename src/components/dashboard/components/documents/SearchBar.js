@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 
+
 export default function SearchBar({
   searchText,
   setSearchText,

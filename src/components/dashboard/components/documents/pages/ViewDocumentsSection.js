@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import SearchBar from "../SearchBar";
-import DocumentView from "../DocumentView";
-import TablePreview from "../TablePreview";
-import FlowView from "../flow/FlowView";
-import CreateMedicine from "./CreateMedicine";
-import CreateProcedure from "./CreateProcedure";
-import CreateProtocol from "./CreateProtocol";
-import ImageView from "../ImageView";
-
-import UserContext from "../../../../context/UserContext";
+import SearchBar from "src/components/dashboard/components/documents/SearchBar";
+import DocumentView from "src/components/dashboard/components/documents/DocumentView";
+import TablePreview from "src/components/dashboard/components/documents/TablePreview";
+import ImageView from "src/components/dashboard/components/documents/ImageView";
+import CreateMedicine from "src/components/dashboard/components/documents/pages/CreateMedicine";
+import CreateProcedure from "src/components/dashboard/components/documents/pages/CreateProcedure";
+import CreateProtocol from "src/components/dashboard/components/documents/pages/CreateProtocol";
+import FlowView from "src/components/dashboard/components/documents/flow/FlowView";
+import UserContext from "src/components/context/UserContext";
 
 export default function ViewDocumentsSection({ documents, setDocuments }) {
   const { userData } = useContext(UserContext);

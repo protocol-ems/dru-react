@@ -1,7 +1,9 @@
 import React, { useState, useContext } from "react";
-import { axiosInstance } from "../../../../axios";
-import UserContext from "../../../context/UserContext";
-import Error from "../../../misc/Error";
+
+import { axiosInstance } from "src/axiosInstance";
+import UserContext from "src/components/context/UserContext";
+import Error from "src/components/misc/Error";
+
 
 export default function LabelList({ labels, setLabels }) {
   //Could not get word-break to work in this section. Long labels look really bad.

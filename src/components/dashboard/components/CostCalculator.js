@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+
 export default function CostCalculator() {
   const [users, setUsers] = useState(5);
   const [cost, setCost] = useState(50);
@@ -8,8 +9,7 @@ export default function CostCalculator() {
     const handleCost = (e) => {
       if (users < 5) {
         setCost(50);
-      }
-      if (users > 5) {
+      } else {
         setCost(50 + users * 2 - 10);
       }
     };

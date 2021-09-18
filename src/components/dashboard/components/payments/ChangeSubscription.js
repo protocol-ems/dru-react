@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { axiosInstance } from "../../../../axios";
-import ApiService from "../../../../axios";
+
+import ApiService, { axiosInstance } from "src/axiosInstance";
+
 
 export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
   const [changeSubscription, setChangeSubscription] = useState(false);

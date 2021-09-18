@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import UserContext from "../context/UserContext";
 
-import Logout from "../userauth/Logout";
+import UserContext from "src/components/context/UserContext";
+import Logout from "src/components/userauth/Logout";
+
+
 export default function Navbar() {
   const { userData } = useContext(UserContext);
   // The navbar is dynamic depending on if the user is logged in.
