@@ -19,7 +19,6 @@ import CreateProcedure from "src/components/dashboard/components/documents/pages
 import CreateProtocol from "src/components/dashboard/components/documents/pages/CreateProtocol";
 import HomePage from "src/components/dashboard/pages/HomePage";
 
-
 function App() {
   //this is what we use to set our one useContext
   // this userData can be accessed any where with useContext
@@ -37,12 +36,13 @@ function App() {
   useEffect(() => {
     const getUserInfo = async () => {
       let token = localStorage.getItem("Authorization");
+      console.log(token);
 
       if (token === null || undefined) {
         localStorage.setItem("Authorization", "");
         token = "";
       }
-      if (token !== "null") {
+      if (token !== "null" || token !== "") {
         axiosInstance.get("/users/info/").then((res) => {
           setUserData({
             user: res.data[0],
