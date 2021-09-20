@@ -1,5 +1,6 @@
 import React from "react";
 
+
 export default function TablePreview({ tableData }) {
   return (
     <div className="pb-12">

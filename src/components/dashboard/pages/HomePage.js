@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 
-import CostCalculator from "../components/CostCalculator";
-import MoreInfoSection from "./MoreInfoSection";
+import CostCalculator from "src/components/dashboard/components/CostCalculator";
+import MoreInfoSection from "src/components/dashboard/pages/MoreInfoSection";
 
-import notes from "../../../images/notes.svg";
-import wave from "../../../images/wave1.svg";
+import notes from "src/images/notes.svg";
+import wave from "src/images/wave1.svg";
+
 
 export default function HomePage() {
   // This is the '/' of the app

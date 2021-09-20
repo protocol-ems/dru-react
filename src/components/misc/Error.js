@@ -1,5 +1,6 @@
 import React from "react";
 
+
 export default function Error({ errorMessage, clearError }) {
   // This error message can be put and pulled wherever.
   // currently I have it so the cancel logic and error message need to be set as a state in the component it will be used in.

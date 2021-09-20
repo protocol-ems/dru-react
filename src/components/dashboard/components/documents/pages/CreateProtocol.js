@@ -1,7 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import CreateDocument from "../CreateDocument";
-import UserContext from "../../../../context/UserContext";
-import { axiosInstance } from "../../../../../axios";
+
+import CreateDocument from "src/components/dashboard/components/documents/CreateDocument";
+import UserContext from "src/components/context/UserContext";
+import { axiosInstance } from "src/axiosInstance";
+
+
 export default function CreateProtocol({
   details,
   tableDetails,

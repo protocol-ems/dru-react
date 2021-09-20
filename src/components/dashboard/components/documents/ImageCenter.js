@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-
 import { useHistory } from "react-router-dom";
-import UserContext from "../../../context/UserContext";
+
+import UserContext from "src/components/context/UserContext";
+
 
 export default function ImageCenter({ companyDocuments }) {
   const { userData } = useContext(UserContext);

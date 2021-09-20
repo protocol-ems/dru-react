@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
-import UserList from "../components/UserList";
 import { Link } from "react-router-dom";
-import ViewDocuments from "./documents/ViewDocuments";
 
-import UserContext from "../../context/UserContext";
-import ImageCenter from "./documents/ImageCenter";
-import BillingCenter from "./payments/BillingCenter";
-import SubscribeToday from "./payments/SubscribeToday";
+import ViewDocuments from "src/components/dashboard/components/documents/ViewDocuments";
+import ImageCenter from "src/components/dashboard/components/documents/ImageCenter";
+import BillingCenter from "src/components/dashboard/components/payments/BillingCenter";
+import SubscribeToday from "src/components/dashboard/components/payments/SubscribeToday";
+import UserList from "src/components/dashboard/components/UserList";
+import UserContext from "src/components/context/UserContext";
+
 
 export default function DashboardContent({
   companyUsers,

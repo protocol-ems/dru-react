@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { registerInstance } from "../../axios";
 import { useHistory } from "react-router-dom";
 
-import Error from "../misc/Error";
+import { registerInstance } from "src/axiosInstance";
+import Error from "src/components/misc/Error";
+
 
 export default function Register() {
   const history = useHistory();

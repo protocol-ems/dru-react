@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import TablePreview from "./TablePreview";
+import TablePreview from "src/components/dashboard/components/documents/TablePreview";
+
 
 export default function CreateTableSection({
   tableData,

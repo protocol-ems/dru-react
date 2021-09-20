@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import UserContext from "./components/context/UserContext";
-import PrivateRoute from "./components/misc/PrivateRoute";
-import { axiosInstance } from "./axios";
-import SubscriptionWrapper from "./components/dashboard/components/payments/SubscriptionWrapper";
-import CancelSubscription from "./components/dashboard/components/payments/CancelSubscription";
-import Navbar from "./components/navbar/Navbar";
-import Register from "./components/userauth/Register";
-import Login from "./components/userauth/Login";
-import Dashboard from "./components/dashboard/pages/Dashboard";
-import CreateCompany from "./components/dashboard/components/CreateCompany";
-import JoinCompany from "./components/dashboard/components/JoinCompany";
-import Error from "./components//misc/Error";
-import CreateDocumentHeader from "./components/dashboard/components/documents/CreateDocumentHeader";
-import CreateMedicine from "./components/dashboard/components/documents/pages/CreateMedicine";
-import CreateProcedure from "./components/dashboard/components/documents/pages/CreateProcedure";
-import CreateProtocol from "./components/dashboard/components/documents/pages/CreateProtocol";
-import HomePage from "./components/dashboard/pages/HomePage";
+import UserContext from "src/components/context/UserContext";
+import PrivateRoute from "src/components/misc/PrivateRoute";
+import { axiosInstance } from "src/axiosInstance";
+import SubscriptionWrapper from "src/components/dashboard/components/payments/SubscriptionWrapper";
+import CancelSubscription from "src/components/dashboard/components/payments/CancelSubscription";
+import Navbar from "src/components/navbar/Navbar";
+import Register from "src/components/userauth/Register";
+import Login from "src/components/userauth/Login";
+import Dashboard from "src/components/dashboard/pages/Dashboard";
+import CreateCompany from "src/components/dashboard/components/CreateCompany";
+import JoinCompany from "src/components/dashboard/components/JoinCompany";
+import Error from "src/components/misc/Error";
+import CreateDocumentHeader from "src/components/dashboard/components/documents/CreateDocumentHeader";
+import CreateMedicine from "src/components/dashboard/components/documents/pages/CreateMedicine";
+import CreateProcedure from "src/components/dashboard/components/documents/pages/CreateProcedure";
+import CreateProtocol from "src/components/dashboard/components/documents/pages/CreateProtocol";
+import HomePage from "src/components/dashboard/pages/HomePage";
+
 
 function App() {
   //this is what we use to set our one useContext

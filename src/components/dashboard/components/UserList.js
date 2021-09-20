@@ -1,7 +1,9 @@
 import React, { useState, useContext } from "react";
-import employeeTitle from "./employeeTitle";
-import { axiosInstance } from "../../../axios";
-import UserContext from "../../context/UserContext";
+
+import employeeTitle from "src/components/dashboard/components/employeeTitle";
+import { axiosInstance } from "src/axiosInstance";
+import UserContext from "src/components/context/UserContext";
+
 
 export default function UserList({
   users,

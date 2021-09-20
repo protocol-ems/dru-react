@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
-import { axiosInstance } from "../../axios";
 import { useHistory } from "react-router-dom";
-import UserContext from "../context/UserContext";
 
-import Error from "../misc/Error";
+import UserContext from "src/components/context/UserContext";
+import { axiosInstance } from "src/axiosInstance";
+import Error from "src/components/misc/Error";
+
 
 export default function Login() {
   const history = useHistory();

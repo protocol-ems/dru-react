@@ -9,9 +9,9 @@ import ReactFlow, {
 } from "react-flow-renderer";
 import { v4 as uuidv4 } from "uuid";
 
-import NodeEditor from "./NodeEditor";
+import CustomEdge from "src/components/dashboard/components/documents/flow/CustomEdge";
+import NodeEditor from "src/components/dashboard/components/documents/flow/NodeEditor";
 
-import CustomEdge from "./CustomEdge";
 
 export default function CreateFlow({ flowData, setFlowData }) {
   const initialChartState = () => {

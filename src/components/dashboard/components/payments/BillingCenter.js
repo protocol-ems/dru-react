@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ChangeSubscription from "./ChangeSubscription";
+
+import ChangeSubscription from "src/components/dashboard/components/payments/ChangeSubscription";
+
 
 export default function BillingCenter({ companyInfo, subscriptionInfo }) {
   return (

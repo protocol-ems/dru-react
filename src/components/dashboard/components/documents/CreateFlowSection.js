@@ -1,5 +1,7 @@
 import React from "react";
-import CreateFlow from "./flow/CreateFlow";
+
+import CreateFlow from "src/components/dashboard/components/documents/flow/CreateFlow";
+
 
 export default function CreateFlowSection({
   flowData,

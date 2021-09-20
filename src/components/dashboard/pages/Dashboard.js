@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import UserContext from "../../context/UserContext";
-import { axiosInstance } from "../../../axios";
 import { useHistory } from "react-router-dom";
-import CreateOrJoinHeader from "../components/CreateOrJoinHeader";
-import DashboardContent from "../components/DashboardContent";
+
+import UserContext from "src/components/context/UserContext";
+import { axiosInstance } from "src/axiosInstance";
+import CreateOrJoinHeader from "src/components/dashboard/components/CreateOrJoinHeader";
+import DashboardContent from "src/components/dashboard/components/DashboardContent";
+
 
 export default function Dashboard() {
   const { userData } = useContext(UserContext);

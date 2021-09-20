@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import { axiosInstance } from "../../../../axios";
-import UserContext from "../../../context/UserContext";
 
-import LabelList from "./LabelList";
-import Error from "../../../misc/Error";
+import { axiosInstance } from "src/axiosInstance";
+import UserContext from "src/components/context/UserContext";
+import LabelList from "src/components/dashboard/components/documents/LabelList";
+import Error from "src/components/misc/Error";
+
 
 export default function CreateDocumentHeader() {
   const { userData } = useContext(UserContext);

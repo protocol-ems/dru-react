@@ -1,8 +1,9 @@
 import React from "react";
-
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import CreateSubscriptionSection from "./CreateSubscriptionSection";
+
+import CreateSubscriptionSection from "src/components/dashboard/components/payments/CreateSubscriptionSection";
+
 
 export default function SubscriptionWrapper() {
   const stripePromise = loadStripe(
