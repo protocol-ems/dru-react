@@ -1,9 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import { axiosInstance } from "src/axiosInstance";
 import UserContext from "src/components/context/UserContext";
 import Error from "src/components/misc/Error";
-
 
 export default function LabelList({ labels, setLabels }) {
   //Could not get word-break to work in this section. Long labels look really bad.
@@ -12,27 +11,38 @@ export default function LabelList({ labels, setLabels }) {
   const { userData } = useContext(UserContext);
 
   const initialPosition = Object.freeze({
-    position: undefined,
-    company: undefined,
+    position: null,
+    company: userData.user.company,
   });
 
   const initialLabel = Object.freeze({
-    labelId: undefined,
-    document_detail_name: undefined,
-    company: undefined,
+    labelId: null,
+    document_detail_name: null,
+    company: userData.user.company,
   });
 
-  const [errorMessage, setErrorMessage] = useState(undefined);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [position, setPosition] = useState(initialPosition);
   const [newLabel, setNewLabel] = useState(initialLabel);
+  const [labelCopy, setLabelCopy] = useState(labels);
 
   const handlePositionChange = (e) => {
     e.preventDefault();
+    // set position is a state we use in the post request. It stores the info that goes in the post request.
     setPosition({
       ...position,
       [e.target.name]: e.target.value,
       labelId: e.target.id,
     });
+
+    // this updates our copy of the labels.
+    let updatedLabel = labelCopy.map((label) => {
+      if (label.id === parseInt(e.target.id)) {
+        return { ...label, position: e.target.value };
+      }
+      return label;
+    });
+    setLabelCopy(updatedLabel);
   };
 
   const handleLabelChange = (e) => {
@@ -42,6 +52,14 @@ export default function LabelList({ labels, setLabels }) {
       labelId: e.target.id,
       [e.target.name]: e.target.value,
     });
+
+    let updatedLabel = labelCopy.map((label) => {
+      if (label.id === parseInt(e.target.id)) {
+        return { ...label, document_detail_name: e.target.value };
+      }
+      return label;
+    });
+    setLabelCopy(updatedLabel);
   };
 
   const handleSubmit = (e, type) => {
@@ -98,6 +116,11 @@ export default function LabelList({ labels, setLabels }) {
     }
   };
 
+  useEffect(() => {
+    // refreshed the copy of the labels we use after any post request is made to the actual data.
+    setLabelCopy(labels);
+  }, [labels, setLabels]);
+
   return (
     <div>
       {errorMessage && (
@@ -116,8 +139,8 @@ export default function LabelList({ labels, setLabels }) {
             </tr>
           </thead>
           <tbody>
-            {labels ? (
-              labels.map((label) => {
+            {labelCopy ? (
+              labelCopy.map((label) => {
                 return (
                   <tr key={label.id}>
                     <td>
@@ -128,6 +151,7 @@ export default function LabelList({ labels, setLabels }) {
                           className="w-12"
                           name="position"
                           onChange={handlePositionChange}
+                          value={label.position}
                           id={label.id}
                           min="0"
                         ></input>
@@ -154,6 +178,7 @@ export default function LabelList({ labels, setLabels }) {
                           onChange={handleLabelChange}
                           id={label.id}
                           className="w-1/2"
+                          value={label.document_detail_name}
                         />
                         {label.id === parseInt(newLabel.labelId) ? (
                           <button
