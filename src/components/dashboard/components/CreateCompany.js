@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { axiosInstance } from "src/axiosInstance";
 import UserContext from "src/components/context/UserContext";
 
-
 export default function CreateCompany() {
   const history = useHistory();
 
@@ -30,6 +29,12 @@ export default function CreateCompany() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // sets the user to an admin
+    axiosInstance.patch(`/users/${userData.user.id}/`, {
+      employee_type: 4,
+    });
+
+    // creates the company and then goes to the dashboard
     axiosInstance
       .post("/company/", {
         name: formData.name,
@@ -45,6 +50,7 @@ export default function CreateCompany() {
       })
       .then(() => {
         history.push("/dashboard");
+        history.go(0);
       });
   };
 
@@ -132,7 +138,7 @@ export default function CreateCompany() {
           </div>
           <button
             type="submit"
-            className="w-full px-16 py-2 my-2 mr-2 text-base text-white transition duration-500 ease-in-out transform bg-green-300 border-green-600 rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-green-400"
+            className="btn btn-accent w-full mt-12"
             onClick={handleSubmit}
           >
             Create

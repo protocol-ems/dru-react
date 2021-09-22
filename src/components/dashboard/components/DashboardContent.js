@@ -8,7 +8,6 @@ import SubscribeToday from "src/components/dashboard/components/payments/Subscri
 import UserList from "src/components/dashboard/components/UserList";
 import UserContext from "src/components/context/UserContext";
 
-
 export default function DashboardContent({
   companyUsers,
   userWaitList,
