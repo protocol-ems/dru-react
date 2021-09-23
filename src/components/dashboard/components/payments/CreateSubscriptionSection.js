@@ -6,7 +6,6 @@ import ApiService, { axiosInstance } from "src/axiosInstance";
 
 import stripeLogo from "src/images/stripe.svg";
 
-
 export default function CreateSubscriptionSection() {
   const { userData } = useContext(UserContext);
   const [error, setError] = useState(null);
@@ -35,7 +34,7 @@ export default function CreateSubscriptionSection() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const card = elements.getElement(CardElement);
-    const { paymentMethod, error } = await stripe.createPaymentMethod({
+    const { paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: card,
     });
