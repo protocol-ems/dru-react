@@ -18,6 +18,12 @@ import CreateMedicine from "src/components/dashboard/components/documents/pages/
 import CreateProcedure from "src/components/dashboard/components/documents/pages/CreateProcedure";
 import CreateProtocol from "src/components/dashboard/components/documents/pages/CreateProtocol";
 import HomePage from "src/components/dashboard/pages/HomePage";
+import CreateNewPage from "src/components/dashboard/pages/CreateNewPage";
+import EmployeeListPage from "src/components/dashboard/pages/EmployeeListPage";
+import WaitListPage from "src/components/dashboard/pages/WaitListPage";
+import ImageCenterPage from "src/components/dashboard/pages/ImageCenterPage";
+import BillingCenterPage from "src/components/dashboard/pages/BillingCenterPage";
+import AdminNavBar from "src/components/dashboard/components/AdminNavBar";
 
 function App() {
   //this is what we use to set our one useContext
@@ -36,18 +42,22 @@ function App() {
   useEffect(() => {
     const getUserInfo = async () => {
       let token = localStorage.getItem("Authorization");
-      console.log(token);
 
       if (token === null || undefined) {
         localStorage.setItem("Authorization", "");
         token = "";
       }
       if (token !== "null" || token !== "") {
-        axiosInstance.get("/users/info/").then((res) => {
-          setUserData({
-            user: res.data[0],
+        axiosInstance
+          .get("/users/info/")
+          .then((res) => {
+            setUserData({
+              user: res.data[0],
+            });
+          })
+          .catch(() => {
+            localStorage.setItem("Authorization", "");
           });
-        });
       }
     };
 
@@ -68,6 +78,8 @@ function App() {
             clearError={() => setErrorMessage(undefined)}
           />
         )}
+        <AdminNavBar />
+
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/register" component={Register} />
@@ -99,6 +111,23 @@ function App() {
             exact
             path="/create-protocol"
             component={CreateProtocol}
+          />
+          <PrivateRoute exact path="/create-new" component={CreateNewPage} />
+          <PrivateRoute
+            exact
+            path="/employee-list"
+            component={EmployeeListPage}
+          />
+          <PrivateRoute exact path="/wait-list" component={WaitListPage} />
+          <PrivateRoute
+            exact
+            path="/image-center"
+            component={ImageCenterPage}
+          />
+          <PrivateRoute
+            exact
+            path="/billing-center"
+            component={BillingCenterPage}
           />
           <PrivateRoute
             exact

@@ -7,7 +7,6 @@ import MoreInfoSection from "src/components/dashboard/pages/MoreInfoSection";
 import notes from "src/images/notes.svg";
 import wave from "src/images/wave1.svg";
 
-
 export default function HomePage() {
   // This is the '/' of the app
   // basic layout with custom html css to display specific information.
@@ -15,7 +14,6 @@ export default function HomePage() {
   const learnMore = useRef(null);
 
   const toMore = () => {
-    console.log(learnMore);
     window.scrollTo(0, learnMore.current.offsetTop);
   };
   const toTop = () => {
