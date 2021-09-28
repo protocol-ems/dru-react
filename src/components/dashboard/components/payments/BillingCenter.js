@@ -6,8 +6,19 @@ import ChangeSubscription from "src/components/dashboard/components/payments/Cha
 export default function BillingCenter({ companyInfo, subscriptionInfo }) {
   return (
     <div>
-      <div className="flex flex-col md:flex-row justify-around">
-        <div className="flex flex-col md:flex-row justify-around w-1/2 p-4">
+      <div className="flex flex-col  justify-around ">
+        <div className="text-center flex flex-col justify-around  p-4">
+          {subscriptionInfo && (
+            <div>
+              <div>
+                Current Subscription Price: ${subscriptionInfo.price} per month
+              </div>
+              <div>Current Max User Count: {subscriptionInfo.user_max}</div>
+              <div>Current User Count:{companyInfo.users.length}</div>
+            </div>
+          )}
+        </div>
+        <div className="mx-auto flex flex-col md:flex-row justify-around ">
           {companyInfo && companyInfo.subscription === null ? (
             <Link
               to="/create-subscription"
@@ -21,15 +32,6 @@ export default function BillingCenter({ companyInfo, subscriptionInfo }) {
               companyInfo={companyInfo}
               subscriptionInfo={subscriptionInfo}
             />
-          )}
-        </div>
-        <div className="w-1/2 flex flex-col justify-around border rounded p-4">
-          {subscriptionInfo && (
-            <div>
-              <div>Current Subscription Price:{subscriptionInfo.price}</div>
-              <div>Current Max User Count: {subscriptionInfo.user_max}</div>
-              <div>Current User Count:{companyInfo.users.length}</div>
-            </div>
           )}
         </div>
       </div>

@@ -23,10 +23,10 @@ export default function EmployeeListPage() {
   return (
     <div>
       <div className="container mx-auto">
-        <h2 className="text-center text-4xl py-4">Current Employees</h2>
+        <h2 className="text-center text-4xl pb-4">Current Employees</h2>
         <div>
           {companyUsers !== null ? (
-            <div className="h-64 overflow-auto scrollbar-thumb-rounded-xl scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+            <div className="h-screen overflow-auto scrollbar-thumb-rounded-xl scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-100">
               {/* make it So that the employee's title is the drop down. Not a seperate column. */}
 
               <UserList

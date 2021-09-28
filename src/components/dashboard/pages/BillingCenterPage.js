@@ -6,6 +6,8 @@ import BillingCenter from "src/components/dashboard/components/payments/BillingC
 export default function BillingCenterPage() {
   const [companyInfo, setCompanyInfo] = useState();
   const [subscriptionInfo, setSubscriptionInfo] = useState();
+  const [loading, setLoading] = useState(true);
+
   const { userData } = useContext(UserContext);
 
   useEffect(() => {
@@ -29,6 +31,7 @@ export default function BillingCenterPage() {
         .get(`payments/subscription-detail/${companyInfo.subscription}/`)
         .then((res) => {
           setSubscriptionInfo(res.data);
+          setLoading(false);
         });
     };
     if (companyInfo) {
@@ -38,8 +41,10 @@ export default function BillingCenterPage() {
 
   return (
     <div className="container mx-auto">
-      <div className="bg-white border rounded-3xl mb-4 p-4 shadow-xl">
-        <div className="text-center text-4xl py-4">Billing Center</div>
+      <div className=" mb-4 px-4">
+        <div className="text-center text-4xl pb-4">Billing Center</div>
+        {loading && <div className="mx-auto loader">Loading</div>}
+
         {companyInfo && subscriptionInfo && (
           <BillingCenter
             companyInfo={companyInfo}

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import ApiService, { axiosInstance } from "src/axiosInstance";
 
-
 export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
   const [changeSubscription, setChangeSubscription] = useState(false);
 
@@ -43,7 +42,6 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
   };
   return (
     <div className="w-full">
-      <div>Change a subscription here</div>
       {!changeSubscription && (
         <button className="btn" onClick={() => setChangeSubscription(true)}>
           Change Subscription?

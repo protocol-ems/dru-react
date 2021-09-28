@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 
 import UserContext from "src/components/context/UserContext";
 
-
 export default function ImageCenter({ companyDocuments }) {
   const { userData } = useContext(UserContext);
   const history = useHistory();
@@ -207,15 +206,6 @@ export default function ImageCenter({ companyDocuments }) {
                 Add Image
               </button>
             )}
-
-            <button
-              className="btn  w-full md:w-1/2 block"
-              onClick={() => {
-                console.log(image);
-              }}
-            >
-              log doc
-            </button>
           </div>
         </div>
       )}

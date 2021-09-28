@@ -7,6 +7,7 @@ import { axiosInstance } from "src/axiosInstance";
 export default function ImageCenterPage() {
   const [companyInfo, setCompanyInfo] = useState();
   const [companyDocuments, setCompanyDocuments] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { userData } = useContext(UserContext);
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export default function ImageCenterPage() {
           .get(`company-documents/${companyId}/`)
           .then((res) => {
             setCompanyDocuments(res.data);
+            setLoading(false);
           });
       }
     };
@@ -37,12 +39,12 @@ export default function ImageCenterPage() {
 
   return (
     <div className="container mx-auto">
-      <div>Image Center Info Here</div>
-      <div className="bg-white  rounded-3xl mb-4 p-4 ">
-        <div className="text-center text-4xl py-4">Image Center</div>
+      <div className="bg-white  rounded-3xl">
+        <div className="text-center text-4xl pb-4">Image Center</div>
         {companyInfo && companyInfo.is_active && (
           <ImageCenter companyDocuments={companyDocuments} />
         )}
+        {loading && <div className="mx-auto loader">Loading</div>}
         {companyInfo && !companyInfo.is_active && <SubscribeToday />}
       </div>
     </div>
