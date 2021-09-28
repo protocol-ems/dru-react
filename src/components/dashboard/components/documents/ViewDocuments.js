@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import ViewDocumentsSection from "./pages/ViewDocumentsSection.js";
 
-
 export default function ViewDocuments({
   companyDocuments,
   setCompanyDocuments,
@@ -29,7 +28,7 @@ export default function ViewDocuments({
   }, [companyDocuments]);
 
   return (
-    <div className="border  shadow-xl rounded-xl my-12">
+    <div className="border  shadow-xl rounded-xl">
       <div className="flex justify-around p-4 ">
         <div
           onClick={() => {

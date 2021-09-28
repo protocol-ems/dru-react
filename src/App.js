@@ -78,7 +78,7 @@ function App() {
             clearError={() => setErrorMessage(undefined)}
           />
         )}
-        <AdminNavBar />
+        {userData.user && userData.user.employee_type === 4 && <AdminNavBar />}
 
         <Switch>
           <Route exact path="/" component={HomePage} />
