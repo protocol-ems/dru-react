@@ -3,25 +3,26 @@ import { useHistory } from "react-router-dom";
 
 import { axiosInstance } from "src/axiosInstance";
 import UserContext from "src/components/context/UserContext";
-
+import Error from "src/components/misc/Error";
 
 export default function JoinCompany() {
   const history = useHistory();
   const { userData, setUserData } = useContext(UserContext);
 
   const initialFormData = Object.freeze({
-    requested_company: undefined,
+    requested_company: null,
   });
 
   const [companyList, setCompanyList] = useState(null);
 
   const [formData, setFormData] = useState(initialFormData);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     let mounted = true;
     const getCompanyList = async () => {
       if (userData.user) {
-        await axiosInstance.get("/company/").then((res) => {
+        await axiosInstance.get("/active-companies/").then((res) => {
           if (mounted) {
             setCompanyList(res.data);
           }
@@ -34,18 +35,23 @@ export default function JoinCompany() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axiosInstance
-      .patch(`/users/${userData.user.id}/`, {
-        requested_company: formData.requested_company,
-      })
-      .then((res) => {
-        setUserData({
-          user: res.data,
+    if (formData.requested_company === null) {
+      setErrorMessage("Please select an agency to join.");
+    }
+    if (formData.requested_company !== null) {
+      axiosInstance
+        .patch(`/users/${userData.user.id}/`, {
+          requested_company: formData.requested_company,
+        })
+        .then((res) => {
+          setUserData({
+            user: res.data,
+          });
+        })
+        .then(() => {
+          history.push("/dashboard");
         });
-      })
-      .then(() => {
-        history.push("/dashboard");
-      });
+    }
   };
 
   const handleChange = (e) => {
@@ -55,15 +61,16 @@ export default function JoinCompany() {
   };
 
   return (
-    <div className="container mx-auto pt-24 ">
-      <h2 className="text-2xl pb-24 ">Request access to a company.</h2>
+    <div className="container mx-auto pt-12 items-center text-center">
+      <h2 className="text-2xl pb-12 ">Request access to an Agency.</h2>
+
       <form
         action="Post"
-        className="flex flex-col items-center md:w-1/2 border px-4 py-10 rounded-xl drop-shadow-lg bg-gray-50"
+        className="flex flex-col items-center md:w-1/2 border px-4 py-10 rounded-xl drop-shadow-lg bg-gray-50 mx-auto"
       >
         <select
           defaultValue={"DEFAULT"}
-          className="select select-bordered select-accent w-full"
+          className="select select-bordered select-accent w-full mb-6"
           onChange={handleChange}
         >
           <option value="DEFAULT" disabled="disabled">
@@ -79,9 +86,15 @@ export default function JoinCompany() {
               })
             : ""}
         </select>
+        {errorMessage && (
+          <Error
+            errorMessage={errorMessage}
+            clearError={() => setErrorMessage(null)}
+          />
+        )}
         <button
           type="submit"
-          className="md:w-1/2 px-4 py-2 my-4 text-base text-white transition duration-500 ease-in-out transform bg-green-300 border-green-600 rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-green-400"
+          className="btn btn-accent mt-6 w-full"
           onClick={handleSubmit}
         >
           Request Access

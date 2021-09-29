@@ -4,7 +4,6 @@ import employeeTitle from "src/components/dashboard/components/employeeTitle";
 import { axiosInstance } from "src/axiosInstance";
 import UserContext from "src/components/context/UserContext";
 
-
 export default function UserList({
   users,
   list,
@@ -61,11 +60,6 @@ export default function UserList({
         .then(() => {
           axiosInstance.get(`/company-waitlist/${companyId}/`).then((res) => {
             setUserWaitList(res.data);
-          });
-        })
-        .then(() => {
-          axiosInstance.get(`/company-users/${companyId}/`).then((res) => {
-            setCompanyUsers(res.data);
           });
         });
     }
