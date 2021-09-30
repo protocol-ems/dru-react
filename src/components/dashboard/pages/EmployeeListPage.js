@@ -10,14 +10,23 @@ export default function EmployeeListPage() {
   const [companyUsers, setCompanyUsers] = useState(null);
 
   useEffect(() => {
+    let isUnmount = false;
+
     const getCompanyUsers = async () => {
       await axiosInstance
         .get(`/company-users/${userData.user.company}/`)
         .then((res) => {
-          setCompanyUsers(res.data);
+          if (!isUnmount) {
+            setCompanyUsers(res.data);
+          }
         });
     };
+
     getCompanyUsers();
+
+    return () => {
+      isUnmount = true;
+    };
   }, [userData.user.company]);
 
   return (

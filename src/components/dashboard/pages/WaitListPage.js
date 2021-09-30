@@ -10,14 +10,23 @@ export default function WaitListPage() {
   const [userWaitList, setUserWaitList] = useState(null);
 
   useEffect(() => {
+    let isUnmount = false;
+
     const getCompanyUsers = async () => {
       await axiosInstance
         .get(`/company-waitlist/${userData.user.company}/`)
         .then((res) => {
-          setUserWaitList(res.data);
+          if (!isUnmount) {
+            setUserWaitList(res.data);
+          }
         });
     };
+
     getCompanyUsers();
+
+    return () => {
+      isUnmount = true;
+    };
   }, [userData.user.company]);
 
   return (

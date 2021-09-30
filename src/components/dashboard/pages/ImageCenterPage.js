@@ -12,13 +12,16 @@ export default function ImageCenterPage() {
 
   useEffect(() => {
     let token = localStorage.getItem("Authorization");
+    let unMount = false;
 
     const getCompanyInfo = async () => {
       if (token !== "" && userData.user.company) {
         let companyId = userData.user.company;
-        await axiosInstance
-          .get(`company/${companyId}/`)
-          .then((res) => setCompanyInfo(res.data));
+        await axiosInstance.get(`company/${companyId}/`).then((res) => {
+          if (!unMount) {
+            setCompanyInfo(res.data);
+          }
+        });
       }
     };
 
@@ -28,13 +31,19 @@ export default function ImageCenterPage() {
         await axiosInstance
           .get(`company-documents/${companyId}/`)
           .then((res) => {
-            setCompanyDocuments(res.data);
-            setLoading(false);
+            if (!unMount) {
+              setCompanyDocuments(res.data);
+              setLoading(false);
+            }
           });
       }
     };
     getCompanyInfo();
     getCompanyDocuments();
+
+    return () => {
+      unMount = true;
+    };
   }, [userData]);
 
   return (

@@ -12,17 +12,25 @@ export default function BillingCenterPage() {
 
   useEffect(() => {
     let token = localStorage.getItem("Authorization");
+    let isUnmount = false;
 
     const getCompanyInfo = async () => {
       if (token !== "" && userData.user.company) {
         let companyId = userData.user.company;
         await axiosInstance.get(`company/${companyId}/`).then((res) => {
-          setCompanyInfo(res.data);
+          if (!isUnmount) {
+            setCompanyInfo(res.data);
+          }
         });
       }
     };
+    if (!isUnmount) {
+      getCompanyInfo();
+    }
 
-    getCompanyInfo();
+    return () => {
+      isUnmount = true;
+    };
   }, [userData.user.company]);
 
   useEffect(() => {

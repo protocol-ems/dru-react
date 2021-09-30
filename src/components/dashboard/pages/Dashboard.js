@@ -23,6 +23,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     let token = localStorage.getItem("Authorization");
+    let isUnmount = false;
 
     const getCompanyDocuments = async () => {
       if (token !== "") {
@@ -30,23 +31,19 @@ export default function Dashboard() {
         await axiosInstance
           .get(`company-documents/${companyId}/`)
           .then((res) => {
-            setCompanyDocuments(res.data);
+            if (!isUnmount) {
+              setCompanyDocuments(res.data);
+            }
           });
       }
     };
-    if (
-      userData.user !== null &&
-      (userData.user.employee_type === 4 || userData.user.employee_type === 6)
-    ) {
-      // if the user is a admin or accounting they get companyInfo
+    if (!isUnmount && userData.user !== null) {
       getCompanyDocuments();
     }
-    if (userData.user !== null && userData.user.employee_type !== 4) {
-      getCompanyDocuments();
-    }
-    if (token === "null" && !userData.user) {
-      history.push("/login");
-    }
+
+    return () => {
+      isUnmount = true;
+    };
   }, [userData.user, userData, history]);
 
   return (
