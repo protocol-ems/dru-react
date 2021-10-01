@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 
 import { axiosInstance } from "src/axiosInstance";
 
-
 export default function ImageView({ currentDocument, editImages }) {
   const [images, setImages] = useState([]);
 
@@ -13,6 +12,8 @@ export default function ImageView({ currentDocument, editImages }) {
   const history = useHistory();
 
   useEffect(() => {
+    let unMount = false;
+
     const getDocumentImages = async () => {
       if (
         currentDocument.document_images &&
@@ -26,11 +27,17 @@ export default function ImageView({ currentDocument, editImages }) {
               imageUrls.push(res.data[i]);
             });
         }
-        setImages(imageUrls);
+        if (!unMount) {
+          setImages(imageUrls);
+        }
       }
     };
 
     getDocumentImages();
+
+    return () => {
+      unMount = true;
+    };
   }, [currentDocument]);
 
   const handleDeleteSetup = (id) => {

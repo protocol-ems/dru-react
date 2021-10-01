@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://127.0.0.1:8000/";
+const baseURL = "https://dru-alpha-qq2bd.ondigitalocean.app/";
 
 //this is the main axios request instance because it will set the token for us.
 

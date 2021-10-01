@@ -1,6 +1,5 @@
 import React from "react";
 
-
 export default function TablePreview({ tableData }) {
   return (
     <div className="pb-12">
@@ -35,7 +34,7 @@ export default function TablePreview({ tableData }) {
             <tbody>
               {tableData.rows.map((row, i) => {
                 return (
-                  <tr className="border even:bg-green-50" key={i} id={i}>
+                  <tr className="border even:bg-gray-50" key={i} id={i}>
                     {row.map((el) => {
                       return (
                         <td className="border " key={el.id}>

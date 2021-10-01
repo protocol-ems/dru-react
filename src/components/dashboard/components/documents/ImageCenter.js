@@ -22,7 +22,7 @@ export default function ImageCenter({ companyDocuments }) {
     uploadData.append("document", document);
     uploadData.append("company", userData.user.company);
 
-    fetch("http://127.0.0.1:8000/images/", {
+    fetch("https://dru-alpha-qq2bd.ondigitalocean.app/images/", {
       method: "POST",
       body: uploadData,
     }).then(() => {
