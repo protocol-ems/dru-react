@@ -38,7 +38,22 @@ export default function UserList({
 
     let companyId = userData.user.company;
 
-    if (list === "current") {
+    // patch request to make an employee a non-admin and then pushes them to company '1' which is the default non-company.
+    if (list === "current" && employee.actionId === "remove") {
+      await axiosInstance
+        .patch(`/users/${employee.employeeId}/`, {
+          employee_type: 1,
+          company: 1,
+        })
+        .then(() => {
+          axiosInstance.get(`/company-users/${companyId}/`).then((res) => {
+            setCompanyUsers(res.data);
+            setEmployee(initialEmployee);
+          });
+        });
+    }
+    // patch requests that changes employee type.
+    if (list === "current" && employee.actionId !== "remove") {
       await axiosInstance
         .patch(`/users/${employee.employeeId}/`, {
           employee_type: employee.actionId,
@@ -50,7 +65,7 @@ export default function UserList({
           });
         });
     }
-
+    // accepts or denys a user who is requesting access.
     if (list === "requested") {
       axiosInstance
         .patch(`/users/${employee.employeeId}/`, {
@@ -71,7 +86,7 @@ export default function UserList({
       case "current":
         return [
           {
-            action: "Change Employee Title",
+            action: "Action",
             value: "DEFAULT",
             disabled: "disabled",
           },
@@ -89,6 +104,7 @@ export default function UserList({
             value: 4,
           },
           { action: "Make Accounting", value: 6 },
+          { action: "Remove Access", value: "remove", warning: true },
         ];
       case "requested":
         return [
@@ -104,6 +120,7 @@ export default function UserList({
           {
             action: "Deny",
             value: 1,
+            warning: true,
           },
         ];
       default:
@@ -146,7 +163,7 @@ export default function UserList({
                     <td>
                       <select
                         defaultValue={"DEFAULT"}
-                        className="select select-bordered select-accent w-1/2"
+                        className="select select-bordered select-accent w-full"
                         onChange={handleChange}
                         id={user.id}
                       >
@@ -156,6 +173,9 @@ export default function UserList({
                               key={action.value}
                               value={action.value}
                               disabled={action.disabled}
+                              className={
+                                action.warning ? "text-red-600" : "bg-white"
+                              }
                             >
                               {action.action}
                             </option>
