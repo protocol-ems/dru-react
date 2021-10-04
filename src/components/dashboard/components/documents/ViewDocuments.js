@@ -36,8 +36,8 @@ export default function ViewDocuments({
           }}
           className={
             documentFocus === 1
-              ? "font-bold text-2xl uppercase text-black w-full text-center border-l-2 border-t-2 border-r-2 cursor-pointer shadow-inner p-4"
-              : " text-2xl uppercase text-gray-500 w-full text-center border-b-2 cursor-pointer p-4"
+              ? "font-bold md:text-2xl uppercase text-black w-full text-center border-l-2 border-t-2 border-r-2 cursor-pointer shadow-inner p-2 md:p-4"
+              : " md:text-2xl uppercase text-gray-500 w-full text-center border-b-2 cursor-pointer md:p-4 "
           }
         >
           Medicine
@@ -48,8 +48,8 @@ export default function ViewDocuments({
           }}
           className={
             documentFocus === 2
-              ? "font-bold text-2xl uppercase text-black w-full text-center border-l-2 border-t-2 border-r-2 cursor-pointer shadow-inner p-4"
-              : "text-2xl uppercase text-gray-500 w-full text-center border-b-2 cursor-pointer p-4"
+              ? "font-bold md:text-2xl uppercase text-black w-full text-center border-l-2 border-t-2 border-r-2 cursor-pointer shadow-inner p-2 md:p-4"
+              : "md:text-2xl uppercase text-gray-500 w-full text-center border-b-2 cursor-pointer md:p-4"
           }
         >
           Procedure
@@ -60,8 +60,8 @@ export default function ViewDocuments({
           }}
           className={
             documentFocus === 3
-              ? "font-bold text-2xl uppercase text-black w-full text-center border-l-2 border-t-2 border-r-2 cursor-pointer shadow-inner p-4"
-              : "text-2xl uppercase text-gray-500 w-full text-center border-b-2 cursor-pointer p-4"
+              ? "font-bold md:text-2xl uppercase text-black w-full text-center border-l-2 border-t-2 border-r-2 cursor-pointer shadow-inner p-2 md:p-4"
+              : "md:text-2xl uppercase text-gray-500 w-full text-center border-b-2 cursor-pointer md:p-4"
           }
         >
           Protocol

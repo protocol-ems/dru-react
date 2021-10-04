@@ -9,9 +9,9 @@ export default function BillingCenter({ companyInfo, subscriptionInfo }) {
       <div className="flex flex-col justify-between ">
         <div className="text-center flex flex-col justify-around mt-24 md:mt-4">
           {subscriptionInfo && (
-            <div className="flex flex-col md:flex-row mx-auto w-full justify-between md:justify-center   ">
-              <div className=" bg-accent md:w-1/3 border h-96 rounded-3xl shadow-lg text-white ">
-                <div className="w-full flex flex-col bg-gradient-to-br from-purple-600 to-purple-500 h-96 rounded-3xl m-4 border">
+            <div className="flex flex-col md:flex-row mx-auto w-full justify-between md:justify-center  min-h-96 ">
+              <div className=" bg-accent md:w-1/3 border min-h-96 rounded-3xl shadow-lg text-white ">
+                <div className="w-full flex flex-col bg-gradient-to-br from-purple-600 to-purple-500 h-full rounded-3xl m-4 border">
                   <div className=" text-left p-12 text-3xl font-bold ">
                     Current Subscription Price
                   </div>
@@ -36,8 +36,8 @@ export default function BillingCenter({ companyInfo, subscriptionInfo }) {
                   </div>
                 </div>
               </div>
-              <div className=" bg-accent md:w-1/3 border h-96 rounded-3xl shadow-lg text-white md:mx-12 mt-12 md:mt-0">
-                <div className="w-full flex flex-col bg-gradient-to-br from-purple-600 to-purple-500 h-96 rounded-3xl m-4 border">
+              <div className=" bg-accent md:w-1/3 border rounded-3xl shadow-lg text-white md:mx-12 mt-12 md:mt-0 min-h-96">
+                <div className="w-full flex flex-col bg-gradient-to-br from-purple-600 to-purple-500  rounded-3xl m-4 border h-full">
                   <div className=" text-left p-12 text-3xl font-bold ">
                     Employees
                   </div>
@@ -48,9 +48,12 @@ export default function BillingCenter({ companyInfo, subscriptionInfo }) {
                     Max User Count: {subscriptionInfo.user_max || 1}
                   </div>
                   <div className="flex justify-end p-12">
-                    <button className="btn glass text-gray-100 ">
-                      See employees
-                    </button>
+                    <Link
+                      to="/employee-list"
+                      className="btn glass text-gray-100 "
+                    >
+                      View Employees
+                    </Link>
                   </div>
                 </div>
               </div>
