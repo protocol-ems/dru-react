@@ -32,7 +32,7 @@ export default function WaitListPage() {
   return (
     <div>
       <div className="container mx-auto">
-        <h2 className="text-center text-4xl pb-4">Wait List</h2>
+        <h2 className="text-center text-4xl pb-4 font-extrabold">Wait List</h2>
         {userWaitList !== null ? (
           <div className=" h-screen overflow-auto scrollbar-thumb-rounded-xl scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-100">
             <UserList

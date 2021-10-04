@@ -49,7 +49,9 @@ export default function ImageCenterPage() {
   return (
     <div className="container mx-auto">
       <div className="bg-white  rounded-3xl">
-        <div className="text-center text-4xl pb-4">Image Center</div>
+        <div className="text-center text-4xl pb-4 font-extrabold">
+          Image Center
+        </div>
         {companyInfo && companyInfo.is_active && (
           <ImageCenter companyDocuments={companyDocuments} />
         )}

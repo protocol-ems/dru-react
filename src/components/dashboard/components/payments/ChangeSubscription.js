@@ -43,7 +43,10 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
   return (
     <div className="w-full">
       {!changeSubscription && (
-        <button className="btn" onClick={() => setChangeSubscription(true)}>
+        <button
+          className="btn glass"
+          onClick={() => setChangeSubscription(true)}
+        >
           Change Subscription?
         </button>
       )}
@@ -54,7 +57,7 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
           </label>
           <select
             defaultValue={"DEFAULT"}
-            className="select select-bordered select-accent w-full"
+            className="select select-bordered select-accent w-full text-black"
             onChange={(e) => handleSubscriptionChange(e)}
           >
             <option value="DEFAULT" disabled="disabled">
@@ -69,14 +72,16 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
                 );
               })}
           </select>
-          <button
-            className="btn"
-            onClick={(e) => {
-              handleSubscriptionSubmit(e);
-            }}
-          >
-            Change Subscription
-          </button>
+          <div className="flex justify-end mt-4">
+            <button
+              className="btn glass"
+              onClick={(e) => {
+                handleSubscriptionSubmit(e);
+              }}
+            >
+              Change Subscription
+            </button>
+          </div>
         </form>
       )}
     </div>

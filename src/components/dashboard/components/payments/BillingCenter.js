@@ -6,32 +6,55 @@ import ChangeSubscription from "src/components/dashboard/components/payments/Cha
 export default function BillingCenter({ companyInfo, subscriptionInfo }) {
   return (
     <div>
-      <div className="flex flex-col  justify-around ">
-        <div className="text-center flex flex-col justify-around  p-4">
+      <div className="flex flex-col justify-between ">
+        <div className="text-center flex flex-col justify-around mt-24 md:mt-4">
           {subscriptionInfo && (
-            <div>
-              <div>
-                Current Subscription Price: ${subscriptionInfo.price} per month
+            <div className="flex flex-col md:flex-row mx-auto w-full justify-between md:justify-center   ">
+              <div className=" bg-accent md:w-1/3 border h-96 rounded-3xl shadow-lg text-white ">
+                <div className="w-full flex flex-col bg-gradient-to-br from-purple-600 to-purple-500 h-96 rounded-3xl m-4 border">
+                  <div className=" text-left p-12 text-3xl font-bold ">
+                    Current Subscription Price
+                  </div>
+                  <div className="text-left px-12 text-2xl text-gray-200">
+                    ${subscriptionInfo.price || 0} per month
+                  </div>
+                  <div className="flex justify-end p-12">
+                    {subscriptionInfo.price ? (
+                      <ChangeSubscription
+                        companyInfo={companyInfo}
+                        subscriptionInfo={subscriptionInfo}
+                      />
+                    ) : (
+                      <Link
+                        to="/create-subscription"
+                        className="btn glass  text-gray-100 "
+                        onClick={() => window.scrollTo(0, 0)}
+                      >
+                        Start A Subscription
+                      </Link>
+                    )}
+                  </div>
+                </div>
               </div>
-              <div>Current Max User Count: {subscriptionInfo.user_max}</div>
-              <div>Current User Count:{companyInfo.users.length}</div>
+              <div className=" bg-accent md:w-1/3 border h-96 rounded-3xl shadow-lg text-white md:mx-12 mt-12 md:mt-0">
+                <div className="w-full flex flex-col bg-gradient-to-br from-purple-600 to-purple-500 h-96 rounded-3xl m-4 border">
+                  <div className=" text-left p-12 text-3xl font-bold ">
+                    Employees
+                  </div>
+                  <div className="text-left px-12 py-4 text-2xl text-gray-200">
+                    Current User Count: {companyInfo.users.length}
+                  </div>
+                  <div className="text-left px-12 text-2xl text-gray-200">
+                    Max User Count: {subscriptionInfo.user_max || 1}
+                  </div>
+                  <div className="flex justify-end p-12">
+                    <button className="btn glass text-gray-100 ">
+                      See employees
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-          )}
-        </div>
-        <div className="mx-auto flex flex-col md:flex-row justify-around ">
-          {companyInfo && companyInfo.subscription === null ? (
-            <Link
-              to="/create-subscription"
-              className="btn btn-accent my-4"
-              onClick={() => window.scrollTo(0, 0)}
-            >
-              Start A Subscription
-            </Link>
-          ) : (
-            <ChangeSubscription
-              companyInfo={companyInfo}
-              subscriptionInfo={subscriptionInfo}
-            />
           )}
         </div>
       </div>

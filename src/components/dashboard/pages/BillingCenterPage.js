@@ -42,15 +42,22 @@ export default function BillingCenterPage() {
           setLoading(false);
         });
     };
-    if (companyInfo) {
+    if (companyInfo && companyInfo.is_active) {
       getSubscriptionDetails();
+    }
+    if (companyInfo && !companyInfo.is_active) {
+      setLoading(false);
+
+      setSubscriptionInfo({});
     }
   }, [companyInfo]);
 
   return (
     <div className="container mx-auto">
       <div className=" mb-4 px-4">
-        <div className="text-center text-4xl pb-4">Billing Center</div>
+        <div className="text-center text-4xl pb-4 font-extrabold">
+          Billing Center
+        </div>
         {loading && <div className="mx-auto loader">Loading</div>}
 
         {companyInfo && subscriptionInfo && (
