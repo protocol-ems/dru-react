@@ -51,12 +51,12 @@ export default function Navbar() {
                   <li className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400">
                     <Logout />
                   </li>
-                  <Link
+                  {/* <Link
                     to="/dashboard"
                     className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400 "
                   >
                     Dashboard
-                  </Link>
+                  </Link> */}
                 </div>
               ) : (
                 <div>

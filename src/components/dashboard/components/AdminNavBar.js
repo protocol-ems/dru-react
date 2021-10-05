@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function AdminNavBar() {
   return (
     <div className=" p-4 mt-12 container mx-auto rounded from-accent via-teal-500 to-purple-600 bg-gradient-to-r w-full text-white md:text-2xl my-12">
-      <ul className="flex flex-col justify-around sm:flex-row">
+      <ul className="flex justify-around sm:flex-row flex-wrap">
         <Link to="/dashboard" className="p-2 cursor-pointer hover:underline">
           Dashboard
         </Link>

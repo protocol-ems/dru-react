@@ -113,7 +113,7 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
                     handleCancelSubscription(e);
                   }}
                 >
-                  Confirm: cancel the subscription
+                  Cancel Subscription
                 </button>
               </div>
             )}

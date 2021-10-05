@@ -10,7 +10,7 @@ export default function BillingCenter({ companyInfo, subscriptionInfo }) {
         <div className="text-center flex flex-col justify-around mt-24 md:mt-4">
           {subscriptionInfo && (
             <div className="flex flex-col md:flex-row mx-auto w-full justify-between md:justify-center  min-h-96 ">
-              <div className=" bg-accent md:w-1/3 border min-h-96 rounded-3xl shadow-lg text-white ">
+              <div className=" bg-accent md:w-1/3 border border-purple-400 min-h-96 rounded-3xl shadow-2xl text-white mx-4 sm:mx-0">
                 <div className="w-full flex flex-col bg-gradient-to-br from-purple-600 to-purple-500 h-full rounded-3xl m-4 border">
                   <div className=" text-left p-12 text-3xl font-bold ">
                     Current Subscription Price
@@ -36,7 +36,7 @@ export default function BillingCenter({ companyInfo, subscriptionInfo }) {
                   </div>
                 </div>
               </div>
-              <div className=" bg-accent md:w-1/3 border rounded-3xl shadow-lg text-white md:mx-12 mt-12 md:mt-0 min-h-96">
+              <div className=" bg-accent md:w-1/3 border border-purple-400 rounded-3xl shadow-2xl text-white md:mx-12 mt-12 md:mt-0 min-h-96 mx-4 sm:mx-0">
                 <div className="w-full flex flex-col bg-gradient-to-br from-purple-600 to-purple-500  rounded-3xl m-4 border h-full">
                   <div className=" text-left p-12 text-3xl font-bold ">
                     Employees

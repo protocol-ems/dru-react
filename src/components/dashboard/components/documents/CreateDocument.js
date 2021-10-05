@@ -9,7 +9,6 @@ import UserContext from "src/components/context/UserContext";
 import { axiosInstance } from "src/axiosInstance";
 import Error from "src/components/misc/Error";
 
-
 export default function CreateDocument({
   labels,
   documentType,

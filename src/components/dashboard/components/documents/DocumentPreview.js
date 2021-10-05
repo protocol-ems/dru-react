@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 export default function DocumentPreview({
   documentDetails,
   setDocumentDetails,
@@ -119,11 +118,11 @@ export default function DocumentPreview({
               Please enter a name
             </h2>
           )}
-          <ul className="flex items-start gap-8 flex-wrap">
+          <ul className="flex flex-col md:flex-row items-start gap-8 md:flex-wrap w-full">
             {labels
               ? labels.map((label) => {
                   return (
-                    <li className="w-2/5" key={label.id}>
+                    <li className="w-full md:w-2/5" key={label.id}>
                       <div className="text-lg font-medium leading-6 text-accent">
                         {label.document_detail_name}
                       </div>
