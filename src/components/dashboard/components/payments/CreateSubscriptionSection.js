@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useHistory } from "react-router-dom";
 
 import UserContext from "src/components/context/UserContext";
 import ApiService, { axiosInstance } from "src/axiosInstance";
@@ -8,6 +9,7 @@ import stripeLogo from "src/images/stripe.svg";
 
 export default function CreateSubscriptionSection() {
   const { userData } = useContext(UserContext);
+  const history = useHistory();
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -57,8 +59,8 @@ export default function CreateSubscriptionSection() {
       },
       company: userData.user.company,
     })
-      .then((response) => {
-        console.log(response.data);
+      .then(() => {
+        history.push("/dashboard");
       })
       .catch((error) => {
         console.log(error);

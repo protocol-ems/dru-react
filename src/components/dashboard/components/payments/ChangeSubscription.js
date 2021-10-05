@@ -9,6 +9,8 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
 
   const [newSubscription, setNewSubscription] = useState();
 
+  const [cancel, setCancel] = useState(false);
+
   useEffect(() => {
     const getSubscriptionTiers = async () => {
       await axiosInstance.get("/payments/subscriptions/").then((res) => {
@@ -39,6 +41,14 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
         company: companyInfo.id,
       });
     }
+  };
+
+  const handleCancelSubscription = (e) => {
+    e.preventDefault();
+    ApiService.cancelSubscription({
+      stripe_sub_id: companyInfo.stripe_sub_id,
+      company: companyInfo.id,
+    });
   };
   return (
     <div className="w-full">
@@ -72,15 +82,41 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
                 );
               })}
           </select>
-          <div className="flex justify-end mt-4">
+          <div className="flex flex-col justify-between mt-4">
             <button
-              className="btn glass"
+              className="btn glass m-2"
               onClick={(e) => {
                 handleSubscriptionSubmit(e);
               }}
             >
               Change Subscription
             </button>
+            {!cancel && (
+              <button
+                className="btn btn-outline btn-error m-2"
+                onClick={() => setCancel(true)}
+              >
+                Cancel Subscription
+              </button>
+            )}
+            {cancel && (
+              <div className="w-full">
+                <button
+                  className="btn w-full m-2 btn-accent"
+                  onClick={() => setCancel(false)}
+                >
+                  Do not cancel
+                </button>
+                <button
+                  className="btn w-full m-2 btn-error"
+                  onClick={(e) => {
+                    handleCancelSubscription(e);
+                  }}
+                >
+                  Confirm: cancel the subscription
+                </button>
+              </div>
+            )}
           </div>
         </form>
       )}

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const baseURL = "https://dru-alpha-qq2bd.ondigitalocean.app/";
+const testURL = "httP://127.0.0.1:8000/";
 
 //this is the main axios request instance because it will set the token for us.
 
@@ -34,6 +35,18 @@ export const axiosInstanceWithImage = axios.create({
   },
 });
 
+export const axiosTestInstance = axios.create({
+  baseURL: testURL,
+  timeout: 5000,
+  headers: {
+    Authorization: localStorage.getItem("Authorization")
+      ? "Token " + localStorage.getItem("Authorization")
+      : null,
+    "Content-Type": "application/json",
+    accept: "application/json",
+  },
+});
+
 // this is the style I saw for how to send stripe info. I really like this class approach.
 // it is bad probably to have two different styles, but for now it is working.
 
@@ -49,5 +62,8 @@ export default class ApiService {
   }
   static changeSubscription(data = {}) {
     return axiosInstance.post("/payments/change-subscription/", data);
+  }
+  static cancelSubscription(data = {}) {
+    return axiosInstance.post("/payments/cancel-subscription/", data);
   }
 }
