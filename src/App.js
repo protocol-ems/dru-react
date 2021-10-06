@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
 import UserContext from "src/components/context/UserContext";
 import PrivateRoute from "src/components/misc/PrivateRoute";
 import { axiosInstance } from "src/axiosInstance";
@@ -32,6 +35,10 @@ function App() {
   const [userData, setUserData] = useState({
     user: null,
   });
+
+  const stripePromise = loadStripe(
+    "pk_test_51JWjDxJEjyoAE1rtYIa5QzZgcsRyvuJ6lCkSSpHapygbSvFMHKkoEOUaEoXqdme01VDg2t2b3w2rPpN0QTWvTUtN00SPwLlYgz"
+  );
 
   // generic error msg component. Not the greatest but it works.
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -79,72 +86,69 @@ function App() {
           />
         )}
         {userData.user && userData.user.employee_type === 4 && <AdminNavBar />}
+        <Elements stripe={stripePromise}>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute
+              exact
+              path="/create-company"
+              component={CreateCompany}
+            />
+            <PrivateRoute exact path="/join-company" component={JoinCompany} />
+            <PrivateRoute
+              exact
+              path="/create-document-header"
+              component={CreateDocumentHeader}
+            />
+            <PrivateRoute
+              exact
+              path="/create-medicine"
+              component={CreateMedicine}
+            />
 
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute
-            exact
-            path="/create-company"
-            component={CreateCompany}
-          />
-          <PrivateRoute exact path="/join-company" component={JoinCompany} />
-          <PrivateRoute
-            exact
-            path="/create-document-header"
-            component={CreateDocumentHeader}
-          />
-          <PrivateRoute
-            exact
-            path="/create-medicine"
-            component={CreateMedicine}
-          />
+            <PrivateRoute
+              exact
+              path="/create-procedure"
+              component={CreateProcedure}
+            />
+            <PrivateRoute
+              exact
+              path="/create-protocol"
+              component={CreateProtocol}
+            />
+            <PrivateRoute exact path="/create-new" component={CreateNewPage} />
+            <PrivateRoute
+              exact
+              path="/employee-list"
+              component={EmployeeListPage}
+            />
+            <PrivateRoute exact path="/wait-list" component={WaitListPage} />
+            <PrivateRoute
+              exact
+              path="/image-center"
+              component={ImageCenterPage}
+            />
+            <PrivateRoute
+              exact
+              path="/billing-center"
+              component={BillingCenterPage}
+            />
+            <PrivateRoute
+              exact
+              to="/create-subscription"
+              component={SubscriptionWrapper}
+            />
 
-          <PrivateRoute
-            exact
-            path="/create-procedure"
-            component={CreateProcedure}
-          />
-          <PrivateRoute
-            exact
-            path="/create-protocol"
-            component={CreateProtocol}
-          />
-          <PrivateRoute exact path="/create-new" component={CreateNewPage} />
-          <PrivateRoute
-            exact
-            path="/employee-list"
-            component={EmployeeListPage}
-          />
-          <PrivateRoute exact path="/wait-list" component={WaitListPage} />
-          <PrivateRoute
-            exact
-            path="/image-center"
-            component={ImageCenterPage}
-          />
-          <PrivateRoute
-            exact
-            path="/billing-center"
-            component={BillingCenterPage}
-          />
-          <PrivateRoute
-            exact
-            to="/create-subscription"
-            component={SubscriptionWrapper}
-          />
-          <PrivateRoute
-            exact
-            to="/create-subscription"
-            component={SubscriptionWrapper}
-          />
-          <PrivateRoute
-            exact
-            to="/cancel-subscription"
-            component={CancelSubscription}
-          />
-        </Switch>
+            <PrivateRoute
+              exact
+              to="/cancel-subscription"
+              component={CancelSubscription}
+            />
+          </Switch>
+        </Elements>
       </UserContext.Provider>
     </div>
   );

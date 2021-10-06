@@ -61,9 +61,15 @@ export default class ApiService {
     return axiosInstance.post("payments/subscription-info/", data);
   }
   static changeSubscription(data = {}) {
-    return axiosInstance.post("/payments/change-subscription/", data);
+    return axiosInstance.post("payments/change-subscription/", data);
   }
   static cancelSubscription(data = {}) {
-    return axiosInstance.post("/payments/cancel-subscription/", data);
+    return axiosInstance.post("payments/cancel-subscription/", data);
+  }
+  static getCardInformation(data = {}) {
+    return axiosInstance.post("payments/card-information/", data);
+  }
+  static changeBillingDetails(data = {}) {
+    return axiosInstance.post("payments/change-billing-information/", data);
   }
 }
