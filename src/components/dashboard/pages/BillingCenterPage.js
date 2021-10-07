@@ -34,12 +34,16 @@ export default function BillingCenterPage() {
   }, [userData.user.company]);
 
   useEffect(() => {
+    let isUnmount = false;
+
     const getSubscriptionDetails = async () => {
       await axiosInstance
         .get(`payments/subscription-detail/${companyInfo.subscription}/`)
         .then((res) => {
-          setSubscriptionInfo(res.data);
-          setLoading(false);
+          if (!isUnmount) {
+            setSubscriptionInfo(res.data);
+            setLoading(false);
+          }
         });
     };
     if (companyInfo && companyInfo.is_active) {
@@ -47,9 +51,12 @@ export default function BillingCenterPage() {
     }
     if (companyInfo && !companyInfo.is_active) {
       setLoading(false);
-
       setSubscriptionInfo({});
     }
+
+    return () => {
+      isUnmount = true;
+    };
   }, [companyInfo]);
 
   return (
