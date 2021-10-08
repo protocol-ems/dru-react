@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-
 export default function CostCalculator() {
   const [users, setUsers] = useState(5);
   const [cost, setCost] = useState(50);
 
   useEffect(() => {
     const handleCost = (e) => {
-      if (users < 5) {
+      if (users < 26) {
         setCost(50);
       } else {
-        setCost(50 + users * 2 - 10);
+        setCost(50 + Math.ceil((users - 25) / 25) * 18.75);
       }
     };
     handleCost();
@@ -32,7 +31,7 @@ export default function CostCalculator() {
         ></input>
 
         <strong className="flex items-end mx-auto text-2xl font-black leading-none text-black py-4">
-          {users > 499 ? (
+          {users > 400 ? (
             <div>Contact us for special pricing</div>
           ) : (
             <span> ${cost} per month</span>

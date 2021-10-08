@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 
 import CostCalculator from "src/components/dashboard/components/CostCalculator";
+import HomePageSteps from "src/components/dashboard/components/HomePageSteps";
 import MoreInfoSection from "src/components/dashboard/pages/MoreInfoSection";
 
 import notes from "src/images/notes.svg";
@@ -66,10 +67,11 @@ export default function HomePage() {
               </strong>
               <ul className="list-disc">
                 <li className="my-4 text-sm  px-2 text-gray-700">
-                  The monthly cost is $50 + $2 per user per month.
+                  The monthly cost is $50 + $18.75 per 25 users. ($0.75 per
+                  additional user)
                 </li>
                 <li className="my-4 text-sm px-2  text-gray-700">
-                  Your first 5 users are free
+                  Your first 25 users are free
                 </li>
                 <li className="my-4 text-sm px-2  text-gray-700">
                   Phone Support & Email Support
@@ -85,6 +87,9 @@ export default function HomePage() {
       </div>
       <div ref={learnMore}>
         <MoreInfoSection />
+      </div>
+      <div>
+        <HomePageSteps />
       </div>
     </div>
   );
