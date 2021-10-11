@@ -139,31 +139,51 @@ export default function UserList({
 
   return (
     <div>
-      <div>
-        <table className="table w-full">
+      <div className="overflow-auto scrollbar-thumb-rounded-xl scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+        <table className="border-collapse w-full table-fixed break-word mt-12">
           <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Title</th>
-              <th>Action</th>
-              <th>confirm</th>
+            <tr className="h-12">
+              <th className=" p-1 sm:p-2 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300  lg:table-cell w-52">
+                First Name
+              </th>
+              <th className=" p-1 sm:p-2 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300  lg:table-cell w-52">
+                Last Name
+              </th>
+              <th className=" p-1 sm:p-2 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300  lg:table-cell w-52">
+                Email
+              </th>
+              <th className=" p-1 sm:p-2 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300  lg:table-cell w-52">
+                Title
+              </th>
+              <th className=" p-1 sm:p-2 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300  lg:table-cell w-52">
+                Action
+              </th>
+              <th className=" p-1 sm:p-2 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300  lg:table-cell w-52">
+                confirm
+              </th>
             </tr>
           </thead>
           <tbody>
             {users !== null ? (
               users.map((user) => {
                 return (
-                  <tr key={user.id}>
-                    <td>{user.first_name}</td>
-                    <td>{user.last_name}</td>
-                    <td>{user.username}</td>
-                    <td>{employeeTitle(user.employee_type)}</td>
-                    <td>
+                  <tr className="border even:bg-gray-50" key={user.id}>
+                    <td className="border min-h-12 min-w-12 break-all p-1 sm:p-2">
+                      {user.first_name}
+                    </td>
+                    <td className="border min-h-12 min-w-12 break-all p-1 sm:p-2">
+                      {user.last_name}
+                    </td>
+                    <td className="border min-h-12 min-w-12 break-all p-1 sm:p-2">
+                      {user.username}
+                    </td>
+                    <td className="border min-h-12 min-w-12 break-all p-1 sm:p-2">
+                      {employeeTitle(user.employee_type)}
+                    </td>
+                    <td className="border">
                       <select
                         defaultValue={"DEFAULT"}
-                        className="select select-bordered select-accent w-full"
+                        className="select w-full"
                         onChange={handleChange}
                         id={user.id}
                       >
@@ -183,11 +203,11 @@ export default function UserList({
                         })}
                       </select>
                     </td>
-                    <td>
+                    <td className="flex justify-center">
                       {parseInt(employee.employeeId) === user.id ? (
                         <button
                           id={user.id}
-                          className=" btn"
+                          className="btn"
                           onClick={(e) => handleSubmit(e, list)}
                         >
                           submit

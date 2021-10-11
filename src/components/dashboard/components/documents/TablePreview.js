@@ -37,7 +37,7 @@ export default function TablePreview({ tableData }) {
                   <tr className="border even:bg-gray-50" key={i} id={i}>
                     {row.map((el) => {
                       return (
-                        <td className="border " key={el.id}>
+                        <td className="border" key={el.id}>
                           <p className="min-h-12 min-w-12 break-all p-1 sm:p-2">
                             {el.value}
                           </p>
