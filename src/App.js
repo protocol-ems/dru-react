@@ -7,8 +7,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import UserContext from "src/components/context/UserContext";
 import PrivateRoute from "src/components/misc/PrivateRoute";
 import { axiosInstance } from "src/axiosInstance";
-import SubscriptionWrapper from "src/components/dashboard/components/payments/SubscriptionWrapper";
-import CancelSubscription from "src/components/dashboard/components/payments/CancelSubscription";
 import Navbar from "src/components/navbar/Navbar";
 import Register from "src/components/userauth/Register";
 import Login from "src/components/userauth/Login";
@@ -27,6 +25,9 @@ import WaitListPage from "src/components/dashboard/pages/WaitListPage";
 import ImageCenterPage from "src/components/dashboard/pages/ImageCenterPage";
 import BillingCenterPage from "src/components/dashboard/pages/BillingCenterPage";
 import AdminNavBar from "src/components/dashboard/components/AdminNavBar";
+import CreateSubscriptionSection from "src/components/dashboard/components/payments/CreateSubscriptionSection";
+
+import Footer from "src/components/footer/Footer";
 
 function App() {
   //this is what we use to set our one useContext
@@ -67,7 +68,6 @@ function App() {
           });
       }
     };
-
     getUserInfo();
   }, [setUserData]);
 
@@ -139,16 +139,11 @@ function App() {
             <PrivateRoute
               exact
               to="/create-subscription"
-              component={SubscriptionWrapper}
-            />
-
-            <PrivateRoute
-              exact
-              to="/cancel-subscription"
-              component={CancelSubscription}
+              component={CreateSubscriptionSection}
             />
           </Switch>
         </Elements>
+        {!userData.user && <Footer />}
       </UserContext.Provider>
     </div>
   );

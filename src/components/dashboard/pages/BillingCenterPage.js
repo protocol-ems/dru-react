@@ -60,7 +60,7 @@ export default function BillingCenterPage() {
   }, [companyInfo]);
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto min-h-screen">
       <div className=" mb-4 px-4">
         <div className="text-center text-4xl pb-4 font-extrabold">
           Billing Center

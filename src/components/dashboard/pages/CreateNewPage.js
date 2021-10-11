@@ -27,6 +27,7 @@ export default function CreateNewPage() {
               <Link
                 to="/create-document-header"
                 className=" btn btn-accent h-12 w-24 mt-4 mx-4"
+                onClick={() => window.scrollTo(0, 0)}
               >
                 Create
               </Link>
@@ -49,6 +50,7 @@ export default function CreateNewPage() {
               <Link
                 to="/create-medicine"
                 className=" btn btn-accent h-12 w-24 mt-4 mx-4"
+                onClick={() => window.scrollTo(0, 0)}
               >
                 Create
               </Link>
@@ -73,6 +75,7 @@ export default function CreateNewPage() {
               <Link
                 to="/create-procedure"
                 className=" btn btn-accent h-12 w-24 mt-4 mx-4"
+                onClick={() => window.scrollTo(0, 0)}
               >
                 Create
               </Link>
@@ -95,6 +98,7 @@ export default function CreateNewPage() {
               <Link
                 to="/create-protocol"
                 className=" btn btn-accent h-12 w-24 mt-4 mx-4 shadow-md"
+                onClick={() => window.scrollTo(0, 0)}
               >
                 Create
               </Link>

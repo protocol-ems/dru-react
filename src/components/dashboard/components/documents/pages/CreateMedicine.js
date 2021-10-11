@@ -4,7 +4,6 @@ import CreateDocument from "src/components/dashboard/components/documents/Create
 import UserContext from "src/components/context/UserContext";
 import { axiosInstance } from "src/axiosInstance";
 
-
 export default function CreateMedicine({
   details,
   tableDetails,
@@ -38,7 +37,7 @@ export default function CreateMedicine({
   }, [userData.user]);
 
   return (
-    <div>
+    <div className="min-h-screen">
       {labels.length > 0 ? (
         <CreateDocument
           labels={labels}
