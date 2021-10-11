@@ -61,7 +61,7 @@ export default function JoinCompany() {
   };
 
   return (
-    <div className="container mx-auto pt-12 items-center text-center">
+    <div className="container mx-auto pt-12 items-center text-center min-h-screen">
       <h2 className="text-2xl pb-12 ">Request access to an Agency.</h2>
 
       <form

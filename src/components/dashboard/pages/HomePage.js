@@ -21,7 +21,7 @@ export default function HomePage() {
     window.scrollTo(0, 0);
   };
   return (
-    <div>
+    <div className="min-h-screen">
       <div className=" flex flex-col md:flex-row mt-24 container mx-auto">
         <div className="flex flex-col md:w-1/2">
           <h1 className="text-4xl font-bold py-4 text-black">OurProtocol</h1>

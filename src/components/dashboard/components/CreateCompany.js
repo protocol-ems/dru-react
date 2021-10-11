@@ -55,98 +55,100 @@ export default function CreateCompany() {
   };
 
   return (
-    <div className="container mx-auto mt-24 w-1/2 border px-10 py-12 rounded-xl drop-shadow-lg bg-gray-50">
-      {userData.user !== null ? (
-        <form action="post" autoComplete="off">
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Company Name</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Company Name"
-              className="input input-bordered"
-              name="name"
-              id="name"
-              onChange={handleChange}
-            ></input>
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Best Contact Phone Number</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Phone Number"
-              className="input input-bordered"
-              name="phone"
-              id="phone"
-              onChange={handleChange}
-            ></input>
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Street Address</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Street Address"
-              className="input input-bordered"
-              name="street_address"
-              id="street_address"
-              onChange={handleChange}
-            ></input>
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Zipcode</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Zipcode"
-              className="input input-bordered"
-              name="zipcode"
-              id="zipcode"
-              onChange={handleChange}
-            ></input>
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">State</span>
-            </label>
-            <input
-              type="text"
-              placeholder="State"
-              className="input input-bordered"
-              name="state"
-              id="state"
-              onChange={handleChange}
-            ></input>
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">City</span>
-            </label>
-            <input
-              type="text"
-              placeholder="City"
-              className="input input-bordered"
-              name="city"
-              id="city"
-              onChange={handleChange}
-            ></input>
-          </div>
-          <button
-            type="submit"
-            className="btn btn-accent w-full mt-12"
-            onClick={handleSubmit}
-          >
-            Create
-          </button>
-        </form>
-      ) : (
-        "Please login to create a company"
-      )}
+    <div className="min-h-screen">
+      <div className="container mx-auto mt-24 w-1/2 border px-10 py-12 rounded-xl drop-shadow-lg bg-gray-50">
+        {userData.user !== null ? (
+          <form action="post" autoComplete="off">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Company Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Company Name"
+                className="input input-bordered"
+                name="name"
+                id="name"
+                onChange={handleChange}
+              ></input>
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Best Contact Phone Number</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Phone Number"
+                className="input input-bordered"
+                name="phone"
+                id="phone"
+                onChange={handleChange}
+              ></input>
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Street Address</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Street Address"
+                className="input input-bordered"
+                name="street_address"
+                id="street_address"
+                onChange={handleChange}
+              ></input>
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Zipcode</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Zipcode"
+                className="input input-bordered"
+                name="zipcode"
+                id="zipcode"
+                onChange={handleChange}
+              ></input>
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">State</span>
+              </label>
+              <input
+                type="text"
+                placeholder="State"
+                className="input input-bordered"
+                name="state"
+                id="state"
+                onChange={handleChange}
+              ></input>
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">City</span>
+              </label>
+              <input
+                type="text"
+                placeholder="City"
+                className="input input-bordered"
+                name="city"
+                id="city"
+                onChange={handleChange}
+              ></input>
+            </div>
+            <button
+              type="submit"
+              className="btn btn-accent w-full mt-12"
+              onClick={handleSubmit}
+            >
+              Create
+            </button>
+          </form>
+        ) : (
+          "Please login to create a company"
+        )}
+      </div>
     </div>
   );
 }

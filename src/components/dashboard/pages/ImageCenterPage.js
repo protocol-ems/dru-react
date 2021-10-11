@@ -47,7 +47,7 @@ export default function ImageCenterPage() {
   }, [userData]);
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto min-h-screen">
       <div className="bg-white  rounded-3xl">
         <div className="text-center text-4xl pb-4 font-extrabold">
           Image Center

@@ -77,7 +77,7 @@ export default function CreateSubscriptionSection() {
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen">
       <div>
         Please choose your subscription type and fill out the details below
       </div>

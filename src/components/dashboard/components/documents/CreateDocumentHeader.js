@@ -5,7 +5,6 @@ import UserContext from "src/components/context/UserContext";
 import LabelList from "src/components/dashboard/components/documents/LabelList";
 import Error from "src/components/misc/Error";
 
-
 export default function CreateDocumentHeader() {
   const { userData } = useContext(UserContext);
 
@@ -74,7 +73,7 @@ export default function CreateDocumentHeader() {
   };
 
   return (
-    <div className="container mx-auto my-24">
+    <div className="container mx-auto my-24 min-h-screen">
       <div className="text-3xl pb-12">
         Create a label for your Medicine, Procedure, or Protocol
       </div>

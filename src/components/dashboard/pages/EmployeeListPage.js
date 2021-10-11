@@ -30,7 +30,7 @@ export default function EmployeeListPage() {
   }, [userData.user.company]);
 
   return (
-    <div>
+    <div className="min-h-screen">
       <div className="container mx-auto">
         <h2 className="text-center text-4xl pb-4 font-extrabold">
           Current Employees
