@@ -12,6 +12,7 @@ export default function Footer() {
           <Link
             to="/contact-us"
             className="cursor-pointer hover:text-gray-300 hover:underline"
+            onClick={() => window.scrollTo(0, 0)}
           >
             Contact
           </Link>
@@ -19,6 +20,7 @@ export default function Footer() {
           <Link
             to="about-us"
             className="cursor-pointer hover:text-gray-300 hover:underline"
+            onClick={() => window.scrollTo(0, 0)}
           >
             About Us
           </Link>
