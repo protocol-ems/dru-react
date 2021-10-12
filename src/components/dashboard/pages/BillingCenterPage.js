@@ -2,8 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import { axiosInstance } from "src/axiosInstance";
 import UserContext from "src/components/context/UserContext";
 import BillingCenter from "src/components/dashboard/components/payments/BillingCenter";
+import { withRouter } from "react-router-dom";
 
-export default function BillingCenterPage() {
+function BillingCenterPage() {
   const [companyInfo, setCompanyInfo] = useState();
   const [subscriptionInfo, setSubscriptionInfo] = useState();
   const [loading, setLoading] = useState(true);
@@ -77,3 +78,4 @@ export default function BillingCenterPage() {
     </div>
   );
 }
+export default withRouter(BillingCenterPage);

@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 
 import UserContext from "src/components/context/UserContext";
 import ApiService, { axiosInstance } from "src/axiosInstance";
 
 import stripeLogo from "src/images/stripe.svg";
 
-export default function CreateSubscriptionSection() {
+function CreateSubscriptionSection() {
   const { userData } = useContext(UserContext);
   const history = useHistory();
   const [error, setError] = useState(null);
@@ -256,3 +256,5 @@ export default function CreateSubscriptionSection() {
     </div>
   );
 }
+
+export default withRouter(CreateSubscriptionSection);

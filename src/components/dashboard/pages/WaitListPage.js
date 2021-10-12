@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { axiosInstance } from "src/axiosInstance";
-
+import { withRouter } from "react-router-dom";
 import UserContext from "src/components/context/UserContext";
 import UserList from "src/components/dashboard/components/UserList";
 
-export default function WaitListPage() {
+function WaitListPage() {
   const { userData } = useContext(UserContext);
 
   const [userWaitList, setUserWaitList] = useState(null);
@@ -48,3 +48,5 @@ export default function WaitListPage() {
     </div>
   );
 }
+
+export default withRouter(WaitListPage);

@@ -36,7 +36,7 @@ function App() {
   const [userData, setUserData] = useState({
     user: null,
   });
-
+  const [isAuth, setIsAuth] = useState(true);
   const stripePromise = loadStripe(
     "pk_test_51JWjDxJEjyoAE1rtYIa5QzZgcsRyvuJ6lCkSSpHapygbSvFMHKkoEOUaEoXqdme01VDg2t2b3w2rPpN0QTWvTUtN00SPwLlYgz"
   );
@@ -51,9 +51,10 @@ function App() {
     const getUserInfo = async () => {
       let token = localStorage.getItem("Authorization");
 
-      if (token === null || undefined) {
+      if (token === null || token === undefined || token === "") {
         localStorage.setItem("Authorization", "");
         token = "";
+        setIsAuth(false);
       }
       if (token !== "null" || token !== "") {
         axiosInstance
@@ -62,14 +63,21 @@ function App() {
             setUserData({
               user: res.data[0],
             });
+            if (res.data.length === 0) {
+              setIsAuth(false);
+            } else {
+              setIsAuth(true);
+            }
           })
           .catch(() => {
             localStorage.setItem("Authorization", "");
+            console.log(isAuth);
+            setIsAuth(false);
           });
       }
     };
     getUserInfo();
-  }, [setUserData]);
+  }, [setUserData, isAuth]);
 
   // The top of the app is wrapped in the user context.
   // the top of the app has the nav bar than a switch statement for differnt routes.
@@ -77,7 +85,7 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={{ userData, setUserData }}>
-        <Navbar />
+        <Navbar setIsAuth={setIsAuth} />
 
         {errorMessage && (
           <Error
@@ -90,56 +98,77 @@ function App() {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/login">
+              <Login setIsAuth={setIsAuth} />
+            </Route>
             <Route exact path="/dashboard" component={Dashboard} />
             <PrivateRoute
               exact
               path="/create-company"
               component={CreateCompany}
+              isAuth={isAuth}
             />
             <PrivateRoute exact path="/join-company" component={JoinCompany} />
             <PrivateRoute
               exact
               path="/create-document-header"
               component={CreateDocumentHeader}
+              isAuth={isAuth}
             />
             <PrivateRoute
               exact
               path="/create-medicine"
               component={CreateMedicine}
+              isAuth={isAuth}
             />
 
             <PrivateRoute
               exact
               path="/create-procedure"
               component={CreateProcedure}
+              isAuth={isAuth}
             />
             <PrivateRoute
               exact
               path="/create-protocol"
               component={CreateProtocol}
+              isAuth={isAuth}
             />
-            <PrivateRoute exact path="/create-new" component={CreateNewPage} />
+            <PrivateRoute
+              exact
+              path="/create-new"
+              component={CreateNewPage}
+              isAuth={isAuth}
+            />
             <PrivateRoute
               exact
               path="/employee-list"
               component={EmployeeListPage}
+              isAuth={isAuth}
             />
-            <PrivateRoute exact path="/wait-list" component={WaitListPage} />
+            <PrivateRoute
+              exact
+              path="/wait-list"
+              component={WaitListPage}
+              isAuth={isAuth}
+            />
             <PrivateRoute
               exact
               path="/image-center"
               component={ImageCenterPage}
+              isAuth={isAuth}
             />
             <PrivateRoute
               exact
               path="/billing-center"
               component={BillingCenterPage}
+              isAuth={isAuth}
             />
             <PrivateRoute
               exact
               to="/create-subscription"
               component={CreateSubscriptionSection}
+              isAuth={isAuth}
             />
           </Switch>
         </Elements>

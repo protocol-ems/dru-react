@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import UserContext from "src/components/context/UserContext";
 
-export default function CreateNewPage() {
+function CreateNewPage() {
   const { userData } = useContext(UserContext);
 
   return (
@@ -109,3 +109,5 @@ export default function CreateNewPage() {
     </div>
   );
 }
+
+export default withRouter(CreateNewPage);

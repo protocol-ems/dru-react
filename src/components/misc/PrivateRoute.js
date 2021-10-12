@@ -1,23 +1,38 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
-import UserContext from "src/components/context/UserContext";
-
-
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { userData } = useContext(UserContext);
+const PrivateRoute = ({ isAuth, component: Component, ...rest }) => {
   // This private route redirects to the dashboard when the page is refreshed or if a specific url is attempted.
   // the dashboard does all the verification - and will redirect to the login page if needed.
+
+  // useEffect(() => {
+  //   const getUserInfo = async () => {
+  //     let token = localStorage.getItem("Authorization");
+
+  //     axiosInstance
+  //       .get("/users/info/")
+  //       .then((res) => {
+  //         setUserData({
+  //           user: res.data[0],
+  //         });
+  //         setAuth(true);
+  //       })
+  //       .catch(() => {
+  //         setAuth(false);
+  //       });
+  //   };
+  //   getUserInfo();
+  // }, [setUserData]);
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        userData.user ? (
+        isAuth ? (
           <Component {...props} />
         ) : (
           <Redirect
-            to={{ pathname: "/dashboard", state: { from: props.location } }}
+            to={{ pathname: "/login", state: { from: props.location } }}
           />
         )
       }

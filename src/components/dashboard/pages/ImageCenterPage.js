@@ -3,8 +3,9 @@ import UserContext from "src/components/context/UserContext";
 import ImageCenter from "src/components/dashboard/components/documents/ImageCenter";
 import SubscribeToday from "src/components/dashboard/components/payments/SubscribeToday";
 import { axiosInstance } from "src/axiosInstance";
+import { withRouter } from "react-router-dom";
 
-export default function ImageCenterPage() {
+function ImageCenterPage() {
   const [companyInfo, setCompanyInfo] = useState();
   const [companyDocuments, setCompanyDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -61,3 +62,5 @@ export default function ImageCenterPage() {
     </div>
   );
 }
+
+export default withRouter(ImageCenterPage);

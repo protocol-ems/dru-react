@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 
 import { axiosInstance } from "src/axiosInstance";
 import UserContext from "src/components/context/UserContext";
 import Error from "src/components/misc/Error";
 
-export default function JoinCompany() {
+function JoinCompany() {
   const history = useHistory();
   const { userData, setUserData } = useContext(UserContext);
 
@@ -103,3 +103,5 @@ export default function JoinCompany() {
     </div>
   );
 }
+
+export default withRouter(JoinCompany);
