@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import UserContext from "src/components/context/UserContext";
 import Logout from "src/components/userauth/Logout";
 
-export default function Navbar() {
+export default function Navbar({ setIsAuth }) {
   const { userData } = useContext(UserContext);
   // The navbar is dynamic depending on if the user is logged in.
   // the OurProtocol text will redirect to '/' or '/'dashboard' depending on if the user is logged in.
@@ -49,7 +49,7 @@ export default function Navbar() {
               {userData.user !== undefined && userData.user !== null ? (
                 <div className="flex flex-wrap items-center justify-start">
                   <li className="px-4 py-1 mr-1 text-base text-black transition duration-500 ease-in-out transform   hover:text-green-400">
-                    <Logout />
+                    <Logout setIsAuth={setIsAuth} />
                   </li>
                   {/* <Link
                     to="/dashboard"

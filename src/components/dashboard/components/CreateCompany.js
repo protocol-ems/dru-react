@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 
 import { axiosInstance } from "src/axiosInstance";
 import UserContext from "src/components/context/UserContext";
 
-export default function CreateCompany() {
+function CreateCompany() {
   const history = useHistory();
 
   const initialFormData = Object.freeze({
@@ -152,3 +152,5 @@ export default function CreateCompany() {
     </div>
   );
 }
+
+export default withRouter(CreateCompany);

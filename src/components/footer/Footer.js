@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -7,10 +8,20 @@ export default function Footer() {
         <div className="p-2 text-4xl font-medium tracking-tighter text-white">
           OurProtocol
         </div>
-        <div className="flex flex-col justify-between p-2 text-white text-xl cursor-pointer">
-          <div>Contact</div>
+        <div className="flex flex-col justify-between p-2 text-white text-xl">
+          <Link
+            to="/contact-us"
+            className="cursor-pointer hover:text-gray-300 hover:underline"
+          >
+            Contact
+          </Link>
 
-          <div>About Us</div>
+          <Link
+            to="about-us"
+            className="cursor-pointer hover:text-gray-300 hover:underline"
+          >
+            About Us
+          </Link>
         </div>
       </div>
     </div>

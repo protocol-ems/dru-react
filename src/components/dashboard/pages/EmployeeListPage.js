@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { axiosInstance } from "src/axiosInstance";
-
+import { withRouter } from "react-router-dom";
 import UserContext from "src/components/context/UserContext";
 import UserList from "src/components/dashboard/components/UserList";
 
-export default function EmployeeListPage() {
+function EmployeeListPage() {
   const { userData } = useContext(UserContext);
 
   const [companyUsers, setCompanyUsers] = useState(null);
@@ -22,12 +22,14 @@ export default function EmployeeListPage() {
         });
     };
 
-    getCompanyUsers();
+    if (userData.user !== null) {
+      getCompanyUsers();
+    }
 
     return () => {
       isUnmount = true;
     };
-  }, [userData.user.company]);
+  }, [userData]);
 
   return (
     <div className="min-h-screen">
@@ -54,3 +56,5 @@ export default function EmployeeListPage() {
     </div>
   );
 }
+
+export default withRouter(EmployeeListPage);

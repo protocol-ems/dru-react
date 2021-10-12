@@ -5,8 +5,7 @@ import UserContext from "src/components/context/UserContext";
 import { axiosInstance } from "src/axiosInstance";
 import Error from "src/components/misc/Error";
 
-
-export default function Login() {
+export default function Login({ setIsAuth }) {
   const history = useHistory();
 
   // The login component sends a post request and then saves the knox token to local storage for authenticaiton .
@@ -60,6 +59,7 @@ export default function Login() {
             setUserData({
               user: res.data[0],
             });
+            setIsAuth(true);
           })
 
           .then(() => {

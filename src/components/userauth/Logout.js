@@ -4,8 +4,7 @@ import { useHistory } from "react-router-dom";
 import { axiosInstance } from "src/axiosInstance";
 import UserContext from "src/components/context/UserContext";
 
-
-export default function Logout() {
+export default function Logout({ setIsAuth }) {
   const history = useHistory();
   const { setUserData } = useContext(UserContext);
   const logOutHandler = () => {
@@ -22,10 +21,11 @@ export default function Logout() {
       })
       .then((res) => {
         localStorage.setItem("Authorization", null);
-        history.push("/");
         setUserData({
           user: null,
         });
+        setIsAuth(false);
+        history.push("/");
       });
   };
 

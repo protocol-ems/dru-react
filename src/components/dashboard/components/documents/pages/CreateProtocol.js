@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-
+import { withRouter } from "react-router-dom";
 import CreateDocument from "src/components/dashboard/components/documents/CreateDocument";
 import UserContext from "src/components/context/UserContext";
 import { axiosInstance } from "src/axiosInstance";
 
-export default function CreateProtocol({
+function CreateProtocol({
   details,
   tableDetails,
   flowDetails,
@@ -58,3 +58,5 @@ export default function CreateProtocol({
     </div>
   );
 }
+
+export default withRouter(CreateProtocol);
