@@ -25,6 +25,9 @@ import WaitListPage from "src/components/dashboard/pages/WaitListPage";
 import ImageCenterPage from "src/components/dashboard/pages/ImageCenterPage";
 import BillingCenterPage from "src/components/dashboard/pages/BillingCenterPage";
 import AdminNavBar from "src/components/dashboard/components/AdminNavBar";
+import AboutUs from "src/components/dashboard/pages/AboutUs";
+import ContactUs from "src/components/dashboard/pages/ContactUs";
+
 import CreateSubscriptionSection from "src/components/dashboard/components/payments/CreateSubscriptionSection";
 
 import Footer from "src/components/footer/Footer";
@@ -98,6 +101,8 @@ function App() {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/contact-us" component={ContactUs} />
+            <Route exact path="/about-us" component={AboutUs} />
             <Route exact path="/login">
               <Login setIsAuth={setIsAuth} />
             </Route>
