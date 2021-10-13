@@ -18,7 +18,7 @@ export default function HomePageSteps() {
       title: "Step 2: Add Details",
       body: "Details are information you write into each label. Each detail you add is a bulletin point on the documentation. These can be multi-line and can be as long in text as you need. You can also have as many bulletin points as you need. ",
       example:
-        "In the example gif you can see someone adding pediatric deteails and some key point details. Also, as the user scrolls down the page you can see other information taht was enterd. ",
+        "In the example gif you can see someone adding pediatric details and some key point details. Also, as the user scrolls down the page you can see other information that was entered. ",
       picture:
         "https://ourprotocol-server-1.s3.us-west-2.amazonaws.com/OurProtocol-Images/Homepage/create-details.gif",
     },

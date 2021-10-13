@@ -18,7 +18,7 @@ export default function ContactUs() {
           </div>
           <div className=" mt-24 flex flex-row justify-around items-start">
             <div
-              tabindex="0"
+              tabIndex="0"
               className="collapse w-96 border rounded-box border-base-300 "
             >
               <div className="collapse-title text-xl font-medium">
@@ -30,7 +30,7 @@ export default function ContactUs() {
             </div>
 
             <div
-              tabindex="0"
+              tabIndex="0"
               className="collapse w-96 border rounded-box border-base-300"
             >
               <div className="collapse-title text-xl font-medium">
