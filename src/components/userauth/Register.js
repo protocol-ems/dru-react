@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import { registerInstance } from "src/axiosInstance";
 import Error from "src/components/misc/Error";
-
 
 export default function Register() {
   const history = useHistory();
@@ -12,17 +11,19 @@ export default function Register() {
   // 1st - Django requires a username not a email to login
   // therefore In the post request you can see that I set the username field and email field to the same value.
   // there is no seperate username field for the user to sign up to.
-  // There error is not dynamic.
+  // The error is not dynamic and the outcomes are hardcoded.
 
   const initialFormData = Object.freeze({
     username: "",
     password: "",
+    passwordMatch: "",
     first_name: "",
     last_name: "",
   });
 
   const [formData, setFormData] = useState(initialFormData);
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [passwordsMatch, setPasswordsMatch] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -38,12 +39,19 @@ export default function Register() {
     // removing the local storage authorization value to prevent a bug from the axios instance.
 
     let email = formData.username;
-    // localStorage.removeItem("Authorization");
+    if (formData.password !== formData.passwordMatch) {
+      setErrorMessage("The passwords must match.");
+      setPasswordsMatch(false);
+    } else {
+      setPasswordsMatch(true);
+    }
+
     if (
       formData.username.length > 0 &&
       formData.password.length > 0 &&
       formData.first_name.length > 0 &&
-      formData.last_name.length > 0
+      formData.last_name.length > 0 &&
+      passwordsMatch
     ) {
       registerInstance
         .post("api/register/", {
@@ -57,10 +65,15 @@ export default function Register() {
           history.push("/login");
         })
         .catch((error) => {
-          setErrorMessage(error.response.data.username);
+          if (error.response.data.email !== undefined) {
+            setErrorMessage(error.response.data.email);
+          }
+          if (error.response.data.username !== undefined) {
+            setErrorMessage(
+              "An account is already registered with this email address."
+            );
+          }
         });
-    } else {
-      setErrorMessage("All fields must be filled out");
     }
   };
 
@@ -128,6 +141,19 @@ export default function Register() {
                 onChange={handleChange}
               ></input>
             </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Confirm Password</span>
+              </label>
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                className="input input-bordered input-accent"
+                name="passwordMatch"
+                id="passwordMatch"
+                onChange={handleChange}
+              ></input>
+            </div>
             <button
               type="submit"
               className="btn btn-accent w-full mt-4"
@@ -136,6 +162,18 @@ export default function Register() {
               Create
             </button>
           </form>
+          <div className="flex flex-col justify-end items-end p-4 text-sm">
+            <h2 className="text-gray-600">Already have an account?</h2>
+            <Link
+              to="/login"
+              className="text-accent"
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+            >
+              Click here to login
+            </Link>
+          </div>
         </div>
       </div>
     </div>

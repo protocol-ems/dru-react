@@ -74,7 +74,6 @@ function App() {
           })
           .catch(() => {
             localStorage.setItem("Authorization", "");
-            console.log(isAuth);
             setIsAuth(false);
           });
       }
