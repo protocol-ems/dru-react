@@ -2,7 +2,6 @@ import React from "react";
 
 import test from "src/images/test1.gif";
 
-
 export default function MoreInfoSection() {
   // A subsection of the Homepage with details on the app.
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import UserContext from "src/components/context/UserContext";
 import { axiosInstance } from "src/axiosInstance";
@@ -115,6 +115,18 @@ export default function Login({ setIsAuth }) {
               Login
             </button>
           </form>
+          <div className="flex flex-col justify-end items-end p-4 text-sm">
+            <h2 className="text-gray-600">Don't have an account?</h2>
+            <Link
+              to="/register"
+              className="text-accent"
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+            >
+              Click here to register
+            </Link>
+          </div>
         </div>
       </div>
     </div>
