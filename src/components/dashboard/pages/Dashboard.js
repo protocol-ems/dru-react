@@ -37,7 +37,7 @@ export default function Dashboard() {
           });
       }
     };
-    if (!isUnmount && userData.user !== null) {
+    if (!isUnmount && userData && userData.user !== null) {
       getCompanyDocuments();
     }
 

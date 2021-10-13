@@ -90,6 +90,7 @@ export default function Login({ setIsAuth }) {
                 className="input input-bordered input-accent"
                 name="username"
                 id="username"
+                testId="email"
                 onChange={handleChange}
               ></input>
             </div>

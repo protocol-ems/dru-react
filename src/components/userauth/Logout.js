@@ -20,12 +20,12 @@ export default function Logout({ setIsAuth }) {
         },
       })
       .then((res) => {
+        setIsAuth(false);
+        history.push("/");
         localStorage.setItem("Authorization", null);
         setUserData({
           user: null,
         });
-        setIsAuth(false);
-        history.push("/");
       });
   };
 
