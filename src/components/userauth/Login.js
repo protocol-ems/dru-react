@@ -20,7 +20,7 @@ export default function Login({ setIsAuth }) {
   const { setUserData } = useContext(UserContext);
 
   const [formData, setFormData] = useState(initialFormData);
-  const [errorMessage, setErrorMessage] = useState(undefined);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -90,7 +90,6 @@ export default function Login({ setIsAuth }) {
                 className="input input-bordered input-accent"
                 name="username"
                 id="username"
-                testId="email"
                 onChange={handleChange}
               ></input>
             </div>

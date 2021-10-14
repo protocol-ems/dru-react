@@ -25,14 +25,14 @@ function BillingCenterPage() {
         });
       }
     };
-    if (!isUnmount) {
+    if (userData.user !== null && !isUnmount) {
       getCompanyInfo();
     }
 
     return () => {
       isUnmount = true;
     };
-  }, [userData.user.company]);
+  }, [userData]);
 
   useEffect(() => {
     let isUnmount = false;
@@ -47,10 +47,11 @@ function BillingCenterPage() {
           }
         });
     };
-    if (companyInfo && companyInfo.is_active) {
+
+    if (userData.user !== null && companyInfo && companyInfo.is_active) {
       getSubscriptionDetails();
     }
-    if (companyInfo && !companyInfo.is_active) {
+    if (userData.user !== null && companyInfo && !companyInfo.is_active) {
       setLoading(false);
       setSubscriptionInfo({});
     }
@@ -58,7 +59,7 @@ function BillingCenterPage() {
     return () => {
       isUnmount = true;
     };
-  }, [companyInfo]);
+  }, [companyInfo, userData]);
 
   return (
     <div className="container mx-auto min-h-screen">
