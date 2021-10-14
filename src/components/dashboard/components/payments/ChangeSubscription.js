@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import ApiService, { axiosInstance } from "src/axiosInstance";
+import Error from "src/components/misc/Error";
 
 export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
   const [changeSubscription, setChangeSubscription] = useState(false);
@@ -10,6 +11,10 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
   const [newSubscription, setNewSubscription] = useState();
 
   const [cancel, setCancel] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const [currentUserCount, setCurrentUserCount] = useState();
 
   useEffect(() => {
     const getSubscriptionTiers = async () => {
@@ -27,13 +32,27 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
 
   const handleSubscriptionSubmit = (e) => {
     e.preventDefault();
+
+    let filteredSubscription = subscriptionTiers.filter(
+      (tier) => tier.id === parseInt(newSubscription)
+    );
+
     // axios request to change subscription
     // checks to make sure current subscription does not match the new one
     if (parseInt(newSubscription) === subscriptionInfo.id) {
-      console.log("You are already have this subscription Tier");
+      setErrorMessage("You are already subscribed at this price.");
     }
 
-    if (parseInt(newSubscription) !== subscriptionInfo.id) {
+    if (currentUserCount > filteredSubscription[0].user_max) {
+      setErrorMessage(
+        "You have more users than what this plan offers. Please choose a different plan."
+      );
+    }
+
+    if (
+      parseInt(newSubscription) !== subscriptionInfo.id &&
+      currentUserCount <= filteredSubscription[0].user_max
+    ) {
       ApiService.changeSubscription({
         subscription_type_id: newSubscription,
         stripe_cus_id: companyInfo.stripe_cus_id,
@@ -50,20 +69,32 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
       company: companyInfo.id,
     });
   };
+
+  const handleChange = (change) => {
+    setCancel(false);
+    setChangeSubscription(change);
+
+    setCurrentUserCount(companyInfo.users.length);
+  };
   return (
     <div className="w-full">
       {!changeSubscription && (
-        <button
-          className="btn glass"
-          onClick={() => setChangeSubscription(true)}
-        >
+        <button className="btn glass" onClick={() => handleChange(true)}>
           Change Subscription?
         </button>
       )}
       {changeSubscription && (
         <form>
+          {errorMessage && (
+            <div className="bg-gray-50 rounded-xl">
+              <Error
+                errorMessage={errorMessage}
+                clearError={() => setErrorMessage(null)}
+              />
+            </div>
+          )}
           <label className="label" htmlFor="name">
-            OurProtcol Tier
+            Price & User Count
           </label>
           <select
             defaultValue={"DEFAULT"}
@@ -71,7 +102,7 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
             onChange={(e) => handleSubscriptionChange(e)}
           >
             <option value="DEFAULT" disabled="disabled">
-              Select your tier
+              Price & User Count
             </option>
             {subscriptionTiers &&
               subscriptionTiers.map((tier) => {
@@ -89,7 +120,13 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
                 handleSubscriptionSubmit(e);
               }}
             >
-              Change Subscription
+              Confirm Change Subscription
+            </button>
+            <button
+              className="btn glass m-2"
+              onClick={() => handleChange(false)}
+            >
+              Close
             </button>
             {!cancel && (
               <button

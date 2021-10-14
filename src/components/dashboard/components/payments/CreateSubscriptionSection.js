@@ -78,14 +78,10 @@ function CreateSubscriptionSection() {
 
   return (
     <div className="min-h-screen">
-      <div>
-        Please choose your subscription type and fill out the details below
-      </div>
-
       <div className="container mx-auto mt-24 w-1/2 border px-2 py-4 md:px-10 md:py-12 rounded-xl drop-shadow-lg bg-gray-50">
         <form onSubmit={handleSubmit} className="stripe-form flex flex-col ">
           <label className="label" htmlFor="name">
-            OurProtcol Tier
+            Price & User Count
           </label>
           <select
             defaultValue={"DEFAULT"}
@@ -95,7 +91,7 @@ function CreateSubscriptionSection() {
             }}
           >
             <option value="DEFAULT" disabled="disabled">
-              Select your tier
+              Price & User Count
             </option>
             {subscriptionTiers &&
               subscriptionTiers.map((tier) => {
