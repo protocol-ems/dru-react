@@ -40,8 +40,12 @@ function App() {
     user: null,
   });
   const [isAuth, setIsAuth] = useState(true);
-  const stripePromise = loadStripe(
-    "pk_test_51JWjDxJEjyoAE1rtYIa5QzZgcsRyvuJ6lCkSSpHapygbSvFMHKkoEOUaEoXqdme01VDg2t2b3w2rPpN0QTWvTUtN00SPwLlYgz"
+
+  // I put setStripePromise on the login component to avoid the error saying setStripePromise is defined but not used.
+  const [stripePromise, setStripePromise] = useState(() =>
+    loadStripe(
+      "pk_test_51JWjDxJEjyoAE1rtYIa5QzZgcsRyvuJ6lCkSSpHapygbSvFMHKkoEOUaEoXqdme01VDg2t2b3w2rPpN0QTWvTUtN00SPwLlYgz"
+    )
   );
 
   // generic error msg component. Not the greatest but it works.
@@ -104,7 +108,10 @@ function App() {
             <Route exact path="/contact-us" component={ContactUs} />
             <Route exact path="/about-us" component={AboutUs} />
             <Route exact path="/login">
-              <Login setIsAuth={setIsAuth} />
+              <Login
+                setIsAuth={setIsAuth}
+                setStripePromise={setStripePromise}
+              />
             </Route>
             <Route exact path="/dashboard" component={Dashboard} />
             <PrivateRoute
