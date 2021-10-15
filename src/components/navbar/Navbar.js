@@ -72,6 +72,7 @@ export default function Navbar({ setIsAuth }) {
                   >
                     Register
                   </Link>
+                  <Link to="/offline-dashboard">Offline Mode</Link>
                 </div>
               )}
             </ul>

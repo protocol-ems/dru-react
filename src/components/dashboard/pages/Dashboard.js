@@ -33,10 +33,12 @@ export default function Dashboard() {
           .then((res) => {
             if (!isUnmount) {
               setCompanyDocuments(res.data);
+              localStorage.setItem("documents", JSON.stringify(res.data));
             }
           });
       }
     };
+
     if (!isUnmount && userData && userData.user !== null) {
       getCompanyDocuments();
     }
@@ -55,6 +57,7 @@ export default function Dashboard() {
           <DashboardContent
             companyDocuments={companyDocuments}
             setCompanyDocuments={setCompanyDocuments}
+            offline={false}
           />
         )}
       </div>

@@ -10,7 +10,11 @@ import CreateProtocol from "src/components/dashboard/components/documents/pages/
 import FlowView from "src/components/dashboard/components/documents/flow/FlowView";
 import UserContext from "src/components/context/UserContext";
 
-export default function ViewDocumentsSection({ documents, setDocuments }) {
+export default function ViewDocumentsSection({
+  documents,
+  setDocuments,
+  offline,
+}) {
   const { userData } = useContext(UserContext);
 
   const [filteredDocuments, setFilteredDocuments] = useState();
@@ -122,7 +126,8 @@ export default function ViewDocumentsSection({ documents, setDocuments }) {
               />
               {tableData && <TablePreview tableData={tableData} />}
               {flowData && <FlowView elements={flowData} />}
-              {currentDocument.document_images &&
+              {!offline &&
+                currentDocument.document_images &&
                 currentDocument.document_images.length > 0 &&
                 userData.user.employee_type === 4 && (
                   <ImageView
@@ -130,7 +135,8 @@ export default function ViewDocumentsSection({ documents, setDocuments }) {
                     editImages={true}
                   />
                 )}
-              {currentDocument.document_images &&
+              {!offline &&
+                currentDocument.document_images &&
                 currentDocument.document_images.length > 0 &&
                 userData.user.employee_type !== 4 && (
                   <ImageView
@@ -140,7 +146,8 @@ export default function ViewDocumentsSection({ documents, setDocuments }) {
                   />
                 )}
 
-              {currentDocument.id &&
+              {!offline &&
+                currentDocument.id &&
                 userData.user &&
                 userData.user.employee_type === 4 && (
                   <div className="flex justify-end p-4 my-12">
