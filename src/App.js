@@ -11,6 +11,7 @@ import Navbar from "src/components/navbar/Navbar";
 import Register from "src/components/userauth/Register";
 import Login from "src/components/userauth/Login";
 import Dashboard from "src/components/dashboard/pages/Dashboard";
+import OfflineDashboard from "src/components/dashboard/components/OfflineDashboard";
 import CreateCompany from "src/components/dashboard/components/CreateCompany";
 import JoinCompany from "src/components/dashboard/components/JoinCompany";
 import Error from "src/components/misc/Error";
@@ -36,9 +37,11 @@ function App() {
   //this is what we use to set our one useContext
   // this userData can be accessed any where with useContext
   // userData is set after logging in.
+
   const [userData, setUserData] = useState({
     user: null,
   });
+
   const [isAuth, setIsAuth] = useState(true);
 
   // I put setStripePromise on the login component to avoid the error saying setStripePromise is defined but not used.
@@ -70,6 +73,7 @@ function App() {
             setUserData({
               user: res.data[0],
             });
+
             if (res.data.length === 0) {
               setIsAuth(false);
             } else {
@@ -114,6 +118,11 @@ function App() {
               />
             </Route>
             <Route exact path="/dashboard" component={Dashboard} />
+            <Route
+              exact
+              path="/offline-dashboard"
+              component={OfflineDashboard}
+            />
             <PrivateRoute
               exact
               path="/create-company"

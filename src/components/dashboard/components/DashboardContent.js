@@ -5,12 +5,14 @@ import ViewDocuments from "src/components/dashboard/components/documents/ViewDoc
 export default function DashboardContent({
   companyDocuments,
   setCompanyDocuments,
+  offline,
 }) {
   return (
     <div className="flex flex-col w-full">
       <ViewDocuments
         companyDocuments={companyDocuments}
         setCompanyDocuments={setCompanyDocuments}
+        offline={offline}
       />
     </div>
   );

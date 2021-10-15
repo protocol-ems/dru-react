@@ -5,6 +5,7 @@ import ViewDocumentsSection from "./pages/ViewDocumentsSection.js";
 export default function ViewDocuments({
   companyDocuments,
   setCompanyDocuments,
+  offline,
 }) {
   const [documentFocus, setDocumentFocus] = useState(1);
   const [medicines, setMedicines] = useState();
@@ -13,6 +14,7 @@ export default function ViewDocuments({
 
   const focusHandler = (docId) => {
     setDocumentFocus(docId);
+    console.log(companyDocuments);
   };
 
   useEffect(() => {
@@ -73,6 +75,7 @@ export default function ViewDocuments({
           <ViewDocumentsSection
             documents={medicines}
             setDocuments={setCompanyDocuments}
+            offline={offline}
           />
         )}
       </div>
@@ -81,6 +84,7 @@ export default function ViewDocuments({
           <ViewDocumentsSection
             documents={procedures}
             setDocuments={setCompanyDocuments}
+            offline={offline}
           />
         )}
       </div>
@@ -89,6 +93,7 @@ export default function ViewDocuments({
           <ViewDocumentsSection
             documents={protocols}
             setDocuments={setCompanyDocuments}
+            offline={offline}
           />
         )}
       </div>
