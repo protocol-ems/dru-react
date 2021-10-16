@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+
 import DashboardContent from "src/components/dashboard/components/DashboardContent";
 
 export default function OfflineDashboard() {
@@ -27,17 +27,7 @@ export default function OfflineDashboard() {
   }, []);
 
   return (
-    <div className="mx-auto container">
-      <div>Offline mode here</div>
-      <button
-        className="btn"
-        onClick={() => {
-          console.log(companyDocuments);
-        }}
-      >
-        See Docs
-      </button>
-
+    <div className="mx-auto container pt-24">
       <DashboardContent
         companyDocuments={companyDocuments}
         setCompanyDocuments={setCompanyDocuments}
