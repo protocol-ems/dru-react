@@ -14,7 +14,6 @@ export default function ViewDocuments({
 
   const focusHandler = (docId) => {
     setDocumentFocus(docId);
-    console.log(companyDocuments);
   };
 
   useEffect(() => {

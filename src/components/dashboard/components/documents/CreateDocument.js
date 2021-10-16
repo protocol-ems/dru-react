@@ -181,6 +181,7 @@ export default function CreateDocument({
     let companyId = userData.user.company || 1;
     await axiosInstance.get(`company-documents/${companyId}/`).then((res) => {
       setDocuments(res.data);
+      localStorage.setItem("documents", JSON.stringify(res.data));
     });
   };
 
