@@ -11,7 +11,7 @@ import Navbar from "src/components/navbar/Navbar";
 import Register from "src/components/userauth/Register";
 import Login from "src/components/userauth/Login";
 import Dashboard from "src/components/dashboard/pages/Dashboard";
-import OfflineDashboard from "src/components/dashboard/components/OfflineDashboard";
+import OfflineDashboard from "src/components/offline/OfflineDashboard";
 import CreateCompany from "src/components/dashboard/components/CreateCompany";
 import JoinCompany from "src/components/dashboard/components/JoinCompany";
 import Error from "src/components/misc/Error";
