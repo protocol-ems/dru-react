@@ -59,6 +59,7 @@ export default function Login({ setIsAuth }) {
             setUserData({
               user: res.data[0],
             });
+            localStorage.setItem("Timeout", timeSetup());
             setIsAuth(true);
           })
 
@@ -66,6 +67,13 @@ export default function Login({ setIsAuth }) {
             history.push("/dashboard");
           });
       });
+  };
+
+  const timeSetup = () => {
+    let newDate = new Date().getTime();
+    let fourteenDays = 1209600000;
+    let timeoutDate = new Date(newDate + fourteenDays).getTime();
+    return new Date(timeoutDate).getTime();
   };
 
   return (

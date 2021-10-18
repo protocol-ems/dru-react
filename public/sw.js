@@ -1,6 +1,9 @@
 let cacheData = "ourProtocol-v1";
 
 this.addEventListener("install", (e) => {
+  // Using caches.delete here to remove the old data. I don't think this would be correct for a production build.
+  caches.delete(cacheData);
+
   e.waitUntil(
     caches.open(cacheData).then((cache) => {
       cache.addAll([
@@ -14,6 +17,8 @@ this.addEventListener("install", (e) => {
         "/static/js/main.chunk.js.map",
         "/logo1.svg",
         "/offline-dashboard",
+        "/static/media/test1.5cfec44b.gif",
+        "/static/media/notes.8c01160c.svg",
       ]);
     })
   );
