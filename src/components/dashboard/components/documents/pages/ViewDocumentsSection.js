@@ -145,7 +145,15 @@ export default function ViewDocumentsSection({
                     editImages={false}
                   />
                 )}
-
+              {offline &&
+                currentDocument.document_images &&
+                currentDocument.document_images.length > 0 && (
+                  <ImageView
+                    currentDocument={currentDocument}
+                    setDocuments={setDocuments}
+                    editImages={false}
+                  />
+                )}
               {!offline &&
                 currentDocument.id &&
                 userData.user &&

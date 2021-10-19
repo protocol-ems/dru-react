@@ -193,7 +193,7 @@ function App() {
             />
           </Switch>
         </Elements>
-        {!userData.user && <Footer />}
+        <Footer />
       </UserContext.Provider>
     </div>
   );
