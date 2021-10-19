@@ -26,8 +26,9 @@ export default function ImageCenter({ companyDocuments }) {
       method: "POST",
       body: uploadData,
     }).then(() => {
+      history.push("/dashboard");
+
       window.scrollTo(0, 0);
-      history.go(0);
     });
   };
 
