@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { axiosTestInstance, axiosInstance } from "src/axiosInstance";
+import { axiosInstance } from "src/axiosInstance";
 import UserContext from "src/components/context/UserContext";
 import Localbase from "localbase";
 
@@ -9,7 +9,7 @@ export default function GetImages() {
 
   const requestImages = async () => {
     const urlPrefix = "https://calm-caverns-22270.herokuapp.com/";
-    await axiosTestInstance
+    await axiosInstance
       .get(`/company-images/${userData.user.company}/`)
       .then((res) => {
         console.log(res.data);
