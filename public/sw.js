@@ -16,7 +16,6 @@ this.addEventListener("install", (e) => {
     "/offline-dashboard",
     "/static/media/test1.5cfec44b.gif",
     "/static/media/notes.8c01160c.svg",
-    "https://ourprotocol-server-1.s3.us-west-2.amazonaws.com/images/Lane+County/Dextrose/dextrose-5percent.webp",
   ];
 
   e.waitUntil(

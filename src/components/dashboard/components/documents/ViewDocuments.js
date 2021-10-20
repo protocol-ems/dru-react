@@ -6,6 +6,7 @@ export default function ViewDocuments({
   companyDocuments,
   setCompanyDocuments,
   offline,
+  companyImages,
 }) {
   const [documentFocus, setDocumentFocus] = useState(1);
   const [medicines, setMedicines] = useState();
@@ -75,6 +76,7 @@ export default function ViewDocuments({
             documents={medicines}
             setDocuments={setCompanyDocuments}
             offline={offline}
+            companyImages={companyImages}
           />
         )}
       </div>
@@ -84,6 +86,7 @@ export default function ViewDocuments({
             documents={procedures}
             setDocuments={setCompanyDocuments}
             offline={offline}
+            companyImages={companyImages}
           />
         )}
       </div>
@@ -93,6 +96,7 @@ export default function ViewDocuments({
             documents={protocols}
             setDocuments={setCompanyDocuments}
             offline={offline}
+            companyImages={companyImages}
           />
         )}
       </div>

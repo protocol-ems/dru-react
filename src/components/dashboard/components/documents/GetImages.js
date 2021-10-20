@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
 import { axiosTestInstance, axiosInstance } from "src/axiosInstance";
+import UserContext from "src/components/context/UserContext";
+import Localbase from "localbase";
 
 export default function GetImages() {
-  const requestImages = () => {
-    axiosTestInstance
-      .get(
-        "https://ourprotocol-server-1.s3.amazonaws.com/images/Lane%20County/Dextrose/dextrose-5percent.webp"
-      )
-      .then((res) => console.log(res));
+  const { userData } = useContext(UserContext);
+  let db = new Localbase("db");
+
+  const requestImages = async () => {
+    const urlPrefix = "https://calm-caverns-22270.herokuapp.com/";
+    await axiosTestInstance
+      .get(`/company-images/${userData.user.company}/`)
+      .then((res) => {
+        console.log(res.data);
+        for (let i = 0; i < res.data.length; i++) {
+          console.log(urlPrefix + res.data[i].image);
+          fetch(urlPrefix + res.data[i].image)
+            .then((res) => {
+              return res.blob();
+            })
+            .then((blob) => {
+              console.log(blob);
+              db.collection("images").add({
+                id: res.data[i].id,
+                blob: blob,
+                documentId: res.data[i].document,
+              });
+            });
+        }
+      });
   };
   return (
     <div>
@@ -19,10 +40,6 @@ export default function GetImages() {
       >
         Download Images
       </button>
-      <img
-        src="https://ourprotocol-server-1.s3.amazonaws.com/images/Lane%20County/Dextrose/dextrose-5percent.webp"
-        alt=""
-      />
     </div>
   );
 }

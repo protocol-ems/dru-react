@@ -14,6 +14,7 @@ export default function ViewDocumentsSection({
   documents,
   setDocuments,
   offline,
+  companyImages,
 }) {
   const { userData } = useContext(UserContext);
 
@@ -152,6 +153,8 @@ export default function ViewDocumentsSection({
                     currentDocument={currentDocument}
                     setDocuments={setDocuments}
                     editImages={false}
+                    companyImages={companyImages}
+                    offline={offline}
                   />
                 )}
               {!offline &&

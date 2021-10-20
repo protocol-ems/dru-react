@@ -3,7 +3,12 @@ import { useHistory } from "react-router-dom";
 
 import { axiosInstance } from "src/axiosInstance";
 
-export default function ImageView({ currentDocument, editImages }) {
+export default function ImageView({
+  currentDocument,
+  editImages,
+  companyImages,
+  offline,
+}) {
   const [images, setImages] = useState([]);
 
   const [deleteImageid, setDeleteImageId] = useState();
@@ -32,15 +37,27 @@ export default function ImageView({ currentDocument, editImages }) {
         }
       }
     };
-
-    getDocumentImages();
+    if (!offline) {
+      getDocumentImages();
+    }
+    if (offline) {
+      let offlineImages = [];
+      let filteredImages = companyImages.filter(
+        (image) => currentDocument.id === image.documentId
+      );
+      filteredImages.map((image) => {
+        return offlineImages.push(image);
+      });
+      setImages(offlineImages);
+    }
 
     return () => {
       unMount = true;
     };
-  }, [currentDocument]);
+  }, [currentDocument, companyImages, offline]);
 
   const handleDeleteSetup = (id) => {
+    console.log(images);
     setDeleteImageId(id);
     setDeleteState(true);
   };
@@ -61,6 +78,7 @@ export default function ImageView({ currentDocument, editImages }) {
     <div>
       <div>
         {images &&
+          !offline &&
           images.length > 0 &&
           images[0] !== undefined &&
           (editImages
@@ -100,6 +118,18 @@ export default function ImageView({ currentDocument, editImages }) {
                   </div>
                 );
               }))}
+
+        {offline &&
+          images.length > 0 &&
+          images.map((image) => {
+            return (
+              <img
+                key={image.id}
+                src={URL.createObjectURL(image.blob)}
+                alt=""
+              />
+            );
+          })}
       </div>
     </div>
   );
