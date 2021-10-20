@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "daisyui": "^1.10.0",
     "draft-js": "^0.11.7",
+    "localbase": "^0.7.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-flow-renderer": "^9.6.6",
