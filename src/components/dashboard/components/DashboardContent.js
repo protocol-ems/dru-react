@@ -10,13 +10,13 @@ export default function DashboardContent({
 }) {
   return (
     <div className="flex flex-col w-full">
-      {!offline && <GetImages />}
       <ViewDocuments
         companyDocuments={companyDocuments}
         setCompanyDocuments={setCompanyDocuments}
         offline={offline}
         companyImages={companyImages}
       />
+      {!offline && <GetImages />}
     </div>
   );
 }
