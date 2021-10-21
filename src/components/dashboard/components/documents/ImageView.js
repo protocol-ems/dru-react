@@ -124,6 +124,7 @@ export default function ImageView({
           images.map((image) => {
             return (
               <img
+                className="mx-auto"
                 key={image.id}
                 src={URL.createObjectURL(image.blob)}
                 alt=""
