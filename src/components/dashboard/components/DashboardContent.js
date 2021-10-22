@@ -7,6 +7,7 @@ export default function DashboardContent({
   setCompanyDocuments,
   offline,
   companyImages,
+  loading,
 }) {
   return (
     <div className="flex flex-col w-full">
@@ -15,6 +16,7 @@ export default function DashboardContent({
         setCompanyDocuments={setCompanyDocuments}
         offline={offline}
         companyImages={companyImages}
+        loading={loading}
       />
       {!offline && <GetImages />}
     </div>

@@ -15,6 +15,7 @@ export default function ViewDocumentsSection({
   setDocuments,
   offline,
   companyImages,
+  loading,
 }) {
   const { userData } = useContext(UserContext);
 
@@ -74,7 +75,7 @@ export default function ViewDocumentsSection({
       {/* <button className="btn" onClick={() => console.log(documents)}>
         log docs
       </button> */}
-      {documents ? (
+      {documents && (
         <div>
           {edit && currentDocument.document_type === "1" && (
             <CreateMedicine
@@ -182,9 +183,8 @@ export default function ViewDocumentsSection({
             </div>
           )}
         </div>
-      ) : (
-        <div className="loader"></div>
       )}
+      {loading && <div className="loader" />}
     </div>
   );
 }

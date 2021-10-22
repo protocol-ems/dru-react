@@ -84,7 +84,7 @@ export default function ImageView({
           (editImages
             ? images.map((image) => {
                 return (
-                  <div key={image.id} className="flex flex-col items-end">
+                  <div key={image.id} className="flex flex-col items-end mt-4">
                     <img
                       className="mx-auto hover:opacity-30 cursor-pointer"
                       src={image.image}
@@ -124,7 +124,7 @@ export default function ImageView({
           images.map((image) => {
             return (
               <img
-                className="mx-auto"
+                className="mx-auto mt-4"
                 key={image.id}
                 src={URL.createObjectURL(image.blob)}
                 alt=""

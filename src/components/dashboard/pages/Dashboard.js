@@ -11,6 +11,7 @@ export default function Dashboard() {
   const history = useHistory();
 
   const [companyDocuments, setCompanyDocuments] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // This is the heart of the app
   // First we check auth of the user -> it will redirect to login on fail
@@ -32,7 +33,13 @@ export default function Dashboard() {
           .get(`company-documents/${companyId}/`)
           .then((res) => {
             if (!isUnmount) {
+              if (res.data.length === 0) {
+                setCompanyDocuments([]);
+                setLoading(false);
+              }
               setCompanyDocuments(res.data);
+              setLoading(false);
+
               localStorage.setItem("documents", JSON.stringify(res.data));
             }
           });
@@ -57,6 +64,7 @@ export default function Dashboard() {
           <DashboardContent
             companyDocuments={companyDocuments}
             setCompanyDocuments={setCompanyDocuments}
+            loading={loading}
             offline={false}
           />
         )}
