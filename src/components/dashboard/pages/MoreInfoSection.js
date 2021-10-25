@@ -1,7 +1,5 @@
 import React from "react";
 
-import test from "src/images/test1.gif";
-
 export default function MoreInfoSection() {
   // A subsection of the Homepage with details on the app.
   return (
@@ -11,7 +9,10 @@ export default function MoreInfoSection() {
           <div className="camera"></div>
           <div className="display">
             <div className="artboard phone-1 artboard-demo">
-              <img src={test} alt="" />
+              <img
+                src="https://ourprotocol-server-1.s3.us-west-2.amazonaws.com/OurProtocol-Images/Homepage/phone-2.gif"
+                alt="PhoneShowCase"
+              />
             </div>
           </div>
         </div>

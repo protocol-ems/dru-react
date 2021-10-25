@@ -14,7 +14,6 @@ this.addEventListener("install", (e) => {
     "/static/js/main.chunk.js.map",
     "/logo1.svg",
     "/offline-dashboard",
-    "/static/media/test1.5cfec44b.gif",
     "/static/media/notes.8c01160c.svg",
   ];
 
