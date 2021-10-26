@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 
 import UserContext from "src/components/context/UserContext";
 
-
 export default function CreateOrJoinHeader() {
   const { userData } = useContext(UserContext);
 
   return (
     <div>
-      <div className="container flex flex-col items-center px-5 py-8 mx-auto">
+      <div className="container flex flex-col items-center px-5 py-8 mx-auto min-h-screen">
         {userData.user.company === 1 &&
         userData.user.requested_company === 1 ? (
           <div>
