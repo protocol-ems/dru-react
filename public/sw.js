@@ -8,13 +8,13 @@ this.addEventListener("install", (e) => {
     "/static/js/2.902b1c71.chunk.js",
     "/static/js/main.1701a4c0.chunk.js",
     "/build/react_devtools_backend.js",
-    "./index.html",
-    "./",
-    "./dashboard",
-    "./static/js/main.chunk.js.map",
-    "./logo1.svg",
-    "./offline-dashboard",
-    "./static/media/notes.8c01160c.svg",
+    // "./index.html",
+    // "./",
+    // "./dashboard",
+    // "./static/js/main.chunk.js.map",
+    // "./logo1.svg",
+    // "./offline-dashboard",
+    // "./static/media/notes.8c01160c.svg",
   ];
 
   e.waitUntil(
