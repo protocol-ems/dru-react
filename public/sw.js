@@ -15,6 +15,9 @@ this.addEventListener("install", (e) => {
     "/logo1.svg",
     "/offline-dashboard",
     "/static/media/notes.8c01160c.svg",
+    "/static/css/main.56437479.chunk.css",
+    "/static/js/2.902b1c71.chunk.js",
+    "/static/js/main.b504a0f8.chunk.js",
   ];
 
   e.waitUntil(

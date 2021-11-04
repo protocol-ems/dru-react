@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-
+import { useHistory } from "react-router-dom";
 import ApiService, { axiosInstance } from "src/axiosInstance";
 import Error from "src/components/misc/Error";
 
 export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
+  const history = useHistory();
   const [changeSubscription, setChangeSubscription] = useState(false);
 
   const [subscriptionTiers, setSubscriptionTiers] = useState();
@@ -58,7 +59,7 @@ export default function ChangeSubscription({ companyInfo, subscriptionInfo }) {
         stripe_cus_id: companyInfo.stripe_cus_id,
         stripe_sub_id: companyInfo.stripe_sub_id,
         company: companyInfo.id,
-      });
+      }).then(() => history.push("/dashboard"));
     }
   };
 
