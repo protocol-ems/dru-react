@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import UserContext from "src/components/context/UserContext";
 import { axiosInstance } from "src/axiosInstance";
 import CreateOrJoinHeader from "src/components/dashboard/components/CreateOrJoinHeader";
+import DummyDataHeader from "src/components/dashboard/components/DummyDataHeader";
 import DashboardContent from "src/components/dashboard/components/DashboardContent";
 
 export default function Dashboard() {
@@ -29,20 +30,32 @@ export default function Dashboard() {
     const getCompanyDocuments = async () => {
       if (token !== "") {
         let companyId = userData.user.company || 1;
-        await axiosInstance
-          .get(`company-documents/${companyId}/`)
-          .then((res) => {
+
+        // A default user has the documents
+        if (companyId === 1) {
+          await axiosInstance.get("company-documents/8/").then((res) => {
             if (!isUnmount) {
-              if (res.data.length === 0) {
-                setCompanyDocuments([]);
-                setLoading(false);
-              }
               setCompanyDocuments(res.data);
               setLoading(false);
-
-              localStorage.setItem("documents", JSON.stringify(res.data));
             }
           });
+        }
+        if (companyId !== 1) {
+          await axiosInstance
+            .get(`company-documents/${companyId}/`)
+            .then((res) => {
+              if (!isUnmount) {
+                if (res.data.length === 0) {
+                  setCompanyDocuments([]);
+                  setLoading(false);
+                }
+                setCompanyDocuments(res.data);
+                setLoading(false);
+
+                localStorage.setItem("documents", JSON.stringify(res.data));
+              }
+            });
+        }
       }
     };
 
@@ -59,7 +72,16 @@ export default function Dashboard() {
     <div>
       <div className="container mx-auto">
         {userData.user !== null && userData.user.company === 1 ? (
-          <CreateOrJoinHeader />
+          <div>
+            <CreateOrJoinHeader />
+            <DummyDataHeader />
+            <DashboardContent
+              companyDocuments={companyDocuments}
+              setCompanyDocuments={setCompanyDocuments}
+              loading={loading}
+              offline={false}
+            />
+          </div>
         ) : (
           <DashboardContent
             companyDocuments={companyDocuments}

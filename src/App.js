@@ -129,7 +129,12 @@ function App() {
               component={CreateCompany}
               isAuth={isAuth}
             />
-            <PrivateRoute exact path="/join-company" component={JoinCompany} />
+            <PrivateRoute
+              exact
+              path="/join-company"
+              component={JoinCompany}
+              isAuth={isAuth}
+            />
             <PrivateRoute
               exact
               path="/create-document-header"

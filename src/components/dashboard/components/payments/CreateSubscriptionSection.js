@@ -61,6 +61,7 @@ function CreateSubscriptionSection() {
     })
       .then(() => {
         history.push("/dashboard");
+        window.scrollTo(0, 0);
       })
       .catch((error) => {
         console.log(error);

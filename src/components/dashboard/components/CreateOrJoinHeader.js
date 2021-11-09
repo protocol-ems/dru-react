@@ -8,12 +8,12 @@ export default function CreateOrJoinHeader() {
 
   return (
     <div>
-      <div className="container flex flex-col items-center px-5 py-8 mx-auto min-h-screen">
+      <div className="container flex flex-col items-center px-5 py-8 mx-auto border my-4 rounded bg-gray-100 ">
         {userData.user.company === 1 &&
         userData.user.requested_company === 1 ? (
           <div>
             <div className="flex flex-col w-full mb-12 text-left lg:text-center">
-              <h2 className="mb-8 text-xs font-semibold tracking-widest text-black uppercase title-font">
+              <h2 className="mb-8 text-sm font-semibold tracking-widest text-black uppercase title-font">
                 Welcome to Protocol
               </h2>
               <h1 className="mx-auto mb-12 text-2xl font-semibold leading-none tracking-tighter text-black  title-font">
