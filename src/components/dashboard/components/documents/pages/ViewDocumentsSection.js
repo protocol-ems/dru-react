@@ -72,7 +72,7 @@ export default function ViewDocumentsSection({
 
   return (
     <div className=" p-4  min-h-screen my-4  z-10">
-      {/* <button className="btn" onClick={() => console.log(documents)}>
+      {/* <button className="btn" onClick={() => console.log(filteredDocuments)}>
         log docs
       </button> */}
       {documents && (

@@ -23,10 +23,9 @@ export default function SearchBar({
           document.document_name.toLowerCase().indexOf(searchText) !== -1 &&
           searchText.length > 0
       );
-
       setFilteredDocuments(documentList);
     }
-    if (documents && searchText.length === 0 && documents.length > 1) {
+    if (documents && searchText.length === 0 && documents.length > 0) {
       setFilteredDocuments(documents);
       setCurrentDocument(documents[0]);
     }
@@ -35,7 +34,7 @@ export default function SearchBar({
   const setDocumentHandler = (index) => {
     //setFlowData is being used here to force a rerender.
     // If a person clicks on one document that has a flow chart and the previous document had a flow chart
-    // the rerender will force the flow chart to be centered
+    // the rerender will force the flow chart to be centered as best as possible
     setFlowData();
     setCurrentDocument(filteredDocuments[index]);
   };
