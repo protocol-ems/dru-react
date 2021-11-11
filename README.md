@@ -1,3 +1,3 @@
-# React Admin Panel
+# OurProtocol
 
-This is the alpha version of the Protocol admin panel
+Live Demo of the Project here - https://dru-react-bcuri.ondigitalocean.app/

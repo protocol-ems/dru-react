@@ -91,8 +91,8 @@ function App() {
   }, [setUserData, isAuth]);
 
   // The top of the app is wrapped in the user context.
-  // the top of the app has the nav bar than a switch statement for differnt routes.
-  // the private route is a custom route that redicts to the dashboard. And the dashboard will redirect to login. I did this because otherwise it was redirecting to the login on page refresh.
+  // the top of the app has the nav bar than a switch statement for differnt routes followed by a footer.
+  // the private route is a custom route that redicts to login if the person is not authenticated.
   return (
     <div className="App">
       <UserContext.Provider value={{ userData, setUserData }}>

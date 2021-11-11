@@ -15,18 +15,15 @@ export default function GetImages() {
     await axiosInstance
       .get(`/company-images/${userData.user.company}/`)
       .then((res) => {
-        console.log(res.data);
         if (res.data) {
           db.collection("images").delete();
         }
         for (let i = 0; i < res.data.length; i++) {
-          console.log(urlPrefix + res.data[i].image);
           fetch(urlPrefix + res.data[i].image)
             .then((res) => {
               return res.blob();
             })
             .then((blob) => {
-              console.log(blob);
               db.collection("images").add({
                 id: res.data[i].id,
                 blob: blob,
